@@ -8,17 +8,17 @@ function Navbar() {
 
     return(
         <>
-            <div className="w-full h-20 shadow-md">
+            <div className="w-full h-20 shadow-md position-fixed">
                 <div className="flex items-center h-20 justify-center">
                     <div className="flex-1 flex justify-start cursor-pointer">
                         <img className="w-32 sm:w-40 md:w-45 ml-4 sm:ml-6" src={MainLogo} alt="Main Logo" />
                     </div>
 
-                    <div className="hidden md:flex flex-none justify-center shadow-md shadow-cyan-950 rounded-full px-6 py-2">
+                    <div className="hidden md:flex flex-none justify-center shadow-md shadow-cyan-950 rounded-full px-10 py-2">
                         <nav className="flex space-x-10">
-                            <a href="#" className="hover:text-blue-400">Home</a>
-                            <a href="#" className="hover:text-blue-400">About</a>
-                            <a href="#" className="hover:text-blue-400">Contact</a>
+                            <a href="#" className=" hover:text-cyan-800 duration-100">Method</a>
+                            <a href="#" className="hover:text-cyan-800 duration-100">Explore</a>
+                            <a href="#" className="hover:text-cyan-800 duration-100">FAQ</a>
                         </nav>
                     </div>
 
@@ -27,8 +27,8 @@ function Navbar() {
                     <div className="flex-1 flex justify-end mr-6">
 
                         <div className="hidden md:flex space-x-4">
-                            <button className="px-4 py-2 cursor-pointer hover:text-blue-400 duration-200">Sign in</button>
-                            <button className="px-7 py-3 cursor-pointer bg-cyan-950 text-white rounded-[50px] hover:bg-cyan-800 duration-200">Sign up</button>
+                            <button className="px-4 py-2 cursor-pointer hover:text-cyan-800 duration-200">Sign in</button>
+                            <button className="px-8 py-3 cursor-pointer bg-cyan-950 text-white rounded-[50px] hover:bg-cyan-800 duration-200">Sign up</button>
                         </div>
                         <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden focus:outline-none cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
