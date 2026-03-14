@@ -8,7 +8,7 @@ function Navbar() {
 
     return(
         <>
-            <div className="w-full h-20 shadow-md position-fixed">
+            <div className="w-full position-ab h-20 shadow-md  bg-white fixed z-40">
                 <div className="flex items-center h-20 justify-center">
                     <div className="flex-1 flex justify-start cursor-pointer">
                         <img className="w-32 sm:w-40 md:w-45 ml-4 sm:ml-6" src={MainLogo} alt="Main Logo" />
@@ -42,19 +42,18 @@ function Navbar() {
                     </div>
 
                 </div>
-                {/* {isMenuOpen && ( */}
-                    <div className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
-                        <div className="flex justify-center">
-                            <div className="w-150 items-center shadow-lg flex flex-col justify-center text-center border-t border-blue-300 p-4 space-y-4">
-                                <a href="#" className="roboto-regular hover:text-cyan-800 duration-100">Method</a>
-                                <a href="#" className="roboto-regular hover:text-cyan-800 duration-100">Explore</a>
-                                <a href="#" className="roboto-regular hover:text-cyan-800 duration-100">FAQ</a>
-                                <button className="roboto-regular px-4 py-2 cursor-pointer hover:text-cyan-800 duration-200">Sign in</button>
-                                <button className="roboto-regular w-full px-30 py-3 cursor-pointer bg-cyan-950 text-white rounded-[50px] hover:bg-cyan-800 duration-200">Sign up</button>
-                            </div>
+
+                <div className={`md:hidden bg-white overflow-hidden z-50 transition-all duration-500 ease-in-out ${isMenuOpen ? "h-screen opacity-100" : "h-0 opacity-0"}`}>
+                    <div className="flex justify-center">
+                        <div className="w-150 items-center shadow-lg flex flex-col justify-center text-center border-t border-blue-300 p-4 space-y-4">
+                            <a href="#" className="roboto-regular hover:text-cyan-800 duration-100">Method</a>
+                            <a href="#" className="roboto-regular hover:text-cyan-800 duration-100">Explore</a>
+                            <a href="#" className="roboto-regular hover:text-cyan-800 duration-100">FAQ</a>
+                            <button className="roboto-regular px-4 py-2 cursor-pointer hover:text-cyan-800 duration-200">Sign in</button>
+                            <button className="roboto-regular w-full px-30 py-3 cursor-pointer bg-cyan-950 text-white rounded-[50px] hover:bg-cyan-800 duration-200">Sign up</button>
                         </div>
                     </div>
-                {/* )} */}
+                </div>
 
             </div>
         </>
