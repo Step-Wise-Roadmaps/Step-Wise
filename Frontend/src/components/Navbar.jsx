@@ -8,7 +8,7 @@ function Navbar() {
 
     return(
         <>
-            <div className="w-full h-20 shadow-md position-fixed">
+            <div className="w-full position-ab h-20 shadow-md  bg-white fixed z-40">
                 <div className="flex items-center h-20 justify-center">
                     <div className="flex-1 flex justify-start cursor-pointer">
                         <img className="w-32 sm:w-40 md:w-45 ml-4 sm:ml-6" src={MainLogo} alt="Main Logo" />
@@ -43,7 +43,7 @@ function Navbar() {
 
                 </div>
                 {/* {isMenuOpen && ( */}
-                    <div className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
+                    <div className={`md:hidden bg-white overflow-hidden transition-all duration-500 ease-in-out ${isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
                         <div className="flex justify-center">
                             <div className="w-150 items-center shadow-lg flex flex-col justify-center text-center border-t border-blue-300 p-4 space-y-4">
                                 <a href="#" className="roboto-regular hover:text-cyan-800 duration-100">Method</a>
