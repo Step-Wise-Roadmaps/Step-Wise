@@ -35,7 +35,7 @@ function Hero() {
 
                 <div className="bg-gray-50 w-full h-[89vh] flex items-center justify-center">
                     <div className="h-screen md:h-96 bg-blue-200 w-full max-w-6xl flex rounded-4xl shadow-lg">
-                        <div className='md:m-10 m-5 flex justify-center flex-col items-center md:items-start w-full'>
+                        <div className='md:m-10 m-5 flex justify-center flex-col items-center w-full'>
                             <div className=''>
                                 <h1 className='roboto-extrabold text-cyan-950 text-4xl md:text-5xl [text-shadow:_2px_0px_5px_rgb(21_94_117)]'>Our Method</h1>
                                 <div className='flex md:w-64 w-48 justify-center'>
