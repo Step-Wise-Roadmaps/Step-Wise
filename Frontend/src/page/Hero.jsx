@@ -1,5 +1,6 @@
 
 import heroImgg from '../assets/HeroImg/heroImgg.png'
+import rokateImg from '../assets/HeroImg/rokateImg.png'
 
 function Hero() {
     return(
@@ -30,11 +31,36 @@ function Hero() {
                 </div>
 
                 <div className="bg-gray-50 w-full h-[89vh] flex items-center justify-center">
-                    <div className="h-96 bg-blue-200 w-full max-w-6xl flex rounded-4xl shadow-lg shadow-lg">
-                        <div className='m-10'>
-                            <h1 className='roboto-extrabold text-cyan-950 text-5xl [text-shadow:_2px_0px_5px_rgb(21_94_117)]'>Our Method</h1>
-                            <div className='flex justify-center'>
-                                <div className='w-48 border-t-5 border-[#46A7C9]'></div>
+                    <div className="h-screen md:h-96 bg-blue-200 w-full max-w-6xl flex rounded-4xl shadow-lg">
+                        <div className='md:m-10 m-5 flex justify-center flex-col items-center md:items-start w-full'>
+                            <div className=''>
+                                <h1 className='roboto-extrabold text-cyan-950 text-4xl md:text-5xl [text-shadow:_2px_0px_5px_rgb(21_94_117)]'>Our Method</h1>
+                                <div className='flex md:w-64 w-48 justify-center'>
+                                    <div className='md:w-48 w-40 border-t-5 border-[#46A7C9]'></div>
+                                </div>
+                            </div>
+
+                            <div className='w-full md:flex items-center mt-10 space-y-5 justify-center md:gap-64 md:h-64'>
+                                <div className='space-y-6'>
+                                    <div className='flex justify-center'>
+                                        <img className='md:w-32 w-24' src={rokateImg} alt="" />
+                                    </div>
+                                    <p className='text-center'>Explore current coerces  </p>
+                                </div>
+
+                                <div className='space-y-6'>
+                                    <div className='flex justify-center'>
+                                        <img className='md:w-32 w-24' src={rokateImg} alt="" />
+                                    </div>
+                                    <p className='text-center'>Explore current coerces  </p>
+                                </div>
+
+                                <div className='space-y-6'>
+                                    <div className='flex justify-center'>
+                                        <img className='md:w-32 w-24' src={rokateImg} alt="" />
+                                    </div>
+                                    <p className='text-center'>Explore current coerces  </p>
+                                </div>
                             </div>
                         </div>
                     </div>
