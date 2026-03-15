@@ -40,26 +40,26 @@ function Hero() {
                                 </div>
                             </div>
 
-                            <div className='w-full md:flex items-center mt-10 space-y-5 justify-center md:gap-64 md:h-64'>
+                            <div className='w-full md:flex mt-10 space-y-5 justify-center md:space-x-40 md:h-64'>
                                 <div className='space-y-6'>
                                     <div className='flex justify-center'>
                                         <img className='md:w-32 w-24' src={rokateImg} alt="" />
                                     </div>
-                                    <p className='text-center'>Explore current coerces  </p>
+                                    <p className='text-center roboto-regular'>Explore current coerces  </p>
                                 </div>
 
                                 <div className='space-y-6'>
                                     <div className='flex justify-center'>
                                         <img className='md:w-32 w-24' src={rokateImg} alt="" />
                                     </div>
-                                    <p className='text-center'>Explore current coerces  </p>
+                                    <p className='text-center roboto-regular'>Explore current coerces  </p>
                                 </div>
 
                                 <div className='space-y-6'>
                                     <div className='flex justify-center'>
                                         <img className='md:w-32 w-24' src={rokateImg} alt="" />
                                     </div>
-                                    <p className='text-center'>Explore current coerces  </p>
+                                    <p className='text-center roboto-regular'>Explore current coerces  </p>
                                 </div>
                             </div>
                         </div>
