@@ -30,8 +30,8 @@ function Hero() {
                 </div>
 
                 <div className="bg-gray-50 w-full h-[89vh] flex items-center justify-center">
-                    <div className="h-96 w-full max-w-6xl flex items-center justify-center bg-white shadow-lg">
-                        <h1>Hello</h1>
+                    <div className="h-96 bg-blue-200 w-full max-w-6xl flex items-center justify-center shadow-lg">
+                        <h1>123</h1>
                     </div>
                 </div>
 
