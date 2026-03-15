@@ -1,6 +1,9 @@
 
+// img
 import heroImgg from '../assets/HeroImg/heroImgg.png'
 import rokateImg from '../assets/HeroImg/rokateImg.png'
+import bookImg from '../assets/HeroImg/bookImg.png'
+import pointer from '../assets/HeroImg/pointer.png'
 
 function Hero() {
     return(
@@ -50,14 +53,14 @@ function Hero() {
 
                                 <div className='space-y-6'>
                                     <div className='flex justify-center'>
-                                        <img className='md:w-32 w-24' src={rokateImg} alt="" />
+                                        <img className='md:w-32 w-24' src={pointer} alt="" />
                                     </div>
                                     <p className='text-center roboto-regular'>Explore current coerces  </p>
                                 </div>
 
                                 <div className='space-y-6'>
                                     <div className='flex justify-center'>
-                                        <img className='md:w-32 w-24' src={rokateImg} alt="" />
+                                        <img className='md:w-32 w-24' src={bookImg} alt="" />
                                     </div>
                                     <p className='text-center roboto-regular'>Explore current coerces  </p>
                                 </div>
