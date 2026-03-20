@@ -70,7 +70,7 @@ function Hero() {
                     </div>
                 </div>
 
-                <div className='h-[80vh] w-full bg-gray-50 mt-20 px-5 py-5 md:px-30 md:py-15'>
+                <div className='w-full bg-gray-50 mt-20 px-5 py-5 md:px-30 md:py-15'>
                     <div className='flex justify-center md:justify-start'>
                         <div className='flex flex-col justify-center md:justify-start'>
                             <h1 className='roboto-extrabold text-cyan-950 text-2xl md:text-5xl [text-shadow:_2px_0px_5px_rgb(21_94_117)]'>Explore Popular Path</h1>
@@ -130,12 +130,20 @@ function Hero() {
                                     </div>
                                 </div>
                             </div>
-                            {/* <div className="p-20 border-3 border-[#46A7C9]"></div>
-                            <div className="p-20 border-3 border-[#46A7C9]"></div> */}
+                        </div>
+                        <div className='flex justify-center mt-15'>
+                            <div className='px-20 py-10 rounded-xl shadow-xl bg-white flex items-center '>
+                                <div className='space-y-5'>
+                                    <h1 className='roboto-extrabold text-2xl'>don’t see what your looking ? </h1>
+                                    <div className='flex justify-center'>
+                                        <button className='px-10 py-5 bg-blue-500 rounded-2xl text-white duration-300 hover:bg-cyan-900 cursor-pointer'>Request a Path</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
+                
             </div>
         </>
     )
