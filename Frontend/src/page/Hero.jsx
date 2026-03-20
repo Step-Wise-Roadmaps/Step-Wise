@@ -35,7 +35,7 @@ function Hero() {
                 </div>
 
                 <div className="bg-gray-50 w-full h-[89vh] flex items-center justify-center">
-                    <div className="h-screen md:h-96 md:bg-blue-200 w-full max-w-6xl flex md:rounded-4xl shadow-lg">
+                    <div className="md:h-96 md:bg-blue-200 w-full max-w-6xl flex md:rounded-4xl shadow-lg">
                         <div className='md:m-10 m-5 flex justify-center flex-col items-center w-full'>
                             <div className=''>
                                 <h1 className='roboto-extrabold text-cyan-950 text-4xl md:text-5xl [text-shadow:_2px_0px_5px_rgb(21_94_117)]'>Our Method</h1>
@@ -140,11 +140,11 @@ function Hero() {
                             </div>
                         </div>
                         <div className='flex justify-center mt-15'>
-                            <div className='px-20 py-10 rounded-xl shadow-xl bg-white flex items-center '>
+                            <div className='px-5 sm:px-15 md:px-20 py-10 rounded-xl shadow-xl bg-white flex items-center '>
                                 <div className='space-y-5'>
-                                    <h1 className='roboto-extrabold text-2xl'>don’t see what your looking ? </h1>
+                                    <h1 className='roboto-extrabold text-lg md:text-2xl'>don’t see what your looking ? </h1>
                                     <div className='flex justify-center'>
-                                        <button className='px-10 py-5 bg-blue-500 rounded-2xl text-white duration-300 hover:bg-cyan-900 cursor-pointer'>Request a Path</button>
+                                        <button className='px-3 py-5 md:px-10 md:py-5 bg-blue-500 rounded-2xl text-white duration-300 hover:bg-cyan-900 cursor-pointer'>Request a Path</button>
                                     </div>
                                 </div>
                             </div>
