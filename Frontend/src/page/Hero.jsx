@@ -4,6 +4,7 @@ import heroImgg from '../assets/HeroImg/heroImgg.png'
 import rokateImg from '../assets/HeroImg/rokateImg.png'
 import bookImg from '../assets/HeroImg/bookImg.png'
 import pointer from '../assets/HeroImg/pointer.png'
+import Photography from '../assets/HeroImg/Photography.png'
 
 function Hero() {
     return(
@@ -76,6 +77,61 @@ function Hero() {
                             <div className='flex justify-center '>
                                 <div className='w-40 md:w-64 border-t-5 border-[#46A7C9]'></div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div className='mt-20'>
+                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                            <div className="p-10 border-1 rounded-xl shadow-xl border-[#46A7C9] flex items-center">
+                                <div className='space-y-10'>
+                                    <div className='flex items-center space-x-5'>
+                                        <img className='' src={Photography} alt="" />
+                                        <h1 className='roboto-extrabold text-cyan-950 text-xl md:text-xl lg:text-2xl'>Photography</h1>
+                                    </div>
+
+                                    <div>
+                                        <p className='roboto-thin text-xl'>From manual camera settings to professional color grading. Learn to capture stories with precision and artistic flair.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="p-10 border-1 rounded-xl shadow-xl border-[#46A7C9] flex items-center">
+                                <div className='space-y-10'>
+                                    <div className='flex items-center space-x-5'>
+                                        <img className='' src={Photography} alt="" />
+                                        <h1 className='roboto-extrabold text-cyan-950 text-xl md:text-xl lg:text-2xl'>Photography</h1>
+                                    </div>
+
+                                    <div>
+                                        <p className='roboto-thin text-xl'>From manual camera settings to professional color grading. Learn to capture stories with precision and artistic flair.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="p-10 border-1 rounded-xl shadow-xl border-[#46A7C9] flex items-center">
+                                <div className='space-y-10'>
+                                    <div className='flex items-center space-x-5'>
+                                        <img className='' src={Photography} alt="" />
+                                        <h1 className='roboto-extrabold text-cyan-950 text-xl md:text-xl lg:text-2xl'>Photography</h1>
+                                    </div>
+
+                                    <div>
+                                        <p className='roboto-thin text-xl'>From manual camera settings to professional color grading. Learn to capture stories with precision and artistic flair.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="p-10 border-1 rounded-xl shadow-xl border-[#46A7C9] flex items-center">
+                                <div className='space-y-10'>
+                                    <div className='flex items-center space-x-5'>
+                                        <img className='' src={Photography} alt="" />
+                                        <h1 className='roboto-extrabold text-cyan-950 text-xl md:text-xl lg:text-2xl'>Photography</h1>
+                                    </div>
+
+                                    <div>
+                                        <p className='roboto-thin text-xl'>From manual camera settings to professional color grading. Learn to capture stories with precision and artistic flair.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* <div className="p-20 border-3 border-[#46A7C9]"></div>
+                            <div className="p-20 border-3 border-[#46A7C9]"></div> */}
                         </div>
                     </div>
                 </div>
