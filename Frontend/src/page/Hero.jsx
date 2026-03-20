@@ -34,7 +34,7 @@ function Hero() {
                 </div>
 
                 <div className="bg-gray-50 w-full h-[89vh] flex items-center justify-center">
-                    <div className="h-screen md:h-96 md:bg-blue-200 w-full max-w-6xl flex rounded-4xl shadow-lg">
+                    <div className="h-screen md:h-96 md:bg-blue-200 w-full max-w-6xl flex md:rounded-4xl shadow-lg">
                         <div className='md:m-10 m-5 flex justify-center flex-col items-center w-full'>
                             <div className=''>
                                 <h1 className='roboto-extrabold text-cyan-950 text-4xl md:text-5xl [text-shadow:_2px_0px_5px_rgb(21_94_117)]'>Our Method</h1>
@@ -64,6 +64,17 @@ function Hero() {
                                     </div>
                                     <p className='text-center roboto-regular'>Explore current coerces  </p>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='h-[80vh] w-full bg-gray-50 mt-20 px-5 py-5 md:px-30 md:py-15'>
+                    <div className='flex justify-center md:justify-start'>
+                        <div className='flex flex-col justify-center md:justify-start'>
+                            <h1 className='roboto-extrabold text-cyan-950 text-2xl md:text-5xl [text-shadow:_2px_0px_5px_rgb(21_94_117)]'>Explore Popular Path</h1>
+                            <div className='flex justify-center '>
+                                <div className='w-40 md:w-64 border-t-5 border-[#46A7C9]'></div>
                             </div>
                         </div>
                     </div>
