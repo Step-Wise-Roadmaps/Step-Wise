@@ -74,8 +74,8 @@ function Hero() {
                     <div className='flex justify-center md:justify-start'>
                         <div className='flex flex-col justify-center md:justify-start'>
                             <h1 className='roboto-extrabold text-cyan-950 text-2xl md:text-5xl [text-shadow:_2px_0px_5px_rgb(21_94_117)]'>Explore Popular Path</h1>
-                            <div className='flex justify-center '>
-                                <div className='w-40 md:w-64 border-t-5 border-[#46A7C9]'></div>
+                            <div className='flex justify-center'>
+                                <div className='w-40 md:w-94 border-t-5 border-[#46A7C9]'></div>
                             </div>
                         </div>
                     </div>
