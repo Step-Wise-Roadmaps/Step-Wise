@@ -85,7 +85,9 @@ function Hero() {
                             <div className="p-10 border-1 rounded-xl shadow-xl border-[#46A7C9] transform transition duration-500 hover:rotate-3 hover:scale-105 cursor-pointer flex items-center">
                                 <div className='space-y-10'>
                                     <div className='flex items-center space-x-5'>
-                                        <img className='' src={Photography} alt="" />
+                                        <div className='bg-blue-100 px-3 py-3 rounded-4xl'>
+                                            <img className='w-[30px]' src={Photography} alt="" />
+                                        </div>
                                         <h1 className='animate-pulse roboto-extrabold text-cyan-950 text-xl md:text-xl lg:text-2xl'>Photography</h1>
                                     </div>
 
@@ -97,7 +99,9 @@ function Hero() {
                             <div className="p-10 border-1 rounded-xl shadow-xl border-[#46A7C9] transform transition duration-500 hover:rotate-3 hover:scale-105 cursor-pointer flex items-center">
                                 <div className='space-y-10'>
                                     <div className='flex items-center space-x-5'>
-                                        <img className='' src={Photography} alt="" />
+                                        <div className='bg-blue-100 px-3 py-3 rounded-4xl'>
+                                            <img className='w-[30px]' src={Photography} alt="" />
+                                        </div>
                                         <h1 className='animate-pulse roboto-extrabold text-cyan-950 text-xl md:text-xl lg:text-2xl'>Photography</h1>
                                     </div>
 
@@ -109,7 +113,9 @@ function Hero() {
                             <div className="p-10 border-1 rounded-xl shadow-xl border-[#46A7C9] transform transition duration-500 hover:rotate-3 hover:scale-105 cursor-pointer flex items-center">
                                 <div className='space-y-10'>
                                     <div className='flex items-center space-x-5'>
-                                        <img className='' src={Photography} alt="" />
+                                        <div className='bg-blue-100 px-3 py-3 rounded-4xl'>
+                                            <img className='w-[30px]' src={Photography} alt="" />
+                                        </div>
                                         <h1 className='animate-pulse roboto-extrabold text-cyan-950 text-xl md:text-xl lg:text-2xl'>Photography</h1>
                                     </div>
 
@@ -121,7 +127,9 @@ function Hero() {
                             <div className="p-10 border-1 rounded-xl shadow-xl border-[#46A7C9] transform transition duration-500 hover:rotate-3 hover:scale-105 cursor-pointer flex items-center">
                                 <div className='space-y-10'>
                                     <div className='flex items-center space-x-5'>
-                                        <img className='' src={Photography} alt="" />
+                                        <div className='bg-blue-100 px-3 py-3 rounded-4xl'>
+                                            <img className='w-[30px]' src={Photography} alt="" />
+                                        </div>
                                         <h1 className='animate-pulse roboto-extrabold text-cyan-950 text-xl md:text-xl lg:text-2xl'>Photography</h1>
                                     </div>
 
