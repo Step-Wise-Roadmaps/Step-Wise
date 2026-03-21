@@ -1,5 +1,6 @@
 import React from 'react';
 import { Twitter, Linkedin, Github, Rocket, ArrowUp, BookOpen } from 'lucide-react';
+import { Link } from "react-router-dom";
 
 import MainLogo from "../assets/NavbarImg/MainLogo.png"
 
@@ -16,7 +17,9 @@ const Footer = () => {
           
           {/* Brand Column */}
           <div className="space-y-6">
-            <img className='w-48' src={MainLogo} alt="" />
+            <Link to="/">
+              <img className='w-48' src={MainLogo} alt="" />
+            </Link>
             <p className="roboto-light text-gray-500 text-sm leading-relaxed">
               Forge your future with precision roadmaps designed by AI.
             </p>
