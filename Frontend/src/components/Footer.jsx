@@ -69,8 +69,12 @@ const Footer = () => {
             
             {/* Social Icons (Matched to Image Bottom Right) */}
             <div className="flex space-x-5 pt-10">
-              <Twitter className="h-6 w-6 text-sky-400 hover:text-cyan-950 cursor-pointer transition" />
-              <Linkedin className="h-6 w-6 text-sky-400 hover:text-cyan-950 cursor-pointer transition" />
+              <a href="https://x.com/dneftalem" target='_blank'>
+                <Twitter className="h-6 w-6 text-sky-400 hover:text-cyan-950 cursor-pointer transition" />
+              </a>
+              <a href="https://www.linkedin.com/in/neftalem-dagnachew-226307365/" target='_blank'>
+                <Linkedin className="h-6 w-6 text-sky-400 hover:text-cyan-950 cursor-pointer transition" />
+              </a>
                 <a href="https://github.com/Neftalem-Dagnachew" target="_blank" rel="noopener noreferrer">
                     <Github className="h-6 w-6 text-sky-400 hover:text-cyan-950 cursor-pointer transition" />
                 </a>
