@@ -151,7 +151,19 @@ function Hero() {
                         </div>
                     </div>
                 </div>
-                
+
+                <div className='mt-10'>
+                    <div className='flex flex-col h-[50vh] justify-center items-center'>
+                        <div className=''>
+                            <h1 className='roboto-extrabold text-4xl'>Frequently asked questions</h1>
+                            <p className='mt-5'>find of the create, International Quotations and StepWise plactiones.</p>
+                            <div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </>
     )
