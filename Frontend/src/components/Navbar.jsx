@@ -49,9 +49,9 @@ function Navbar() {
                 <div className={`md:hidden bg-white overflow-hidden z-50 transition-all duration-500 ease-in-out ${isMenuOpen ? "h-screen opacity-100" : "h-0 opacity-0"}`}>
                     <div className="flex justify-center">
                         <div className="w-150 items-center shadow-lg flex flex-col justify-center text-center border-t border-blue-300 p-4 space-y-4">
-                            <a href="#" className="roboto-regular hover:text-cyan-800 duration-100">Method</a>
-                            <a href="#" className="roboto-regular hover:text-cyan-800 duration-100">Explore</a>
-                            <a href="#" className="roboto-regular hover:text-cyan-800 duration-100">FAQ</a>
+                            <a href="#method" className="roboto-regular hover:text-cyan-800 duration-100">Method</a>
+                            <a href="#explore" className="roboto-regular hover:text-cyan-800 duration-100">Explore</a>
+                            <a href="#faq" className="roboto-regular hover:text-cyan-800 duration-100">FAQ</a>
                             <button className="roboto-regular px-4 py-2 cursor-pointer hover:text-cyan-800 duration-200">Sign in</button>
                             <button className="roboto-regular w-full px-30 py-3 cursor-pointer bg-cyan-950 text-white rounded-[50px] hover:bg-cyan-800 duration-200">Sign up</button>
                         </div>
