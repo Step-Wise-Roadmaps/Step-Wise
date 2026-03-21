@@ -69,7 +69,7 @@ function Hero() {
                     </div>
                 </div>
 
-                <div className="bg-gray-50 w-full h-[89vh] flex items-center justify-center">
+                <div id="method" className="bg-gray-50 w-full h-[89vh] flex items-center justify-center">
                     <div className="md:h-96 md:bg-blue-200 w-full max-w-6xl flex md:rounded-4xl shadow-lg">
                         <div className='md:m-10 m-5 flex justify-center flex-col items-center w-full'>
                             <div className=''>
@@ -105,7 +105,7 @@ function Hero() {
                     </div>
                 </div>
 
-                <div className='w-full bg-gray-50 mt-20 px-5 py-5 md:px-30 md:py-15'>
+                <div id="explore" className='w-full bg-gray-50 mt-20 px-5 py-5 md:px-30 md:py-15'>
                     <div className='flex justify-center md:justify-start'>
                         <div className='flex flex-col justify-center md:justify-start'>
                             <h1 className='roboto-extrabold text-cyan-950 text-2xl md:text-5xl [text-shadow:_2px_0px_5px_rgb(21_94_117)]'>Explore Popular Path</h1>
@@ -187,7 +187,7 @@ function Hero() {
                     </div>
                 </div>
 
-                <div className='mt-10 mb-50'>
+                <div id="faq" className='mt-10 mb-50'>
                     <div className='flex flex-col h-[70vh] justify-center items-center px-5'>
                         <div className='text-center'>
                             <h1 className='roboto-extrabold text-4xl'>Frequently asked questions</h1>

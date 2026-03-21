@@ -16,9 +16,9 @@ function Navbar() {
 
                     <div className="hidden md:flex flex-none justify-center shadow-md shadow-cyan-950 rounded-full px-10 py-2">
                         <nav className="flex space-x-10">
-                            <a href="#" className="roboto-regular hover:text-cyan-800 duration-100">Method</a>
-                            <a href="#" className="roboto-regular hover:text-cyan-800 duration-100">Explore</a>
-                            <a href="#" className="roboto-regular hover:text-cyan-800 duration-100">FAQ</a>
+                            <a href="#method" className="roboto-regular hover:text-cyan-800 duration-100">Method</a>
+                            <a href="#explore" className="roboto-regular hover:text-cyan-800 duration-100">Explore</a>
+                            <a href="#faq" className="roboto-regular hover:text-cyan-800 duration-100">FAQ</a>
                         </nav>
                     </div>
 
