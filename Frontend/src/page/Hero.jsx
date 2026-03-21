@@ -186,8 +186,8 @@ function Hero() {
                         </div>
                     </div>
                 </div>
-
-                <div id="faq" className='mt-10 mb-50'>
+                
+                <div id="faq" className='mt-10 mb-20'>
                     <div className='flex flex-col h-[70vh] justify-center items-center px-5'>
                         <div className='text-center'>
                             <h1 className='roboto-extrabold text-4xl'>Frequently asked questions</h1>
