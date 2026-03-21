@@ -1,5 +1,6 @@
 import React from 'react';
 import { Twitter, Linkedin, Github, Rocket, ArrowUp, BookOpen } from 'lucide-react';
+import { Link } from "react-router-dom";
 
 import MainLogo from "../assets/NavbarImg/MainLogo.png"
 
@@ -16,7 +17,9 @@ const Footer = () => {
           
           {/* Brand Column */}
           <div className="space-y-6">
-            <img className='w-48' src={MainLogo} alt="" />
+            <Link to="/">
+              <img className='w-48' src={MainLogo} alt="" />
+            </Link>
             <p className="roboto-light text-gray-500 text-sm leading-relaxed">
               Forge your future with precision roadmaps designed by AI.
             </p>
@@ -69,8 +72,12 @@ const Footer = () => {
             
             {/* Social Icons (Matched to Image Bottom Right) */}
             <div className="flex space-x-5 pt-10">
-              <Twitter className="h-6 w-6 text-sky-400 hover:text-cyan-950 cursor-pointer transition" />
-              <Linkedin className="h-6 w-6 text-sky-400 hover:text-cyan-950 cursor-pointer transition" />
+              <a href="https://x.com/dneftalem" target='_blank'>
+                <Twitter className="h-6 w-6 text-sky-400 hover:text-cyan-950 cursor-pointer transition" />
+              </a>
+              <a href="https://www.linkedin.com/in/neftalem-dagnachew-226307365/" target='_blank'>
+                <Linkedin className="h-6 w-6 text-sky-400 hover:text-cyan-950 cursor-pointer transition" />
+              </a>
                 <a href="https://github.com/Neftalem-Dagnachew" target="_blank" rel="noopener noreferrer">
                     <Github className="h-6 w-6 text-sky-400 hover:text-cyan-950 cursor-pointer transition" />
                 </a>
