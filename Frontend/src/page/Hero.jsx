@@ -1,3 +1,4 @@
+import { useState } from 'react';
 
 // img
 import heroImgg from '../assets/HeroImg/heroImgg.png'
@@ -6,7 +7,41 @@ import bookImg from '../assets/HeroImg/bookImg.png'
 import pointer from '../assets/HeroImg/pointer.png'
 import Photography from '../assets/HeroImg/Photography.png'
 
+const FAQItem = ({ question, answer }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return(
+        <>
+            <div className='border-b border-gray-200 py-4 w-full max-w-4xl'>
+                <button className='flex w-full items-center justify-between text-left focus:outline-none cursor-pointer' onClick={() => setIsOpen(!isOpen)}>
+                    <span className='roboto-bold text-lg md:text-xl text-cyan-950 hover:text-cyan-800 duration-300'>{question}</span>
+                    <span className={`text-2xl transform transition-transform ${isOpen ? 'rotate-180' : ''}`}>▼</span>
+                </button>
+                <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-40 mt-4' : 'max-h-0'}`}>
+                    <p className="roboto-light text-gray-600">{answer}</p>
+                </div>
+            </div>
+        </>
+    )
+}
+
 function Hero() {
+
+    const faqs = [
+        {
+            question: "How does StepWise AI create personalized roadmaps?",
+            answer: "Our AI analyzes your goal and current skill level to source the best tutorials and documentation, organizing them into a logical step-by-step path."
+        },
+        {
+            question: "Is there a limit to the number of paths I can explore?",
+            answer: "No, you can start as many learning journeys as you want. Your progress for each one is saved individually."
+        },
+        {
+            question: "Can I request a specific path or course?",
+            answer: "Yes! Use the 'Request a Path' button above, and our system will generate a custom curriculum based on your specific needs."
+        }
+    ];
+
     return(
         <>
             <div>
@@ -151,7 +186,20 @@ function Hero() {
                         </div>
                     </div>
                 </div>
-                
+
+                <div className='mt-10 mb-20'>
+                    <div className='flex flex-col h-[70vh] justify-center items-center px-5'>
+                        <div className='text-center'>
+                            <h1 className='roboto-extrabold text-4xl'>Frequently asked questions</h1>
+                            <p className='mt-5 mb-10'>find of the create, International Quotations and StepWise plactiones.</p>
+                            <div className='flex flex-col items-center w-full'>
+                                {faqs.map((faq, index) => (
+                                    <FAQItem key={index} question={faq.question} answer={faq.answer} />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     )
