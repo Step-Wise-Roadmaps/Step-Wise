@@ -47,7 +47,7 @@ function Hero() {
             <div>
                 <div className='relative'>
                     <div className='flex flex-col justify-center'>
-                        <img className='object-cover saturate-200 contrast-75 bg-no-repeat bg-center mt-20 h-[89vh]' 
+                        <video className='object-cover saturate-200 contrast-75 bg-no-repeat bg-center mt-20 h-[89vh]' 
                         src={heroImgg} 
                         alt="Hero Image" />
 
