@@ -3,6 +3,7 @@ import MainLayout from "./layout/MainLayout";
 
 // pages
 import Hero from "./page/Hero";
+import Login from "./page/Login";
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
                 <Route path="/" element={<MainLayout />}>
                     <Route index element={<Hero />} />
                 </Route>
+                <Route path="login" element={<Login/>} />
             </Routes>
         </>
     )
