@@ -52,7 +52,7 @@ function Hero() {
                     <div className='flex flex-col justify-center'>
                         <video
                         className='object-cover saturate-200 contrast-75 mt-20 h-[89vh] w-full'
-                        src={secondBackground}   // import your video like image
+                        src={secondBackground}
                         autoPlay
                         loop
                         muted
