@@ -1,48 +1,94 @@
-
 import firstBackground from '../assets/video/firstBackground.mp4'
+
+import google from '../assets//authImg/google.png'
 
 function Login() {
     return(
         <>
-            <div>
-                <div className='flex flex-col justify-center items-center h-screen'>
-                    <div className='bg-cyan-900 rounded-2xl p-10  text-white'>
-                        <div className='flex flex-col justify-center items-start'>
-                            <h1 className='roboto-medium text-2xl pb-10'>Login to your Account</h1>
+           <div>
+                <div className='relative flex flex-col justify-center items-center min-h-screen px-4'>
+                    
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className='absolute inset-0 w-full h-full object-cover'
+                    >
+                        <source src={firstBackground} type="video/mp4" />
+                    </video>
+
+                    <div className='absolute inset-0 bg-black/40'></div>
+                    <div className='relative z-10 bg-transparent border-2 backdrop-blur-lg border-white/20 shadow-2xl shadow-black/40 rounded-2xl p-6 sm:p-8 md:p-10 text-white w-full max-w-md md:max-w-lg'>
+                    
+                        <div className='flex flex-col justify-center items-start w-full'>
                             
-                            <button className='px-41 py-2 bg-white text-black mb-7'>Login with Google</button>
-                            <div className='flex mb-10'>
-                                <div className='border-1 px-20 h-0 mt-3'></div>
-                                <span className='px-1 roboto-extralight'>or Sign with Email</span>
-                                <div className='border-1 px-20 h-0 mt-3'></div>
+                            <h1 className='roboto-medium text-xl sm:text-2xl pb-6 sm:pb-10'>
+                            Login to your Account
+                            </h1>
+
+                            <button className='w-full py-2 bg-white text-black mb-6 roboto-regular rounded-lg cursor-pointer outline-none hover:bg-gray-200 transition duration-300'>
+                                <span className='flex items-center gap-2 justify-center'>
+                                    <img className='w-[20px] h-[20px]' src={google} alt="" />
+                                    Login with Google
+                                </span>
+                            </button>
+
+                            <div className='flex items-center w-full mb-8'>
+                                <div className='flex-1 border-t'></div>
+                                <span className='px-2 text-sm roboto-extralight'>
+                                    or Sign with Email
+                                </span>
+                                <div className='flex-1 border-t'></div>
                             </div>
 
-                            <div className='space-y-10'>
-                                <div>
-                                    <p className='my-2'>Email</p>
-                                    <input className='bg-white text-black pl-5 px-62 py-2' type="Email" placeholder='Enter your Email' />
-                                </div>
+                            <div className='space-y-6 w-full'>
+                            
+                            <div className='w-full'>
+                                <p className='my-2'>Email</p>
+                                <input 
+                                className='w-full bg-white text-black pl-4 py-2 rounded-md outline-none' 
+                                type="email" 
+                                placeholder='Enter your Email' 
+                                />
+                            </div>
 
-                                <div>
-                                    <p className='my-2'>Password</p>
-                                    <input className='bg-white text-black pl-5 px-62 py-2' type="Email" placeholder='Enter your Password' />
+                            <div className='w-full'>
+                                <p className='my-2'>Password</p>
+                                <input 
+                                className='w-full bg-white text-black pl-4 py-2 rounded-md outline-none' 
+                                type="password" 
+                                placeholder='Enter your Password' 
+                                />
 
-                                    <div className='flex mt-2 ml-5 space-x-64'>
-                                        <p>Rember me</p>
-                                        <p>Forget pass</p>
-                                    </div>
+                                <div className='flex justify-between mt-2 text-sm'>
+                                    <label className='flex items-center gap-2 cursor-pointer'>
+                                        <input 
+                                        type="checkbox" 
+                                        className='w-4 h-4 accent-cyan-500 cursor-pointer'
+                                        />
+                                        <span>Remember me</span>
+                                    </label>
+                                    <p className='cursor-pointer hover:underline'>
+                                        Forgot password?
+                                    </p>
                                 </div>
+                            </div>
 
-                                <div>
-                                    <button className='px-52 py-2 bg-white text-black roboto-medium'>Login</button>
-                                </div>
+                            <div className='w-full'>
+                                <button className='w-full py-2 bg-white text-black roboto-medium rounded-lg hover:bg-gray-200 transition duration-300 cursor-pointer'>
+                                Login
+                                </button>
+                            </div>
 
-                                <div className='flex justify-center space-x-2'>
-                                    <p>Not Registered Yet?</p>
-                                    <p>Create an account</p>
-                                </div>
+                            <div className='flex justify-center space-x-2 text-sm'>
+                                <p>Not Registered Yet?</p>
+                                <p className='underline cursor-pointer'>Create an account</p>
+                            </div>
+
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
