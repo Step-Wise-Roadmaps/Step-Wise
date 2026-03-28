@@ -1,5 +1,10 @@
+
+import { Link } from 'react-router-dom'
+
+// import background video
 import firstBackground from '../assets/video/firstBackground.mp4'
 
+// import google icon
 import google from '../assets//authImg/google.png'
 
 function Login() {
@@ -82,8 +87,8 @@ function Login() {
                             </div>
 
                             <div className='flex justify-center space-x-2 text-sm'>
-                                <p>Not Registered Yet?</p>
-                                <p className='underline cursor-pointer'>Create an account</p>
+                                <p className='roboto-light'>Not Registered Yet?</p>
+                                <Link to="/register" className='roboto-regular underline cursor-pointer'>Create an account</Link>
                             </div>
 
                             </div>

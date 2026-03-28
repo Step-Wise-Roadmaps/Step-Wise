@@ -1,4 +1,9 @@
 
+import { Link } from 'react-router-dom'
+// import background video
+import firstBackground from '../assets/video/firstBackground.mp4'
+
+// import google icon
 import google from '../assets//authImg/google.png'
 
 function Register() {
@@ -7,8 +12,17 @@ function Register() {
             <div>
                 <div className="relative flex flex-col items-center justify-center min-h-screen px-4">
 
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className='absolute inset-0 w-full h-full object-cover'>
+                        <source src={firstBackground} type="video/mp4" />
+                    </video>
+
                     <div className='absolute inset-0 bg-black/40'></div>
-                    <div className="relative z-10 text-white bg-cyan-900 p-6 sm:p-8 md:p-10 rounded-lg w-full max-w-md md:max-w-lg">
+                    <div className="relative z-10 text-white bg-transparent border-2 border-white/20 shadow-2xl shadow-black/40 backdrop-blur-lg p-6 sm:p-8 md:p-10 rounded-lg w-full max-w-md md:max-w-lg">
                         <div className="space-y-6 w-full">
                             <h1 className="roboto-medium text-xl sm:text-2xl">Register</h1>
 
@@ -20,11 +34,6 @@ function Register() {
                             </button>
 
                             <div>
-                                <p className="my-2">Fullname</p>
-                                <input className='bg-white text-black w-full p-4 py-2 outline-none rounded-md' type="text" placeholder='Enter Fullname' />
-                            </div>
-
-                            <div>
                                 <p className="my-2">Email</p>
                                 <input className='bg-white text-black w-full p-4 py-2 outline-none rounded-md' type="email" placeholder='Enter Email' />
                             </div>
@@ -32,6 +41,11 @@ function Register() {
                             <div>
                                 <p className="my-2">Password</p>
                                 <input className='bg-white text-black w-full p-4 py-2 outline-none rounded-md' type="password" placeholder='Enter Password' />
+                            </div>
+
+                            <div>
+                                <p className="my-2">Fullname</p>
+                                <input className='bg-white text-black w-full p-4 py-2 outline-none rounded-md' type="text" placeholder='Enter Fullname' />
                             </div>
 
                             <div>
@@ -52,7 +66,7 @@ function Register() {
 
                             <div className='flex justify-center space-x-2 text-sm'>
                                 <p className='roboto-light'>Already have an account?</p>
-                                <p className='roboto-regular underline cursor-pointer'>Login</p>
+                                <Link to="/login" className='roboto-regular underline cursor-pointer'>Login</Link>
                             </div>
                         </div>
                     </div>
