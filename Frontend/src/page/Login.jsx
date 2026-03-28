@@ -24,7 +24,7 @@ function Login() {
                         <div className='flex flex-col justify-center items-start w-full'>
                             
                             <h1 className='roboto-medium text-xl sm:text-2xl pb-6 sm:pb-10'>
-                            Login to your Account
+                                Login to your Account
                             </h1>
 
                             <button className='w-full py-2 bg-white text-black mb-6 roboto-regular rounded-lg cursor-pointer outline-none hover:bg-gray-200 transition duration-300'>
