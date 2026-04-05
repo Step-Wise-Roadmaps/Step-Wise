@@ -10,7 +10,7 @@ const pool = mysql.createPool({
 
 db.connect((err) => {
     if(err) throw err
-    return console.log("MySQL Connected...")
+    return console.log("MySQL Connected...");
 })
 
 module.exports = pool.promise;
