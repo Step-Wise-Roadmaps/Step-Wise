@@ -9,11 +9,11 @@ app.use(express.json());
 
 // Routs
 const userRouts = require('./routes/userRouts');
-// const adminRouts = require('./routes/adminRouts');
+const adminRouts = require('./routes/adminRouts');
 
 // use Routs
 app.use('/api/user', userRouts);
-// app.use('/api/admin', adminRouts);
+app.use('/api/admin', adminRouts);
 
 // .env PORT
 const PORT = process.env.PORT || 5000;
