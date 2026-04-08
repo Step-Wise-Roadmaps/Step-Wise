@@ -5,18 +5,37 @@ const jwt = require('jsonwebtoken');
 // secret key
 const JWT_SECRET = process.env.JWT_SECRET;
 
-exports.getUsers = async (req, res) => {
+// exports.getUsers = async (req, res) => {
+//     try {
+//         const [results] = await pool.query("SELECT * FROM users");
+//         return res.status(200).json(results);
+//     } catch (err) {
+//         return res.status(500).json({ message: "DB Error" });
+//     }
+// };
+
+exports.getMe = async (req, res) => {
     try {
-        const [results] = await pool.query("SELECT * FROM users");
-        return res.status(200).json(results);
+        const userId = req.user.id;
+
+        const [results] = await pool.query(
+            "SELECT id, full_name, email FROM users WHERE id = ?",
+            [userId]
+        );
+
+        if (results.length === 0) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.status(200).json(results[0])
     } catch (err) {
-        return res.status(500).json({ message: "DB Error" });
+        res.status(500).json({ message: "DB Error" })
     }
-};
+}
 
 exports.registerUsers = async (req, res) => {
     try {
-        const { email, password, full_name, role, selected_skill_id } = req.body;
+        const { email, password, full_name, selected_skill_id } = req.body;
 
         if (!email || !password || !full_name || !selected_skill_id) {
             return res.status(400).json({ message: "All fields are required" })
