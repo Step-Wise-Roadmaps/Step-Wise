@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from '../../services/authService';
 
-// 1. መጀመሪያ ላይ ያለው ሁኔታ (Initial State)
 const user = JSON.parse(localStorage.getItem('user'));
 
 const initialState = {
@@ -12,7 +11,7 @@ const initialState = {
   message: '',
 };
 
-// 2. Register Action (ከBackend ጋር ይነጋገራል)
+
 export const register = createAsyncThunk('auth/register', async (user, thunkAPI) => {
   try {
     return await authService.register(user);
@@ -22,7 +21,7 @@ export const register = createAsyncThunk('auth/register', async (user, thunkAPI)
   }
 });
 
-// 3. Login Action
+
 export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   try {
     return await authService.login(user);
@@ -32,7 +31,7 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   }
 });
 
-// 4. Slice (Logic-ን የሚቆጣጠር)
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
