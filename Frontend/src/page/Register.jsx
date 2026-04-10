@@ -1,23 +1,106 @@
 
 // import background video
-import firstBackground from '../assets/video/firstBackground.mp4'
+import firstBackground from '../assets/video/firstBackground.mp4';
 
 // import google icon
-import google from '../assets//authImg/google.png'
+import google from '../assets//authImg/google.png';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { register, reset } from '../features/auth/authSlice';
 
-function Register() {
+const UserIcon = () => (
+    <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        className="h-5 w-5 text-slate-400"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+    >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.25a7.5 7.5 0 0 1 15 0" />
+    </svg>
+);
 
+const MailIcon = () => (
+    <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        className="h-5 w-5 text-slate-400"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+    >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5 10.94 13a2 2 0 0 0 2.12 0L21 7.5" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 5.25h15A1.5 1.5 0 0 1 21 6.75v10.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.25V6.75a1.5 1.5 0 0 1 1.5-1.5Z" />
+    </svg>
+);
+
+const LockIcon = () => (
+    <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        className="h-5 w-5 text-slate-400"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+    >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 10.5V8a4.5 4.5 0 1 1 9 0v2.5" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 10.5h10.5A2.25 2.25 0 0 1 19.5 12.75v5.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 18.25v-5.5a2.25 2.25 0 0 1 2.25-2.25Z" />
+    </svg>
+);
+
+const EyeIcon = ({ open }) => (
+    <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        className="h-5 w-5 text-slate-400"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+    >
+        {open ? (
+            <>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12s3.75-6.75 9.75-6.75S21.75 12 21.75 12 18 18.75 12 18.75 2.25 12 2.25 12Z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 15.25A3.25 3.25 0 1 0 12 8.75a3.25 3.25 0 0 0 0 6.5Z" />
+            </>
+        ) : (
+            <>
+                <path strokeLinecap="round" strokeLinejoin="round" d="m3 3 18 18" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10.58 10.58A2 2 0 0 0 12 14a2 2 0 0 0 1.42-.58" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9.88 5.38A10.8 10.8 0 0 1 12 5.25c6 0 9.75 6.75 9.75 6.75a17.62 17.62 0 0 1-3.04 3.79" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6.23 6.23A17.7 17.7 0 0 0 2.25 12s3.75 6.75 9.75 6.75a10.9 10.9 0 0 0 4.12-.79" />
+            </>
+        )}
+    </svg>
+);
+
+const GitHubIcon = () => (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5 fill-current">
+        <path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.04c-3.34.73-4.04-1.42-4.04-1.42A3.18 3.18 0 0 0 3.67 18c-1.08-.74.08-.72.08-.72a2.52 2.52 0 0 1 1.84 1.24 2.56 2.56 0 0 0 3.49 1 2.54 2.54 0 0 1 .76-1.6c-2.67-.3-5.47-1.33-5.47-5.92a4.63 4.63 0 0 1 1.24-3.22 4.3 4.3 0 0 1 .12-3.17s1-.32 3.3 1.23a11.39 11.39 0 0 1 6 0c2.27-1.55 3.3-1.23 3.3-1.23a4.3 4.3 0 0 1 .12 3.17 4.62 4.62 0 0 1 1.24 3.22c0 4.6-2.8 5.61-5.48 5.91a2.84 2.84 0 0 1 .81 2.2v3.26c0 .32.22.69.83.57A12 12 0 0 0 12 .5Z" />
+    </svg>
+);
+
+const fieldStateClasses = {
+    idle: 'border-slate-200 bg-slate-50 hover:border-slate-300 focus-within:border-cyan-400 focus-within:bg-white focus-within:ring-cyan-500/10',
+    success:
+        'border-emerald-200 bg-emerald-50/60 hover:border-emerald-300 focus-within:border-emerald-400 focus-within:bg-white focus-within:ring-emerald-500/10',
+    error:
+        'border-rose-200 bg-rose-50/60 hover:border-rose-300 focus-within:border-rose-400 focus-within:bg-white focus-within:ring-rose-500/10',
+};
+
+function Register() {
     const [formData, setFormData] = useState({
         full_name: '',
         email: '',
         password: '',
-        selected_skill_id: ''
-    })
+        selected_skill_id: '',
+    });
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const { full_name, email, password, selected_skill_id } = formData;
 
@@ -34,7 +117,7 @@ function Register() {
         }
 
         if (isSuccess) {
-            navigate('/login')
+            navigate('/login');
         }
 
         dispatch(reset());
@@ -53,103 +136,280 @@ function Register() {
         dispatch(register(userData));
     };
 
+    const getPasswordStrength = () => {
+        if (!password) return { label: 'Create a secure password', width: 'w-0', tone: 'bg-slate-200' };
+        if (password.length < 6) return { label: 'Weak password', width: 'w-1/3', tone: 'bg-rose-400' };
+        if (password.length < 10) return { label: 'Good password', width: 'w-2/3', tone: 'bg-amber-400' };
+        return { label: 'Strong password', width: 'w-full', tone: 'bg-emerald-500' };
+    };
+
+    const passwordStrength = getPasswordStrength();
+    const confirmMatches = confirmPassword.length > 0 && confirmPassword === password;
+    const confirmHasError = confirmPassword.length > 0 && confirmPassword !== password;
+
+    const getFieldState = (value, validator) => {
+        if (!value) return 'idle';
+        return validator ? (validator(value) ? 'success' : 'error') : 'success';
+    };
+
+    const nameFieldState = getFieldState(full_name, (value) => value.trim().length >= 2);
+    const emailFieldState = getFieldState(email, (value) => /\S+@\S+\.\S+/.test(value));
+    const passwordFieldState = getFieldState(password, (value) => value.length >= 6);
+    const confirmFieldState = confirmPassword
+        ? confirmMatches
+            ? 'success'
+            : 'error'
+        : 'idle';
+
     return (
-        <>
-            <div>
-                <div className="relative flex flex-col items-center justify-center min-h-screen px-4">
+        <div className="relative min-h-screen overflow-hidden bg-slate-950">
+            <div className="absolute inset-0">
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="h-full w-full object-cover"
+                >
+                    <source src={firstBackground} type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-slate-950/70" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(148,163,184,0.16),transparent_35%)]" />
+            </div>
 
-                    <video
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className='absolute inset-0 w-full h-full object-cover'>
-                        <source src={firstBackground} type="video/mp4" />
-                    </video>
+            <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl items-center px-4 py-10 sm:px-6 lg:px-8">
+                <div className="grid w-full items-center gap-10 lg:grid-cols-[minmax(0,1fr)_500px] lg:gap-16">
+                    <div className="hidden max-w-2xl text-white lg:block">
+                        <p className="roboto-bold text-sm uppercase tracking-[0.24em] text-cyan-300">
+                            Create your workspace
+                        </p>
+                        <h1 className="roboto-extrabold mt-6 text-5xl leading-tight xl:text-6xl">
+                            Start learning with a roadmap built around your goals.
+                        </h1>
+                        <p className="roboto-light mt-6 max-w-xl text-lg leading-8 text-slate-300">
+                            Join StepWise to get structured learning paths, clear milestones, and a focused system that keeps your progress moving.
+                        </p>
 
-                    <div className='absolute inset-0 bg-black/40'></div>
-                    <div className="relative z-10 text-white bg-transparent border-2 border-white/20 shadow-2xl shadow-black/40 backdrop-blur-lg p-6 sm:p-8 md:p-10 rounded-lg w-full max-w-md md:max-w-lg">
-                        <form onSubmit={onSubmit} className="space-y-6 w-full">
-                            <h1 className="roboto-medium text-xl sm:text-2xl">Register</h1>
-
-                            <button type="button" className="bg-white text-black py-2 w-full roboto-regular rounded-lg cursor-pointer hover:bg-gray-200 transition duration-300">
-                                <span className="flex justify-center gap-2 items-center">
-                                    <img className='w-[20px] h-[20px]' src={google} alt="Google" />
-                                    Register with Google
-                                </span>
-                            </button>
-
-                            <div>
-                                <p className="my-2">Fullname</p>
-                                <input 
-                                    className='bg-white text-black w-full p-4 py-2 outline-none rounded-md' 
-                                    type="text" 
-                                    name="full_name"
-                                    value={full_name} 
-                                    onChange={onChange} 
-                                    placeholder='Enter Fullname' 
-                                    required 
-                                />
+                        <div className="mt-10 grid max-w-xl gap-4 sm:grid-cols-2">
+                            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
+                                <p className="roboto-extrabold text-2xl text-white">Personalized</p>
+                                <p className="roboto-light mt-2 text-sm leading-7 text-slate-300">
+                                    Build a learning path tailored to your current level.
+                                </p>
                             </div>
-
-                            <div>
-                                <p className="my-2">Email</p>
-                                <input 
-                                    className='bg-white text-black w-full p-4 py-2 outline-none rounded-md' 
-                                    type="email" 
-                                    name="email" 
-                                    value={email} 
-                                    onChange={onChange} 
-                                    placeholder='Enter Email' 
-                                    required 
-                                />
+                            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
+                                <p className="roboto-extrabold text-2xl text-white">Structured</p>
+                                <p className="roboto-light mt-2 text-sm leading-7 text-slate-300">
+                                    Turn scattered tutorials into one clean progression.
+                                </p>
                             </div>
+                        </div>
+                    </div>
 
-                            <div>
-                                <p className="my-2">Password</p>
-                                <input 
-                                    className='bg-white text-black w-full p-4 py-2 outline-none rounded-md' 
-                                    type="password" 
-                                    name="password" 
-                                    value={password} 
-                                    onChange={onChange} 
-                                    placeholder='Enter Password' 
-                                    required 
-                                />
+                    <div className="mx-auto w-full max-w-md sm:max-w-xl lg:max-w-none">
+                        <div className="rounded-[28px] border border-white/10 bg-white/80 p-4 shadow-2xl shadow-slate-950/30 backdrop-blur-xl sm:p-5">
+                            <div className="rounded-3xl bg-white p-6 shadow-sm shadow-slate-200/80 sm:p-8">
+                                <div className="text-center sm:text-left">
+                                    <p className="roboto-bold text-sm uppercase tracking-[0.22em] text-cyan-700">
+                                        StepWise
+                                    </p>
+                                    <h1 className="roboto-extrabold mt-3 text-3xl text-slate-950 sm:text-4xl">
+                                        Create your account
+                                    </h1>
+                                    <p className="roboto-light mt-3 text-sm leading-7 text-slate-600 sm:text-base">
+                                        Set up your account and start building a more focused learning journey.
+                                    </p>
+                                </div>
+
+                                <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                                    <button
+                                        type="button"
+                                        className="inline-flex items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-cyan-500/30"
+                                    >
+                                        <img className="h-5 w-5" src={google} alt="Google" />
+                                        Continue with Google
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="inline-flex items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-cyan-500/30"
+                                    >
+                                        <GitHubIcon />
+                                        Continue with GitHub
+                                    </button>
+                                </div>
+
+                                <div className="my-8 flex items-center gap-4">
+                                    <div className="h-px flex-1 bg-slate-200" />
+                                    <span className="roboto-light text-xs uppercase tracking-[0.22em] text-slate-400">
+                                        Or sign up with email
+                                    </span>
+                                    <div className="h-px flex-1 bg-slate-200" />
+                                </div>
+
+                                <form onSubmit={onSubmit} className="space-y-5">
+                                    <div className="space-y-2">
+                                        <label htmlFor="full_name" className="roboto-medium text-sm text-slate-700">
+                                            Full name
+                                        </label>
+                                        <div className={`flex items-center rounded-2xl border px-4 transition focus-within:ring-4 ${fieldStateClasses[nameFieldState]}`}>
+                                            <UserIcon />
+                                            <input
+                                                id="full_name"
+                                                className="w-full bg-transparent py-3.5 pl-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 sm:text-base"
+                                                type="text"
+                                                name="full_name"
+                                                value={full_name}
+                                                onChange={onChange}
+                                                placeholder="Enter your full name"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label htmlFor="email" className="roboto-medium text-sm text-slate-700">
+                                            Email address
+                                        </label>
+                                        <div className={`flex items-center rounded-2xl border px-4 transition focus-within:ring-4 ${fieldStateClasses[emailFieldState]}`}>
+                                            <MailIcon />
+                                            <input
+                                                id="email"
+                                                className="w-full bg-transparent py-3.5 pl-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 sm:text-base"
+                                                type="email"
+                                                name="email"
+                                                value={email}
+                                                onChange={onChange}
+                                                placeholder="you@example.com"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="grid gap-5 sm:grid-cols-2">
+                                        <div className="space-y-2">
+                                            <label htmlFor="password" className="roboto-medium text-sm text-slate-700">
+                                                Password
+                                            </label>
+                                            <div className={`flex items-center rounded-2xl border px-4 transition focus-within:ring-4 ${fieldStateClasses[passwordFieldState]}`}>
+                                                <LockIcon />
+                                                <input
+                                                    id="password"
+                                                    className="w-full bg-transparent py-3.5 pl-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 sm:text-base"
+                                                    type={showPassword ? 'text' : 'password'}
+                                                    name="password"
+                                                    value={password}
+                                                    onChange={onChange}
+                                                    placeholder="Create a password"
+                                                    required
+                                                />
+                                                <button
+                                                    type="button"
+                                                    className="ml-2 transition hover:text-slate-700"
+                                                    onClick={() => setShowPassword((prevState) => !prevState)}
+                                                >
+                                                    <EyeIcon open={showPassword} />
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <label htmlFor="confirmPassword" className="roboto-medium text-sm text-slate-700">
+                                                Confirm password
+                                            </label>
+                                            <div className={`flex items-center rounded-2xl border px-4 transition focus-within:ring-4 ${fieldStateClasses[confirmFieldState]}`}>
+                                                <LockIcon />
+                                                <input
+                                                    id="confirmPassword"
+                                                    className="w-full bg-transparent py-3.5 pl-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 sm:text-base"
+                                                    type={showConfirmPassword ? 'text' : 'password'}
+                                                    name="confirmPassword"
+                                                    value={confirmPassword}
+                                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                                    placeholder="Repeat password"
+                                                    required
+                                                />
+                                                <button
+                                                    type="button"
+                                                    className="ml-2 transition hover:text-slate-700"
+                                                    onClick={() => setShowConfirmPassword((prevState) => !prevState)}
+                                                >
+                                                    <EyeIcon open={showConfirmPassword} />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-3">
+                                        <div className="flex items-center justify-between text-xs sm:text-sm">
+                                            <span className="text-slate-500">Password strength</span>
+                                            <span
+                                                className={`font-medium ${
+                                                    password.length >= 10
+                                                        ? 'text-emerald-600'
+                                                        : password.length >= 6
+                                                        ? 'text-amber-600'
+                                                        : password.length > 0
+                                                        ? 'text-rose-600'
+                                                        : 'text-slate-400'
+                                                }`}
+                                            >
+                                                {passwordStrength.label}
+                                            </span>
+                                        </div>
+                                        <div className="h-2 rounded-full bg-slate-100">
+                                            <div className={`h-2 rounded-full transition-all duration-300 ${passwordStrength.width} ${passwordStrength.tone}`} />
+                                        </div>
+                                        {confirmHasError && (
+                                            <p className="text-sm text-rose-600">Passwords do not match yet.</p>
+                                        )}
+                                        {confirmMatches && (
+                                            <p className="text-sm text-emerald-600">Passwords match.</p>
+                                        )}
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label htmlFor="selected_skill_id" className="roboto-medium text-sm text-slate-700">
+                                            Primary skill interest
+                                        </label>
+                                        <select
+                                            id="selected_skill_id"
+                                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 outline-none transition hover:border-slate-300 focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-500/10 sm:text-base"
+                                            name="selected_skill_id"
+                                            value={selected_skill_id}
+                                            onChange={onChange}
+                                        >
+                                            <option value="">Select a skill</option>
+                                            <option value="1">Photoshop</option>
+                                            <option value="2">Web Development</option>
+                                            <option value="3">UI/UX Design</option>
+                                        </select>
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        disabled={isLoading}
+                                        className="roboto-medium w-full rounded-2xl bg-slate-950 px-4 py-3.5 text-sm text-white shadow-lg shadow-slate-950/15 transition hover:bg-cyan-900 focus:outline-none focus:ring-4 focus:ring-cyan-500/20 disabled:cursor-not-allowed disabled:opacity-70 sm:text-base"
+                                    >
+                                        {isLoading ? 'Processing...' : 'Create Account'}
+                                    </button>
+
+                                    <p className="text-center text-sm text-slate-600">
+                                        <span className="roboto-light">Already have an account? </span>
+                                        <Link
+                                            to="/login"
+                                            className="roboto-medium text-slate-950 transition hover:text-cyan-800 hover:underline"
+                                        >
+                                            Log in
+                                        </Link>
+                                    </p>
+                                </form>
                             </div>
-
-                            <div>
-                                <p className="my-2">Skills</p>
-                                <select 
-                                    className='w-full bg-white text-black py-2 p-4 outline-none rounded-md' 
-                                    name="selected_skill_id" 
-                                    value={selected_skill_id} 
-                                    onChange={onChange}
-                                >
-                                    <option value="">Select a skill</option>
-                                    <option value="1">Photoshop</option>
-                                    <option value="2">Web Development</option>
-                                    <option value="3">UI/UX Design</option>
-                                </select>
-                            </div>
-
-                            <button 
-                                type="submit" 
-                                disabled={isLoading}
-                                className="bg-white text-black py-2 w-full roboto-regular rounded-lg cursor-pointer hover:bg-gray-200 transition duration-300">
-                                {isLoading ? 'Processing...' : 'Register'}
-                            </button>
-
-                            <div className='flex justify-center space-x-2 text-sm'>
-                                <p className='roboto-light'>Already have an account?</p>
-                                <Link to="/login" className='roboto-regular underline cursor-pointer'>Login</Link>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </>
-    )
+        </div>
+    );
 }
 
 export default Register;
