@@ -33,8 +33,8 @@ function Register() {
             alert(message);
         }
 
-        if (isSuccess || user) {
-            alert("Register Successfully")
+        if (isSuccess) {
+            navigate('/login')
         }
 
         dispatch(reset());
