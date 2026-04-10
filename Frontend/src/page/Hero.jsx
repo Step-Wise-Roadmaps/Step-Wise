@@ -1,227 +1,313 @@
 import { useState } from 'react';
 
-// img
-import heroImgg from '../assets/HeroImg/heroImgg.png'
-import rokateImg from '../assets/HeroImg/rokateImg.png'
-import bookImg from '../assets/HeroImg/bookImg.png'
-import pointer from '../assets/HeroImg/pointer.png'
-import Photography from '../assets/HeroImg/Photography.png'
-
-// video
-import secondBackground from '../assets/video/secondBackground.mp4'
+import rokateImg from '../assets/HeroImg/rokateImg.png';
+import bookImg from '../assets/HeroImg/bookImg.png';
+import pointer from '../assets/HeroImg/pointer.png';
+import Photography from '../assets/HeroImg/Photography.png';
+import secondBackground from '../assets/video/secondBackground.mp4';
 
 const FAQItem = ({ question, answer }) => {
     const [isOpen, setIsOpen] = useState(false);
 
-    return(
-        <>
-            <div className='border-b border-gray-200 py-4 w-full max-w-4xl'>
-                <button className='flex w-full items-center justify-between text-left focus:outline-none cursor-pointer' onClick={() => setIsOpen(!isOpen)}>
-                    <span className='roboto-bold text-lg md:text-xl text-cyan-950 hover:text-cyan-800 duration-300'>{question}</span>
-                    <span className={`text-2xl transform transition-transform ${isOpen ? 'rotate-180' : ''}`}>▼</span>
-                </button>
-                <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-40 mt-4' : 'max-h-0'}`}>
-                    <p className="roboto-light text-gray-600">{answer}</p>
-                </div>
+    return (
+        <div className="w-full rounded-2xl border border-slate-200 bg-white/90 px-5 py-4 shadow-sm shadow-slate-200/60 backdrop-blur-sm transition hover:border-cyan-200 hover:shadow-md md:px-6">
+            <button
+                className="flex w-full items-center justify-between gap-4 text-left"
+                onClick={() => setIsOpen(!isOpen)}
+            >
+                <span className="roboto-bold text-base text-slate-900 md:text-lg">{question}</span>
+                <span
+                    className={`text-lg text-cyan-900 transition-transform duration-300 ${
+                        isOpen ? 'rotate-180' : ''
+                    }`}
+                >
+                    v
+                </span>
+            </button>
+            <div
+                className={`overflow-hidden text-sm text-slate-600 transition-all duration-300 md:text-base ${
+                    isOpen ? 'max-h-40 pt-3' : 'max-h-0'
+                }`}
+            >
+                <p className="roboto-light leading-7">{answer}</p>
             </div>
-        </>
-    )
-}
+        </div>
+    );
+};
+
+const methodSteps = [
+    {
+        title: 'Discover a goal',
+        description: 'Start with the skill you want to learn and the level you are at today.',
+        image: rokateImg,
+    },
+    {
+        title: 'Get an AI roadmap',
+        description: 'Receive a guided sequence of lessons, projects, and milestones in minutes.',
+        image: pointer,
+    },
+    {
+        title: 'Learn with clarity',
+        description: 'Follow a structured path that keeps progress visible and removes guesswork.',
+        image: bookImg,
+    },
+];
+
+const popularPaths = [
+    {
+        title: 'Photography',
+        description:
+            'Master framing, exposure, editing, and storytelling with a practical path from beginner to pro.',
+    },
+    {
+        title: 'UI/UX Design',
+        description:
+            'Build strong design fundamentals, wireframes, systems, and portfolio-ready product workflows.',
+    },
+    {
+        title: 'Frontend Development',
+        description:
+            'Move from HTML and CSS basics to React, responsive interfaces, and polished production apps.',
+    },
+    {
+        title: 'Data Analytics',
+        description:
+            'Learn spreadsheets, SQL, dashboards, and decision-ready analysis with real-world exercises.',
+    },
+];
 
 function Hero() {
-
     const faqs = [
         {
-            question: "How does StepWise AI create personalized roadmaps?",
-            answer: "Our AI analyzes your goal and current skill level to source the best tutorials and documentation, organizing them into a logical step-by-step path."
+            question: 'How does StepWise AI create personalized roadmaps?',
+            answer:
+                'StepWise looks at your goal, your experience level, and the order topics should be learned in so you get a practical step-by-step path instead of a random list of resources.',
         },
         {
-            question: "Is there a limit to the number of paths I can explore?",
-            answer: "No, you can start as many learning journeys as you want. Your progress for each one is saved individually."
+            question: 'Is there a limit to the number of paths I can explore?',
+            answer:
+                'No. You can create multiple learning journeys and track each one independently as your interests evolve.',
         },
         {
-            question: "Can I request a specific path or course?",
-            answer: "Yes! Use the 'Request a Path' button above, and our system will generate a custom curriculum based on your specific needs."
-        }
+            question: 'Can I request a specific path or course?',
+            answer:
+                'Yes. If you do not see the topic you want, request a custom path and StepWise can generate a roadmap tailored to that exact goal.',
+        },
     ];
 
-    return(
-        <>
-            <div>
-                <div className='relative'>
-                    <div className='flex flex-col justify-center'>
-                        <video
-                        className='object-cover saturate-200 contrast-75 mt-20 h-[89vh] w-full'
-                        src={secondBackground}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        />
-                        
-                        <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white'>
-                        <div>
-                            <h1 className='roboto-extrabold text-black text-4xl md:text-8xl xl:text-8xl [text-shadow:_2px_0px_5px_rgb(21_94_117)]'>
-                            Any Skill,
+    return (
+        <div className="bg-slate-50 text-slate-900">
+            <section className="relative isolate overflow-hidden">
+                <video
+                    className="absolute inset-0 h-full w-full object-cover"
+                    src={secondBackground}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                />
+                <div className="absolute inset-0 bg-slate-950/65" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.2),transparent_35%),linear-gradient(to_bottom,rgba(15,23,42,0.35),rgba(15,23,42,0.88))]" />
+
+                <div className="relative mx-auto flex min-h-[calc(100vh-2rem)] max-w-7xl items-center px-6 pb-20 pt-28 sm:px-8 lg:px-12">
+                    <div className="grid w-full gap-12 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center">
+                        <div className="max-w-3xl">
+                            <span className="roboto-bold inline-flex rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-2 text-xs uppercase tracking-[0.24em] text-cyan-100 backdrop-blur-sm">
+                                AI-powered learning roadmap
+                            </span>
+                            <h1 className="roboto-extrabold mt-6 text-4xl leading-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
+                                Learn any skill with a roadmap that feels clear from day one.
                             </h1>
-                            <h1 className='roboto-extrabold text-black text-2xl md:text-4xl xl:text-7xl [text-shadow:_2px_0px_5px_rgb(21_94_117)]'>
-                            One Step at a Time.
-                            </h1>
+                            <p className="roboto-light mt-6 max-w-2xl text-base leading-8 text-slate-200 sm:text-lg">
+                                StepWise turns overwhelming topics into a guided path with focused milestones,
+                                curated resources, and steady progress you can actually follow.
+                            </p>
+
+                            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                                <button className="roboto-bold rounded-full bg-cyan-400 px-7 py-4 text-sm text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-300 sm:text-base">
+                                    Start Learning
+                                </button>
+                                <button className="roboto-medium rounded-full border border-white/20 bg-white/10 px-7 py-4 text-sm text-white backdrop-blur-sm transition hover:bg-white/15 sm:text-base">
+                                    Explore Paths
+                                </button>
+                            </div>
+
+                            <div className="mt-12 grid gap-4 sm:grid-cols-3">
+                                <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
+                                    <p className="roboto-extrabold text-2xl text-white">1,200+</p>
+                                    <p className="roboto-light mt-1 text-sm text-slate-300">Curated learning steps</p>
+                                </div>
+                                <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
+                                    <p className="roboto-extrabold text-2xl text-white">Fast</p>
+                                    <p className="roboto-light mt-1 text-sm text-slate-300">Roadmaps generated in minutes</p>
+                                </div>
+                                <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
+                                    <p className="roboto-extrabold text-2xl text-white">Focused</p>
+                                    <p className="roboto-light mt-1 text-sm text-slate-300">Less noise, more progress</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div className='mt-1'>
-                            <p className='roboto-bold text-black text-xs md:text-xl xl:text-3xl'>
-                            Smart Roadmaps for Fast Learning.
-                            </p>
-                            <p className='roboto-light text-black text-xs md:text-xl xl:text-2xl'>
-                            Skip the confusion of endless tutorials. Get a hand-picked, structured
-                            </p>
-                        </div>
+                        <div className="mx-auto w-full max-w-md">
+                            <div className="rounded-[28px] border border-white/10 bg-white/10 p-5 shadow-2xl shadow-slate-950/30 backdrop-blur-xl">
+                                <div className="rounded-3xl bg-white p-6 shadow-xl shadow-slate-200/70">
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <p className="roboto-bold text-sm uppercase tracking-[0.2em] text-cyan-700">
+                                                Weekly Focus
+                                            </p>
+                                            <h2 className="roboto-extrabold mt-2 text-2xl text-slate-900">
+                                                Frontend Roadmap
+                                            </h2>
+                                        </div>
+                                        <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
+                                            Active
+                                        </span>
+                                    </div>
 
-                        <div className='mt-10 md:mt-12'>
-                            <button className='px-6 py-4 md:px-14 md:py-4 md:text-lg text-xs bg-cyan-950 rounded-full hover:bg-cyan-800 duration-200 cursor-pointer roboto-regular'>
-                            Start Learning
+                                    <div className="mt-6 space-y-4">
+                                        <div className="rounded-2xl bg-slate-50 p-4">
+                                            <p className="roboto-bold text-sm text-slate-900">Module 1</p>
+                                            <p className="roboto-light mt-1 text-sm text-slate-600">
+                                                HTML, semantic structure, and accessible layouts
+                                            </p>
+                                        </div>
+                                        <div className="rounded-2xl border border-cyan-100 bg-cyan-50 p-4">
+                                            <p className="roboto-bold text-sm text-slate-900">Module 2</p>
+                                            <p className="roboto-light mt-1 text-sm text-slate-600">
+                                                Tailwind styling, responsive patterns, and reusable UI blocks
+                                            </p>
+                                        </div>
+                                        <div className="rounded-2xl bg-slate-50 p-4">
+                                            <p className="roboto-bold text-sm text-slate-900">Module 3</p>
+                                            <p className="roboto-light mt-1 text-sm text-slate-600">
+                                                React fundamentals and shipping polished interfaces
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-6">
+                                        <div className="mb-2 flex items-center justify-between text-sm text-slate-500">
+                                            <span>Progress</span>
+                                            <span>68%</span>
+                                        </div>
+                                        <div className="h-3 rounded-full bg-slate-100">
+                                            <div className="h-3 w-[68%] rounded-full bg-cyan-500" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="method" className="px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
+                <div className="mx-auto max-w-7xl rounded-[32px] border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/60 sm:p-10 lg:p-12">
+                    <div className="mx-auto max-w-2xl text-center">
+                        <p className="roboto-bold text-sm uppercase tracking-[0.24em] text-cyan-700">How it works</p>
+                        <h2 className="roboto-extrabold mt-4 text-3xl text-slate-900 sm:text-4xl lg:text-5xl">
+                            A simpler way to move from interest to mastery
+                        </h2>
+                        <p className="roboto-light mt-4 text-base leading-7 text-slate-600 sm:text-lg">
+                            Every roadmap is designed to remove friction, organize the next best step, and keep you learning with confidence.
+                        </p>
+                    </div>
+
+                    <div className="mt-12 grid gap-6 md:grid-cols-3">
+                        {methodSteps.map((step) => (
+                            <div
+                                key={step.title}
+                                className="rounded-3xl border border-slate-200 bg-slate-50 p-6 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                            >
+                                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-cyan-100">
+                                    <img className="h-12 w-12 object-contain" src={step.image} alt={step.title} />
+                                </div>
+                                <h3 className="roboto-extrabold mt-6 text-xl text-slate-900">{step.title}</h3>
+                                <p className="roboto-light mt-3 text-sm leading-7 text-slate-600 sm:text-base">
+                                    {step.description}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <section id="explore" className="px-6 py-4 sm:px-8 lg:px-12 lg:py-8">
+                <div className="mx-auto max-w-7xl">
+                    <div className="max-w-2xl">
+                        <p className="roboto-bold text-sm uppercase tracking-[0.24em] text-cyan-700">Popular paths</p>
+                        <h2 className="roboto-extrabold mt-4 text-3xl text-slate-900 sm:text-4xl lg:text-5xl">
+                            Explore roadmap templates learners love
+                        </h2>
+                        <p className="roboto-light mt-4 text-base leading-7 text-slate-600 sm:text-lg">
+                            Start with a proven path, then personalize it around your pace, interests, and goals.
+                        </p>
+                    </div>
+
+                    <div className="mt-12 grid gap-6 md:grid-cols-2">
+                        {popularPaths.map((path) => (
+                            <div
+                                key={path.title}
+                                className="group rounded-[28px] border border-slate-200 bg-white p-7 shadow-sm shadow-slate-200/70 transition hover:-translate-y-1 hover:border-cyan-200 hover:shadow-xl"
+                            >
+                                <div className="flex items-start gap-4">
+                                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-cyan-50">
+                                        <img className="h-7 w-7 object-contain" src={Photography} alt={path.title} />
+                                    </div>
+                                    <div>
+                                        <h3 className="roboto-extrabold text-xl text-slate-900 transition group-hover:text-cyan-800">
+                                            {path.title}
+                                        </h3>
+                                        <p className="roboto-light mt-3 text-sm leading-7 text-slate-600 sm:text-base">
+                                            {path.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="mt-10 rounded-[28px] border border-cyan-100 bg-gradient-to-r from-cyan-50 to-white p-8 shadow-sm shadow-slate-200/60 sm:p-10">
+                        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+                            <div className="max-w-2xl">
+                                <p className="roboto-extrabold text-2xl text-slate-900 sm:text-3xl">
+                                    Don&apos;t see the path you need?
+                                </p>
+                                <p className="roboto-light mt-3 text-base leading-7 text-slate-600">
+                                    Request a custom roadmap and let StepWise create a learning plan tailored to your exact target skill.
+                                </p>
+                            </div>
+                            <button className="roboto-bold rounded-full bg-slate-950 px-7 py-4 text-sm text-white transition hover:bg-cyan-900 sm:w-fit sm:text-base">
+                                Request a Path
                             </button>
                         </div>
-                        </div>
-
                     </div>
                 </div>
+            </section>
 
-                <div id="method" className="bg-gray-50 w-full h-[89vh] flex items-center justify-center">
-                    <div className="md:h-96 md:bg-blue-200 w-full max-w-6xl flex md:rounded-4xl shadow-lg">
-                        <div className='md:m-10 m-5 flex justify-center flex-col items-center w-full'>
-                            <div className=''>
-                                <h1 className='roboto-extrabold text-cyan-950 text-4xl md:text-5xl [text-shadow:_2px_0px_5px_rgb(21_94_117)]'>Our Method</h1>
-                                <div className='flex md:w-64 w-48 justify-center'>
-                                    <div className='md:w-48 w-40 border-t-5 border-[#46A7C9]'></div>
-                                </div>
-                            </div>
+            <section id="faq" className="px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
+                <div className="mx-auto max-w-4xl">
+                    <div className="text-center">
+                        <p className="roboto-bold text-sm uppercase tracking-[0.24em] text-cyan-700">FAQ</p>
+                        <h2 className="roboto-extrabold mt-4 text-3xl text-slate-900 sm:text-4xl">
+                            Frequently asked questions
+                        </h2>
+                        <p className="roboto-light mt-4 text-base leading-7 text-slate-600 sm:text-lg">
+                            A quick look at how StepWise helps learners build focused, personalized growth plans.
+                        </p>
+                    </div>
 
-                            <div className='w-full md:flex mt-10 space-y-5 justify-center md:space-x-40 md:h-64'>
-                                <div className='space-y-6'>
-                                    <div className='flex justify-center'>
-                                        <img className='md:w-32 w-24' src={rokateImg} alt="" />
-                                    </div>
-                                    <p className='text-center roboto-regular'>Explore current coerces  </p>
-                                </div>
-
-                                <div className='space-y-6'>
-                                    <div className='flex justify-center'>
-                                        <img className='md:w-32 w-24' src={pointer} alt="" />
-                                    </div>
-                                    <p className='text-center roboto-regular'>Explore current coerces  </p>
-                                </div>
-
-                                <div className='space-y-6'>
-                                    <div className='flex justify-center'>
-                                        <img className='md:w-32 w-24' src={bookImg} alt="" />
-                                    </div>
-                                    <p className='text-center roboto-regular'>Explore current coerces  </p>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="mt-10 space-y-4">
+                        {faqs.map((faq) => (
+                            <FAQItem key={faq.question} question={faq.question} answer={faq.answer} />
+                        ))}
                     </div>
                 </div>
-
-                <div id="explore" className='w-full bg-gray-50 mt-20 px-5 py-5 md:px-30 md:py-15'>
-                    <div className='flex justify-center md:justify-start'>
-                        <div className='flex flex-col justify-center md:justify-start'>
-                            <h1 className='roboto-extrabold text-cyan-950 text-2xl md:text-5xl [text-shadow:_2px_0px_5px_rgb(21_94_117)]'>Explore Popular Path</h1>
-                            <div className='flex justify-center'>
-                                <div className='w-40 md:w-94 border-t-5 border-[#46A7C9]'></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className='mt-20'>
-                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                            <div className="p-10 border-1 rounded-xl shadow-xl border-[#46A7C9] transform transition duration-500 hover:rotate-3 hover:scale-105 cursor-pointer flex items-center">
-                                <div className='space-y-10'>
-                                    <div className='flex items-center space-x-5'>
-                                        <div className='bg-blue-100 px-3 py-3 rounded-4xl'>
-                                            <img className='w-[30px]' src={Photography} alt="" />
-                                        </div>
-                                        <h1 className='animate-pulse roboto-extrabold text-cyan-950 text-xl md:text-xl lg:text-2xl'>Photography</h1>
-                                    </div>
-
-                                    <div>
-                                        <p className='roboto-thin text-xl'>From manual camera settings to professional color grading. Learn to capture stories with precision and artistic flair.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="p-10 border-1 rounded-xl shadow-xl border-[#46A7C9] transform transition duration-500 hover:rotate-3 hover:scale-105 cursor-pointer flex items-center">
-                                <div className='space-y-10'>
-                                    <div className='flex items-center space-x-5'>
-                                        <div className='bg-blue-100 px-3 py-3 rounded-4xl'>
-                                            <img className='w-[30px]' src={Photography} alt="" />
-                                        </div>
-                                        <h1 className='animate-pulse roboto-extrabold text-cyan-950 text-xl md:text-xl lg:text-2xl'>Photography</h1>
-                                    </div>
-
-                                    <div>
-                                        <p className='roboto-thin text-xl'>From manual camera settings to professional color grading. Learn to capture stories with precision and artistic flair.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="p-10 border-1 rounded-xl shadow-xl border-[#46A7C9] transform transition duration-500 hover:rotate-3 hover:scale-105 cursor-pointer flex items-center">
-                                <div className='space-y-10'>
-                                    <div className='flex items-center space-x-5'>
-                                        <div className='bg-blue-100 px-3 py-3 rounded-4xl'>
-                                            <img className='w-[30px]' src={Photography} alt="" />
-                                        </div>
-                                        <h1 className='animate-pulse roboto-extrabold text-cyan-950 text-xl md:text-xl lg:text-2xl'>Photography</h1>
-                                    </div>
-
-                                    <div>
-                                        <p className='roboto-thin text-xl'>From manual camera settings to professional color grading. Learn to capture stories with precision and artistic flair.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="p-10 border-1 rounded-xl shadow-xl border-[#46A7C9] transform transition duration-500 hover:rotate-3 hover:scale-105 cursor-pointer flex items-center">
-                                <div className='space-y-10'>
-                                    <div className='flex items-center space-x-5'>
-                                        <div className='bg-blue-100 px-3 py-3 rounded-4xl'>
-                                            <img className='w-[30px]' src={Photography} alt="" />
-                                        </div>
-                                        <h1 className='animate-pulse roboto-extrabold text-cyan-950 text-xl md:text-xl lg:text-2xl'>Photography</h1>
-                                    </div>
-
-                                    <div>
-                                        <p className='roboto-thin text-xl'>From manual camera settings to professional color grading. Learn to capture stories with precision and artistic flair.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='flex justify-center mt-15'>
-                            <div className='px-5 sm:px-15 md:px-20 py-10 rounded-xl shadow-xl bg-white flex items-center '>
-                                <div className='space-y-5'>
-                                    <h1 className='roboto-extrabold text-lg md:text-2xl'>don’t see what your looking ? </h1>
-                                    <div className='flex justify-center'>
-                                        <button className='px-3 py-5 md:px-10 md:py-5 bg-blue-500 rounded-2xl text-white duration-300 hover:bg-cyan-900 cursor-pointer'>Request a Path</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="faq" className='mt-10 mb-20'>
-                    <div className='flex flex-col h-[70vh] justify-center items-center px-5'>
-                        <div className='text-center'>
-                            <h1 className='roboto-extrabold text-4xl'>Frequently asked questions</h1>
-                            <p className='mt-5 mb-10'>find of the create, International Quotations and StepWise plactiones.</p>
-                            <div className='flex flex-col items-center w-full'>
-                                {faqs.map((faq, index) => (
-                                    <FAQItem key={index} question={faq.question} answer={faq.answer} />
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>
-    )
+            </section>
+        </div>
+    );
 }
 
 export default Hero;
+
