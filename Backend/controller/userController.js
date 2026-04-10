@@ -5,14 +5,14 @@ const jwt = require('jsonwebtoken');
 // secret key
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// exports.getUsers = async (req, res) => {
-//     try {
-//         const [results] = await pool.query("SELECT * FROM users");
-//         return res.status(200).json(results);
-//     } catch (err) {
-//         return res.status(500).json({ message: "DB Error" });
-//     }
-// };
+exports.getUsers = async (req, res) => {
+    try {
+        const [results] = await pool.query("SELECT * FROM users");
+        return res.status(200).json(results);
+    } catch (err) {
+        return res.status(500).json({ message: "DB Error" });
+    }
+};
 
 exports.getMe = async (req, res) => {
     try {
@@ -38,21 +38,34 @@ exports.registerUsers = async (req, res) => {
         const { email, password, full_name, selected_skill_id } = req.body;
 
         if (!email || !password || !full_name || !selected_skill_id) {
-            return res.status(400).json({ message: "All fields are required" })
+            return res.status(400).json({ message: "All fields are required" });
         }
 
+        const [skill] = await pool.query(
+            "SELECT id FROM skills WHERE id = ?",
+            [selected_skill_id]
+        );
+
+        if (skill.length === 0) {
+            return res.status(400).json({ message: "Invalid skill selected" });
+        }
+
+        // 🔥 STEP 2: hash password
         const hashed = await bcrypt.hash(password, 10);
 
+        // 🔥 STEP 3: insert user
         const [results] = await pool.query(
             "INSERT INTO users (email, password, full_name, selected_skill_id) VALUES (?, ?, ?, ?)",
             [email, hashed, full_name, selected_skill_id]
         );
-        res.status(201).json({ message: "User registered successful" });
+
+        res.status(201).json({ message: "User registered successfully" });
+
     } catch (err) {
         console.log(err);
         res.status(500).json({ message: "Server error" });
     }
-}
+};
 
 exports.loginUsers = async (req, res) => {
     try {
