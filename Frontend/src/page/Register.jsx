@@ -34,7 +34,7 @@ function Register() {
         }
 
         if (isSuccess || user) {
-            navigate('/');
+            alert("Register Successfully")
         }
 
         dispatch(reset());

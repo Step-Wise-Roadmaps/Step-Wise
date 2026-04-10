@@ -79,7 +79,7 @@ function Login() {
                                 Login to your Account
                             </h1>
 
-                            <button className='w-full py-2 bg-white text-black mb-6 roboto-regular rounded-lg cursor-pointer outline-none hover:bg-gray-200 transition duration-300'>
+                            <button type='button' className='w-full py-2 bg-white text-black mb-6 roboto-regular rounded-lg cursor-pointer outline-none hover:bg-gray-200 transition duration-300'>
                                 <span className='flex items-center gap-2 justify-center'>
                                     <img className='w-[20px] h-[20px]' src={google} alt="" />
                                     Login with Google
