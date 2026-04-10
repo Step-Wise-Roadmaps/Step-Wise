@@ -35,8 +35,8 @@ function Login() {
             alert(message);
         }
 
-        if (isSuccess || user) {
-            alert("Successfully Logined")
+        if (isSuccess) {
+            navigate('/')
         }
 
         dispatch(reset());
