@@ -2,12 +2,59 @@
 import { Link } from 'react-router-dom'
 
 // import background video
-import firstBackground from '../assets/video/firstBackground.mp4'
+import firstBackground from '../assets/video/firstBackground.mp4';
 
 // import google icon
-import google from '../assets//authImg/google.png'
+import google from '../assets//authImg/google.png';
+
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { login, reset } from '../features/auth/authSlice';
+
+import { useSelector, useDispatch } from 'react-redux';
+
 
 function Login() {
+
+    const [ formData, setFormData ] = useState({
+        email: '',
+        password: ''
+    });
+
+    const { email, password } = formData;
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const { user, isLoading, isError, isSuccess, message } = useSelector(
+        (state) => state.auth
+    )
+
+    useEffect(() => {
+        if (isError) {
+            alert(message);
+        }
+
+        if (isSuccess || user) {
+            alert("Successfully Logined")
+        }
+
+        dispatch(reset());
+    }, [user, isError, isSuccess, message, navigate, dispatch]);
+
+    const onChange = (e) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }));
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const userData = { email, password };
+        dispatch(login(userData));
+    };
+
     return(
         <>
            <div>
@@ -26,7 +73,7 @@ function Login() {
                     <div className='absolute inset-0 bg-black/40'></div>
                     <div className='relative z-10 bg-transparent border-2 backdrop-blur-lg border-white/20 shadow-2xl shadow-black/40 rounded-2xl p-6 sm:p-8 md:p-10 text-white w-full max-w-md md:max-w-lg'>
                     
-                        <div className='flex flex-col justify-center items-start w-full'>
+                        <form onSubmit={onSubmit} className='flex flex-col justify-center items-start w-full'>
                             
                             <h1 className='roboto-medium text-xl sm:text-2xl pb-6 sm:pb-10'>
                                 Login to your Account
@@ -54,6 +101,9 @@ function Login() {
                                 <input 
                                 className='w-full bg-white text-black pl-4 py-2 rounded-md outline-none' 
                                 type="email" 
+                                name='email'
+                                value={email}
+                                onChange={onChange}
                                 placeholder='Enter your Email' 
                                 />
                             </div>
@@ -63,6 +113,9 @@ function Login() {
                                 <input 
                                 className='w-full bg-white text-black pl-4 py-2 rounded-md outline-none' 
                                 type="password" 
+                                name='password'
+                                value={password}
+                                onChange={onChange}
                                 placeholder='Enter your Password' 
                                 />
 
@@ -81,8 +134,11 @@ function Login() {
                             </div>
 
                             <div className='w-full'>
-                                <button className='w-full py-2 bg-white text-black roboto-medium rounded-lg hover:bg-gray-200 transition duration-300 cursor-pointer'>
-                                Login
+                                <button
+                                    type='submit'
+                                    disabled={isLoading} 
+                                    className='w-full py-2 bg-white text-black roboto-medium rounded-lg hover:bg-gray-200 transition duration-300 cursor-pointer'>
+                                    {isLoading ? 'Processing...' : 'Login'}
                                 </button>
                             </div>
 
@@ -92,7 +148,7 @@ function Login() {
                             </div>
 
                             </div>
-                        </div>
+                        </form>
 
                     </div>
                 </div>

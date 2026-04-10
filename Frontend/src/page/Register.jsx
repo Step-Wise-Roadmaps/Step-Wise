@@ -49,7 +49,6 @@ function Register() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log("selected_skill_id:", selected_skill_id);
         const userData = { full_name, email, password, selected_skill_id };
         dispatch(register(userData));
     };
