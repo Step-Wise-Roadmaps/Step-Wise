@@ -20,9 +20,24 @@ const login = async (userData) => {
   return response.data;
 };
 
+const forgotPassword = async (emailData) => {
+  const response = await axiosInstance.post('/user/forgotPassword', emailData);
+
+  return response.data;
+}
+
+const resetPassword = async (resetData) => {
+  const response = await axiosInstance.post(`/user/resetPassword/${resetData.token}`, {
+    password: resetData.password
+  });
+  return response.data;
+};
+
 const authService = {
   register,
   login,
+  forgotPassword,
+  resetPassword,
 };
 
 export default authService;
