@@ -2,6 +2,9 @@ const pool = require('../config/db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
+
 // secret key
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -104,3 +107,77 @@ exports.loginUsers = async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 }
+
+exports.forgotPassword = async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        const [rows] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
+        const user = rows[0];
+
+        if (!user) {
+            return res.status(404).json({ message: "User Not Found" });
+        }
+
+        const token = crypto.randomBytes(32).toString('hex');
+        const expiry = new Date(Date.now() + 3600000);
+
+        await pool.query(
+            "UPDATE users SET reset_token = ?, token_expiry = ? WHERE email = ?",
+            [token, expiry, email]
+        );
+
+        const resetUrl = `http://localhost:5173/reset-password/${token}`;
+
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+            }
+        });
+
+        await transporter.sendMail({    
+            to: email,
+            subject: "Reset Password Link",
+            html: `<h3>To Change Password Click This Link</h3>
+                   <a href="${resetUrl}">${resetUrl}</a>
+                   <p>1hr</p>`
+        });
+
+        res.status(200).json({ message: "the like is send it" });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error ..." });
+    }
+};
+
+exports.resetPassword = async (req, res) => {
+    const { token } = req.params;
+    const { password } = req.body;
+
+    try {
+        const [rows] = await pool.query(
+            "SELECT * FROM users WHERE reset_token = ? AND token_expiry > NOW()", 
+            [token]
+        );
+        const user = rows[0];
+
+        if (!user) {
+            return res.status(400).json({ message: "the Link is expaired or not correct" });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        await pool.query(
+            "UPDATE users SET password = ?, reset_token = NULL, token_expiry = NULL WHERE id = ?",
+            [hashedPassword, user.id]
+        );
+
+        res.status(200).json({ message: "Password changed" });
+
+    } catch (error) {
+        res.status(500).json({ message: "Error" });
+    }
+};
