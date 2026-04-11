@@ -140,9 +140,34 @@ exports.forgotPassword = async (req, res) => {
         await transporter.sendMail({    
             to: email,
             subject: "Reset Password Link",
-            html: `<h3>To Change Password Click This Link</h3>
-                   <a href="${resetUrl}">${resetUrl}</a>
-                   <p>1hr</p>`
+            html: `
+                <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 10px;">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h2 style="color: #0e7490; margin: 0;">Password Reset Request</h2>
+                </div>
+            
+            <p>Hello,</p>
+            <p>We received a request to reset the password for your account. Click the button below to choose a new password:</p>
+            
+            <div style="text-align: center; margin: 35px 0;">
+                <a href="${resetUrl}" 
+                   style="background-color: #0e7490; color: #ffffff; padding: 14px 30px; text-decoration: none; border-radius: 6px; font-weight: 600; display: inline-block; font-size: 16px;">
+                   Reset Password
+                </a>
+            </div>
+
+            <p style="color: #6b7280; font-size: 14px;">This link will expire in <strong>1 hour</strong> for security reasons.</p>
+            
+            <p style="color: #6b7280; font-size: 14px;">If you didn't request a password reset, you can safely ignore this email. Your password will remain the same until you create a new one.</p>
+            
+            <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+            
+            <p style="font-size: 12px; color: #9ca3af; text-align: center;">
+                If you're having trouble clicking the button, copy and paste the URL below into your web browser:<br>
+                <a href="${resetUrl}" style="color: #0e7490; word-break: break-all;">${resetUrl}</a>
+            </p>
+        </div>
+            `
         });
 
         res.status(200).json({ message: "the like is send it" });
