@@ -1,6 +1,10 @@
 
-import { Link } from 'react-router-dom';
 import firstBackground from '../assets/video/firstBackground.mp4';
+
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { forgotPassword, reset } from '../features/auth/authSlice';
 
 const MailIcon = () => (
     <svg
@@ -17,6 +21,31 @@ const MailIcon = () => (
 );
 
 function ForgotPassword() {
+
+    const [email, setEmail] = useState('');
+    const dispatch = useDispatch();
+
+    const { user, isLoading, isError, isSuccess, message  } = useSelector(
+        (state) => state.auth
+    )
+
+    useEffect(() => {
+        if (isError) {
+            alert(message);
+        }
+
+        if (isSuccess) {
+            alert(message);
+        }
+
+        dispatch(reset());
+    }, [user, isLoading, isError, isSuccess, message])
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        dispatch(forgotPassword({email}));
+    }
+
     return (
         <div className="relative min-h-screen overflow-hidden bg-slate-950">
             <div className="absolute inset-0">
@@ -83,7 +112,7 @@ function ForgotPassword() {
                                     </p>
                                 </div>
 
-                                <form className="mt-8 space-y-5">
+                                <form onSubmit={onSubmit} className="mt-8 space-y-5">
                                     <div className="space-y-2">
                                         <label htmlFor="email" className="roboto-medium text-sm text-slate-700">
                                             Email address
@@ -95,6 +124,9 @@ function ForgotPassword() {
                                                 className="w-full bg-transparent py-3.5 pl-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 sm:text-base"
                                                 type="email"
                                                 name="email"
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                required
                                                 placeholder="you@example.com"
                                             />
                                         </div>
@@ -102,9 +134,10 @@ function ForgotPassword() {
 
                                     <button
                                         type="submit"
+                                        disabled={isLoading}
                                         className="roboto-medium w-full rounded-2xl bg-slate-950 px-4 py-3.5 text-sm text-white shadow-lg shadow-slate-950/15 transition hover:bg-cyan-900 focus:outline-none focus:ring-4 focus:ring-cyan-500/20 sm:text-base"
                                     >
-                                        Send reset link
+                                        {isLoading ? "Sending.." : "Send"}
                                     </button>
 
                                     <p className="text-center text-sm text-slate-600">
