@@ -197,12 +197,12 @@ function Login() {
                                             <label htmlFor="password" className="roboto-medium text-sm text-slate-700">
                                                 Password
                                             </label>
-                                            <button
-                                                type="button"
+                                            <Link
+                                                to="/forgot-password"
                                                 className="text-sm font-medium text-cyan-700 transition hover:text-cyan-800 hover:underline"
                                             >
                                                 Forgot password?
-                                            </button>
+                                            </Link>
                                         </div>
 
                                         <div className="group flex items-center rounded-2xl border border-slate-200 bg-slate-50 px-4 transition focus-within:border-cyan-400 focus-within:bg-white focus-within:ring-4 focus-within:ring-cyan-500/10 hover:border-slate-300">
