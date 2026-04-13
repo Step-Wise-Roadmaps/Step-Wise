@@ -21,31 +21,31 @@ function AdminDashboard() {
                             <img className="w-16 h-16 md:w-20 md:h-20 rounded-full" src={profilePhoto} alt="" />
                             <div>
                                 <p className="roboto-regular text-md">Students</p>
-                                <h1 className="roboto-semibold text-2xl">200</h1>
+                                <h1 className="roboto-semibold text-2xl">100</h1>
                             </div>
                         </div>
 
                         <div className=" flex items-center space-x-4">
                             <img className="w-16 h-16 md:w-20 md:h-20 rounded-full" src={profilePhoto} alt="" />
                             <div>
-                                <p className="roboto-regular text-md">Students</p>
-                                <h1 className="roboto-semibold text-2xl">200</h1>
+                                <p className="roboto-regular text-md">Skills</p>
+                                <h1 className="roboto-semibold text-2xl">5</h1>
                             </div>
                         </div>
 
                         <div className=" flex items-center space-x-4">
                             <img className="w-16 h-16 md:w-20 md:h-20 rounded-full" src={profilePhoto} alt="" />
                             <div>
-                                <p className="roboto-regular text-md">Students</p>
-                                <h1 className="roboto-semibold text-2xl">200</h1>
+                                <p className="roboto-regular text-md">Cources</p>
+                                <h1 className="roboto-semibold text-2xl">10</h1>
                             </div>
                         </div>
 
                         <div className=" flex items-center space-x-4">
                             <img className="w-16 h-16 md:w-20 md:h-20 rounded-full" src={profilePhoto} alt="" />
                             <div>
-                                <p className="roboto-regular text-md">Students</p>
-                                <h1 className="roboto-semibold text-2xl">200</h1>
+                                <p className="roboto-regular text-md">Lessons</p>
+                                <h1 className="roboto-semibold text-2xl">50</h1>
                             </div>
                         </div>
                     </div>
