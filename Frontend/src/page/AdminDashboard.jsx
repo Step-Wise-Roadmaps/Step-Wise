@@ -117,8 +117,8 @@ function AdminDashboard() {
                             return (
                                 <article
                                     key={stat.title}
-                                    className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1"
-                                >
+                                    className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1">
+
                                     <div className="flex items-start justify-between gap-4">
                                         <div>
                                             <p className="text-sm text-slate-500">{stat.title}</p>
