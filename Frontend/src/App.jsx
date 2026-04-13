@@ -7,6 +7,7 @@ import Login from "./page/Login";
 import Register from "./page/Register";
 import ForgotPassword from "./page/ForgotPassword";
 import ResetPassword from "./page/ResetPassword";
+import AdminSideBar from "./components/AdminSideBar";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                 <Route path="register" element={<Register/>} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/reset-password/:token" element={<ResetPassword />} />
+                <Route path="/admin-sideBar" element={<AdminSideBar />} />
             </Routes>
         </>
     )
