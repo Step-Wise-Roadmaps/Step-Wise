@@ -249,7 +249,7 @@ function AdminSideBar() {
 
             <div
                 className={`fixed inset-0 z-50 md:hidden ${
-                    isMobileOpen ? "pointer-events-auto bg-black/20 backdrop-blur-sm" : "pointer-events-none"
+                    isMobileOpen ? "pointer-events-auto backdrop-blur-sm" : "pointer-events-none"
                 }`}
             >
                 <div
