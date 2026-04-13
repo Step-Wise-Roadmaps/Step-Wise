@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import sideBarLogo from "../assets/sideBarLogo/sideBarLogo.png";
 import {
     BarChart3,
@@ -38,6 +39,10 @@ const footerItems = [
     { id: "settings", label: "Settings", icon: Settings },
     { id: "logout", label: "Logout", icon: LogOut, danger: true },
 ];
+
+const itemRoutes = {
+    dashboard: "/AdminDashboard",
+};
 
 function SidebarItem({ item, isOpen, isActive, onClick }) {
     const Icon = item.icon;
@@ -219,12 +224,20 @@ function SidebarContent({ isOpen, activeItem, onItemClick, onCollapseToggle, onM
 }
 
 function AdminSideBar() {
+    const navigate = useNavigate();
+    const location = useLocation();
     const [isOpen, setIsOpen] = useState(true);
     const [isMobileOpen, setIsMobileOpen] = useState(false);
-    const [activeItem, setActiveItem] = useState("dashboard");
+
+    const activeItem = Object.entries(itemRoutes).find(([, path]) => path === location.pathname)?.[0] ?? "";
 
     const handleItemClick = (itemId) => {
-        setActiveItem(itemId);
+        const route = itemRoutes[itemId];
+
+        if (route) {
+            navigate(route);
+        }
+
         setIsMobileOpen(false);
     };
 
