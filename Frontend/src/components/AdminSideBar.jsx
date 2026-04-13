@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import sideBarLogo from "../assets/sideBarLogo/sideBarLogo.png";
 import {
@@ -49,24 +48,24 @@ function SidebarItem({ item, isOpen, isActive, onClick }) {
             onClick={() => onClick(item.id)}
             className={`group relative flex w-full items-center gap-3 overflow-hidden rounded-xl border px-3 py-3 text-left transition-all duration-300 ${
                 isActive
-                    ? "border-cyan-400/30 bg-cyan-400/15 text-white shadow-[0_0_30px_rgba(34,211,238,0.18)]"
+                    ? "border-cyan-200 bg-cyan-100 text-cyan-700 shadow-[0_0_20px_rgba(34,211,238,0.2)]"
                     : item.danger
-                      ? "border-transparent text-slate-300 hover:border-rose-400/20 hover:bg-rose-400/10 hover:text-rose-100"
-                      : "border-transparent text-slate-300 hover:border-white/8 hover:bg-white/6 hover:text-white"
+                      ? "border-transparent text-rose-500 hover:border-rose-200 hover:bg-rose-50 hover:text-rose-600"
+                      : "border-transparent text-slate-600 hover:border-slate-200 hover:bg-slate-100 hover:text-slate-900"
             } ${isOpen ? "justify-start" : "justify-center"}`}
             aria-label={item.label}
         >
             {isActive && (
-                <span className="absolute bottom-2 left-0 top-2 w-1 rounded-r-full bg-cyan-300 shadow-[0_0_18px_rgba(103,232,249,0.95)]" />
+                <span className="absolute bottom-2 left-0 top-2 w-1 rounded-r-full bg-cyan-400" />
             )}
 
             <span
                 className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-all duration-300 ${
                     isActive
-                        ? "border-cyan-300/30 bg-cyan-300/10 text-cyan-200"
+                        ? "border-cyan-200 bg-cyan-100 text-cyan-600"
                         : item.danger
-                          ? "border-white/8 bg-white/4 text-rose-200"
-                          : "border-white/8 bg-white/4 text-slate-200"
+                          ? "border-slate-200 bg-slate-100 text-rose-500"
+                          : "border-slate-200 bg-slate-100 text-slate-600"
                 }`}
             >
                 <Icon size={18} />
@@ -81,7 +80,7 @@ function SidebarItem({ item, isOpen, isActive, onClick }) {
                 {item.badge && (
                     <span
                         className={`ml-3 rounded-full px-2 py-1 text-[11px] roboto-medium ${
-                            isActive ? "bg-cyan-300/15 text-cyan-100" : "bg-white/8 text-slate-300"
+                            isActive ? "bg-cyan-200 text-cyan-700" : "bg-slate-200 text-slate-600"
                         }`}
                     >
                         {item.badge}
@@ -90,7 +89,7 @@ function SidebarItem({ item, isOpen, isActive, onClick }) {
             </div>
 
             {!isOpen && (
-                <span className="pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 whitespace-nowrap rounded-lg border border-white/10 bg-slate-950/95 px-2 py-1 text-xs text-slate-100 opacity-0 shadow-xl transition-all duration-200 group-hover:opacity-100">
+                <span className="pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 whitespace-nowrap rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs text-slate-700 opacity-0 shadow-lg transition-all duration-200 group-hover:opacity-100">
                     {item.label}
                 </span>
             )}
@@ -127,20 +126,20 @@ function SidebarSection({ title, items, isOpen, activeItem, onItemClick }) {
 function SidebarContent({ isOpen, activeItem, onItemClick, onCollapseToggle, onMobileClose, mobile = false }) {
     return (
         <aside
-            className={`relative flex h-screen flex-col overflow-hidden rounded-none border-r border-white/10 bg-gradient-to-b from-slate-950 via-slate-900 to-[#020617] text-white shadow-[0_20px_60px_rgba(2,6,23,0.6)] backdrop-blur-xl ${
+            className={`relative flex h-screen flex-col overflow-hidden rounded-none border-r border-slate-200 bg-white text-slate-800 shadow-[0_20px_60px_rgba(0,0,0,0.05)] ${
                 isOpen ? "w-72" : "w-24"
             } transition-all duration-300 ease-out`}
         >
             <div className="pointer-events-none absolute inset-0">
-                <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-cyan-400/10 via-blue-500/5 to-transparent" />
-                <div className="absolute -left-20 top-28 h-40 w-40 rounded-full bg-cyan-400/10 blur-3xl" />
-                <div className="absolute bottom-20 right-0 h-48 w-48 rounded-full bg-indigo-500/10 blur-3xl" />
+                <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-cyan-100 via-blue-50 to-transparent" />
+                <div className="absolute -left-20 top-28 h-40 w-40 rounded-full bg-cyan-200/40 blur-3xl" />
+                <div className="absolute bottom-20 right-0 h-48 w-48 rounded-full bg-indigo-200/40 blur-3xl" />
             </div>
 
             <div className="relative z-10 flex h-full flex-col p-4">
                 <div className={`mb-6 flex items-center ${isOpen ? "justify-between" : "justify-center"} gap-3`}>
                     <div className={`flex min-w-0 items-center gap-3 ${isOpen ? "" : "justify-center"}`}>
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/8 shadow-lg shadow-cyan-950/20">
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-slate-200 bg-slate-100 shadow">
                             <img src={sideBarLogo} alt="StepWise logo" className="h-8 w-8 object-contain" />
                         </div>
 
@@ -149,24 +148,23 @@ function SidebarContent({ isOpen, activeItem, onItemClick, onCollapseToggle, onM
                                 isOpen ? "max-w-[180px] opacity-100" : "max-w-0 opacity-0"
                             }`}
                         >
-                            <p className="roboto-light text-[11px] uppercase tracking-[0.28em] text-cyan-200/70">
+                            <p className="roboto-light text-[11px] uppercase tracking-[0.28em] text-slate-500">
                                 Workspace
                             </p>
-                            <h1 className="roboto-bold truncate text-lg text-white">StepWise Admin</h1>
+                            <h1 className="roboto-bold truncate text-lg text-slate-800">StepWise Admin</h1>
                         </div>
                     </div>
 
                     <button
                         type="button"
                         onClick={mobile ? onMobileClose : onCollapseToggle}
-                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/6 text-slate-200 transition hover:bg-white/10 hover:text-white"
-                        aria-label={mobile ? "Close sidebar" : isOpen ? "Collapse sidebar" : "Expand sidebar"}
+                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-100 text-slate-600 transition hover:bg-slate-200 hover:text-slate-900"
                     >
                         {mobile ? <X size={18} /> : isOpen ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
                     </button>
                 </div>
 
-                <div className="mb-6 h-px bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
+                <div className="mb-6 h-px bg-slate-200" />
 
                 <div className="flex-1 space-y-6 overflow-y-auto">
                     {menuSections.map((section) => (
@@ -181,7 +179,7 @@ function SidebarContent({ isOpen, activeItem, onItemClick, onCollapseToggle, onM
                     ))}
                 </div>
 
-                <div className="mt-6 h-px bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
+                <div className="mt-6 h-px bg-slate-200" />
 
                 <div className="mt-6 space-y-2">
                     {footerItems.map((item) => (
@@ -196,12 +194,12 @@ function SidebarContent({ isOpen, activeItem, onItemClick, onCollapseToggle, onM
                 </div>
 
                 <div
-                    className={`mt-6 rounded-2xl border border-white/10 bg-white/6 p-3 shadow-inner shadow-slate-950/30 transition-all duration-300 ${
+                    className={`mt-6 rounded-2xl border border-slate-200 bg-slate-100 p-3 shadow-inner ${
                         isOpen ? "opacity-100" : "px-2"
                     }`}
                 >
                     <div className={`flex items-center ${isOpen ? "gap-3" : "justify-center"}`}>
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-300 to-blue-500 text-sm roboto-bold text-slate-950">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 text-sm roboto-bold text-white">
                             SA
                         </div>
 
@@ -210,8 +208,8 @@ function SidebarContent({ isOpen, activeItem, onItemClick, onCollapseToggle, onM
                                 isOpen ? "max-w-[160px] opacity-100" : "max-w-0 opacity-0"
                             }`}
                         >
-                            <p className="roboto-medium truncate text-sm text-white">Sarah Admin</p>
-                            <p className="roboto-light truncate text-xs text-slate-400">Platform Owner</p>
+                            <p className="roboto-medium truncate text-sm text-slate-800">Sarah Admin</p>
+                            <p className="roboto-light truncate text-xs text-slate-500">Platform Owner</p>
                         </div>
                     </div>
                 </div>
@@ -235,8 +233,7 @@ function AdminSideBar() {
             <button
                 type="button"
                 onClick={() => setIsMobileOpen(true)}
-                className="fixed left-4 top-4 z-40 flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-slate-950/80 text-slate-100 shadow-lg backdrop-blur md:hidden"
-                aria-label="Open sidebar"
+                className="fixed left-4 top-4 z-40 flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-lg md:hidden"
             >
                 <Menu size={18} />
             </button>
@@ -251,8 +248,8 @@ function AdminSideBar() {
             </div>
 
             <div
-                className={`fixed inset-0 z-50 md:hidden transition-all duration-300 ${
-                    isMobileOpen ? "pointer-events-auto bg-slate-950/55 backdrop-blur-sm" : "pointer-events-none bg-transparent"
+                className={`fixed inset-0 z-50 md:hidden ${
+                    isMobileOpen ? "pointer-events-auto bg-black/20 backdrop-blur-sm" : "pointer-events-none"
                 }`}
             >
                 <div
@@ -273,7 +270,6 @@ function AdminSideBar() {
                     type="button"
                     onClick={() => setIsMobileOpen(false)}
                     className="absolute inset-0 -z-10"
-                    aria-label="Close sidebar overlay"
                 />
             </div>
         </>
