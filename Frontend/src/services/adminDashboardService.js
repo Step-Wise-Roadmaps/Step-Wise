@@ -17,7 +17,7 @@ const getCourses = async (coursesData) => {
 }
 
 const getLessons = async (lessonData) => {
-    const response = await axiosInstance.get('/admin/Lessons', {
+    const response = await axiosInstance.get('/admin/getLesson', {
         params: lessonData
     });
 

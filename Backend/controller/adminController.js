@@ -49,7 +49,7 @@ exports.getLessons = async (req, res) => {
             "SELECT COUNT(*) AS total FROM lessons"
         )
 
-        const totalLessons = countLessons.total;
+        const totalLessons = countLessons[0].total;
 
         res.status(200).json({
             success: true,
@@ -103,10 +103,10 @@ exports.addCourse = async (req, res) => {
 
 exports.addLessons = async (req, res) => {
     try {
-        const { lesson_name, video_url, course_id } = req.body;
+        const { lesson_name, video_url, course_id } = req.body || {};
 
         if (!lesson_name || !video_url || !course_id) {
-            return res.status(400).json({ message: "Lesson name and Video url and Course id are required" })
+            return res.status(400).json({ message: "lesson_name, video_url, and course_id are required" })
         }
 
         const [results] = await pool.query(
@@ -116,6 +116,6 @@ exports.addLessons = async (req, res) => {
         res.status(201).json({ message: "Lessons added successfully", lessonId: results.insertId })
 
     } catch (err) {
-        res.status(500).json({ message: "Failed to add lessons", error: err.message })
+        res.status(500).json({ message: `Failed to add lessons. Check that course_id exists and the field names are lesson_name, video_url, course_id. ${err.message}` })
     }
 };

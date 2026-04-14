@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../features/auth/adminDashboardSlice";
 import { getCourses } from "../features/auth/adminDashboardSlice";
+import { getLessons } from "../features/auth/adminDashboardSlice";
 
 import {
     Activity,
@@ -64,11 +65,12 @@ const recentActivities = [
 function AdminDashboard() {
 
     const dispatch = useDispatch();
-    const { users, courses, isLoading, isError, message } = useSelector((state) => state.admin);
+    const { users, courses, lessons, isLoading, isError, message } = useSelector((state) => state.admin);
 
     useEffect(() => {
         dispatch(getAllUsers());
         dispatch(getCourses());
+        dispatch(getLessons());
     }, [dispatch]);
 
     const stats = [
@@ -90,7 +92,7 @@ function AdminDashboard() {
     },
     {
         title: "Lessons Completed",
-        value: "8,940",
+        value: isLoading ? "Loading..." : lessons.length,
         change: "+18%",
         note: "Compared to last month",
         icon: GraduationCap,

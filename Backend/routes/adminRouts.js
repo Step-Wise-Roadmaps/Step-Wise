@@ -13,7 +13,7 @@ router.get('/users', auth, adminAuth, adminController.getAllUsers);
 router.get('/course', auth, adminAuth, adminController.getCourses);
 
 // get lessons
-router.get('/lesson', auth, adminAuth, adminController.addLessons);
+router.get('/getLesson', auth, adminAuth, adminController.getLessons);
 
 // delete
 router.delete('/users/:id', auth, adminAuth, adminController.deleteUser);
