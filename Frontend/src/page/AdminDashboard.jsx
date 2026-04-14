@@ -85,7 +85,7 @@ function AdminDashboard() {
 
                             <div className="grid gap-4 sm:grid-cols-2">
                                 <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                                    <p className="text-sm text-slate-500">Today&apos;s focus</p>
+                                    <p className="text-sm text-slate-500">Today's focus</p>
                                     <p className="mt-2 roboto-semibold text-lg text-slate-900">
                                         Course approvals and student support
                                     </p>
