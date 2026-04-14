@@ -5,6 +5,7 @@ const user = JSON.parse(localStorage.getItem('user'));
 
 const initialState = {
     users: [],
+    courses: [],
     isError: false,
     isSuccess: false,
     isLoading: false,
@@ -13,7 +14,16 @@ const initialState = {
 
 export const getAllUsers = createAsyncThunk('admin/getAllUsers', async (adminData, thunkAPI) => {
     try {
-        return await adminDashboardService.getAllUsers(adminData)
+        return await adminDashboardService.getAllUsers(adminData);
+    } catch (error) {
+        const message = error.response?.data?.message || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+});
+
+export const getCourses = createAsyncThunk('admin/getCourses', async (coursesData, thunkAPI) => {
+    try {
+        return await adminDashboardService.getCourses(coursesData);
     } catch (error) {
         const message = error.response?.data?.message || error.message || error.toString();
         return thunkAPI.rejectWithValue(message);
@@ -41,6 +51,18 @@ export const adminSlice = createSlice({
             state.users = action.payload;
         })
         .addCase(getAllUsers.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        })
+        // getCourses
+        .addCase(getCourses.pending, (state) => {state.isLoading = true})
+        .addCase(getCourses.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.courses = action.payload;
+        })
+        .addCase(getCourses.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;

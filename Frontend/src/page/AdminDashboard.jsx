@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../features/auth/adminDashboardSlice";
+import { getCourses } from "../features/auth/adminDashboardSlice";
 
 import {
     Activity,
@@ -63,10 +64,11 @@ const recentActivities = [
 function AdminDashboard() {
 
     const dispatch = useDispatch();
-    const { users, isLoading, isError, message } = useSelector((state) => state.admin);
+    const { users, courses, isLoading, isError, message } = useSelector((state) => state.admin);
 
     useEffect(() => {
         dispatch(getAllUsers());
+        dispatch(getCourses());
     }, [dispatch]);
 
     const stats = [
@@ -80,7 +82,7 @@ function AdminDashboard() {
         },
         {
         title: "Active Courses",
-        value: "36",
+        value: isLoading ? "Loading..." : courses.length,
         change: "+4",
         note: "Published and visible",
         icon: BookOpen,

@@ -8,8 +8,17 @@ const getAllUsers = async (adminData) => {
     return response.data.data;
 }
 
+const getCourses = async (coursesData) => {
+    const response = await axiosInstance.get('/admin/course', {
+        params: coursesData
+    })
+
+    return response.data.data
+}
+
 const adminDashboardService = {
     getAllUsers,
+    getCourses
 }
 
 export default adminDashboardService;
