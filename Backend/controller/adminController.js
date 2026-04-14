@@ -40,6 +40,27 @@ exports.getCourses = async (req, res) => {
     }
 }
 
+exports.getLessons = async (req, res) => {
+    try {
+        const [lessons] = await pool.query(
+            "SELECT id, lesson_name, video_url FROM lessons"
+        )
+        const [countLessons] = await pool.query(
+            "SELECT COUNT(*) AS total FROM lessons"
+        )
+
+        const totalLessons = countLessons.total;
+
+        res.status(200).json({
+            success: true,
+            count: totalLessons,
+            data: lessons
+        })
+    } catch (err) {
+        res.status(500).json({ message: "Database Error", error: err.message });
+    }
+}
+
 exports.deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
