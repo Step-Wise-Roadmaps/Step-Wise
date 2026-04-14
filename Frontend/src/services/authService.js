@@ -21,6 +21,13 @@ const login = async (userData) => {
   return response.data;
 };
 
+const getMe = async (userData) => {
+  const response = await axiosInstance.get('/user/getMe', userData);
+
+  return response.data
+
+}
+
 const forgotPassword = async (emailData) => {
   const response = await axiosInstance.post('/user/forgotPassword', emailData);
 
@@ -39,6 +46,7 @@ const authService = {
   login,
   forgotPassword,
   resetPassword,
+  getMe
 };
 
 export default authService;

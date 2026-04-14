@@ -31,6 +31,15 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   }
 });
 
+export const getMe = createAsyncThunk('auth/getMe', async (user, thunkAPI) => {
+  try {
+    return await authService.getMe(user)
+  } catch (err) {
+    const message = err.response?.data?.message || err.message || err.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+})
+
 export const forgotPassword = createAsyncThunk('auth/forgotPassword', async (email, thunkAPI) => {
   try {
     return await authService.forgotPassword(email);
@@ -89,7 +98,19 @@ export const authSlice = createSlice({
         state.message = action.payload;
         state.user = null;
       })
-
+      // getMe
+      .addCase(getMe.pending, (state) => { state.isLoading = true; })
+      .addCase(getMe.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(getMe.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.user = null;
+      })
       // forgotPassword
       .addCase(forgotPassword.pending, (state) => { state.isLoading = true; })
       .addCase(forgotPassword.fulfilled, (state, action) => {

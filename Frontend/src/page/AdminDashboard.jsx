@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../features/auth/adminDashboardSlice";
 import { getCourses } from "../features/auth/adminDashboardSlice";
 import { getLessons } from "../features/auth/adminDashboardSlice";
+import { getMe } from "../features/auth/authSlice";
 
 import {
     Activity,
@@ -66,11 +67,13 @@ function AdminDashboard() {
 
     const dispatch = useDispatch();
     const { users, courses, lessons, isLoading, isError, message } = useSelector((state) => state.admin);
+    const { user } = useSelector((state) => state.auth);
 
     useEffect(() => {
         dispatch(getAllUsers());
         dispatch(getCourses());
         dispatch(getLessons());
+        dispatch(getMe());
     }, [dispatch]);
 
     const stats = [
@@ -149,7 +152,7 @@ function AdminDashboard() {
                                             alt="Admin profile"
                                         />
                                         <div>
-                                            <p className="roboto-medium text-base">Sarah Admin</p>
+                                            <p className="roboto-medium text-base">{user?.full_name}</p>
                                             <p className="text-sm text-slate-300">Platform Owner</p>
                                         </div>
                                     </div>
