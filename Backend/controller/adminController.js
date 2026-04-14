@@ -19,6 +19,27 @@ exports.getAllUsers = async (req, res) => {
     }
 };
 
+exports.getCourses = async (req, res) => {
+    try {
+        const [courses] = await pool.query(
+            "SELECT id, course_name FROM courses"
+        )
+        const [countCourses] = await pool.query(
+            "SELECT COUNT(*) AS total FROM courses"
+        )
+
+        const totalCourses = countCourses[0].total;
+
+        res.status(200).json({ 
+            success: true,
+            count: totalCourses,
+            data: courses
+         })
+    } catch (err) {
+        res.status(500).json({ message: "Database Error", error: err.message });
+    }
+}
+
 exports.deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
