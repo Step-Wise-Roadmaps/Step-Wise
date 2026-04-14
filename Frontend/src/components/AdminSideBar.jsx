@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import sideBarLogo from "../assets/sideBarLogo/sideBarLogo.png";
 import {
     BarChart3,
@@ -38,6 +39,10 @@ const footerItems = [
     { id: "settings", label: "Settings", icon: Settings },
     { id: "logout", label: "Logout", icon: LogOut, danger: true },
 ];
+
+const itemRoutes = {
+    dashboard: "/AdminDashboard",
+};
 
 function SidebarItem({ item, isOpen, isActive, onClick }) {
     const Icon = item.icon;
@@ -126,7 +131,7 @@ function SidebarSection({ title, items, isOpen, activeItem, onItemClick }) {
 function SidebarContent({ isOpen, activeItem, onItemClick, onCollapseToggle, onMobileClose, mobile = false }) {
     return (
         <aside
-            className={`relative flex h-screen flex-col overflow-hidden rounded-none border-r border-slate-200 bg-white text-slate-800 shadow-[0_20px_60px_rgba(0,0,0,0.05)] ${
+            className={`relative flex h-full flex-col overflow-hidden rounded-none border-r border-slate-200 bg-white text-slate-800 shadow-[0_20px_60px_rgba(0,0,0,0.05)] ${
                 isOpen ? "w-72" : "w-24"
             } transition-all duration-300 ease-out`}
         >
@@ -219,12 +224,20 @@ function SidebarContent({ isOpen, activeItem, onItemClick, onCollapseToggle, onM
 }
 
 function AdminSideBar() {
+    const navigate = useNavigate();
+    const location = useLocation();
     const [isOpen, setIsOpen] = useState(true);
     const [isMobileOpen, setIsMobileOpen] = useState(false);
-    const [activeItem, setActiveItem] = useState("dashboard");
+
+    const activeItem = Object.entries(itemRoutes).find(([, path]) => path === location.pathname)?.[0] ?? "";
 
     const handleItemClick = (itemId) => {
-        setActiveItem(itemId);
+        const route = itemRoutes[itemId];
+
+        if (route) {
+            navigate(route);
+        }
+
         setIsMobileOpen(false);
     };
 
@@ -249,7 +262,7 @@ function AdminSideBar() {
 
             <div
                 className={`fixed inset-0 z-50 md:hidden ${
-                    isMobileOpen ? "pointer-events-auto bg-black/20 backdrop-blur-sm" : "pointer-events-none"
+                    isMobileOpen ? "pointer-events-auto backdrop-blur-sm" : "pointer-events-none"
                 }`}
             >
                 <div
