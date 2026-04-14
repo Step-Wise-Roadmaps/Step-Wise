@@ -5,7 +5,7 @@ exports.getAllUsers = async (req, res) => {
         const [users] = await pool.query("SELECT id, full_name, email, role, created_at FROM users");
 
         const [countResult] = await pool.query(
-            "SELECT COUNT(*) AS total FORM users"
+            "SELECT COUNT(*) AS total FROM users"
         )
         const totalUsers = countResult[0].total;
 

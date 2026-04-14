@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import adminDashboardService from "../../services/adminDashboardService";
-import { reset } from "./authSlice";
 
 const user = JSON.parse(localStorage.getItem('user'));
 
