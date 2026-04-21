@@ -297,13 +297,13 @@ function AdminSideBar() {
             <div
                 className={`fixed inset-0 z-50 md:hidden ${
                     isMobileOpen ? "pointer-events-auto backdrop-blur-sm" : "pointer-events-none"
-                }`}
-            >
+                }`}>
+
                 <div
                     className={`h-full max-w-[86vw] transition-transform duration-300 ease-out ${
                         isMobileOpen ? "translate-x-0" : "-translate-x-full"
-                    }`}
-                >
+                    }`}>
+                        
                     <SidebarContent
                         isOpen
                         activeItem={activeItem}
