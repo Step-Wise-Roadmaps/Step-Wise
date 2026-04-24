@@ -69,7 +69,7 @@ function Login() {
         }
 
         if (isSuccess) {
-            navigate('/AdminDashboard');
+            navigate('/admin-dashboard');
         }
 
         dispatch(reset());
