@@ -13,6 +13,9 @@ import AllUsers from "./page/AllUsers";
 // layot
 import AdminDashboardLayout from "./layout/AdminDashboardLayout";
 
+// protected router
+import ProtectedRoute from "./router/ProtectedRoute";
+
 function App() {
     return (
         <>
@@ -25,9 +28,11 @@ function App() {
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/reset-password/:token" element={<ResetPassword />} />
 
-                <Route path="/admin-dashboard" element={<AdminDashboardLayout />}>
-                    <Route index element={<AdminDashboard />} />
-                    <Route path="users" element={<AllUsers />} />
+                <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+                    <Route path="/admin-dashboard" element={<AdminDashboardLayout />}>
+                        <Route index element={<AdminDashboard />} />
+                        <Route path="users" element={<AllUsers />} />
+                    </Route>
                 </Route>
             </Routes>
         </>
