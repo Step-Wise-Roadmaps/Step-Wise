@@ -19,7 +19,7 @@ import {
     Sparkles,
     Users,
 } from "lucide-react";
-import AdminSideBar from "../components/AdminSideBar.jsx";
+// import AdminSideBar from "../components/AdminSideBar.jsx";
 import profilePhoto from "../assets/sideBarLogo/profilePhoto.png";
 
 // const stats = [
@@ -109,7 +109,7 @@ function AdminDashboard() {
 
     return (
         <div className="flex min-h-screen w-full bg-slate-50 text-slate-900">
-            <AdminSideBar />
+            {/* <AdminSideBar /> */}
 
             <main className="flex-1 overflow-y-auto">
                 <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8">

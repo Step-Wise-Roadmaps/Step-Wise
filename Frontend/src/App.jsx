@@ -10,6 +10,9 @@ import ResetPassword from "./page/ResetPassword";
 import AdminDashboard from "./page/AdminDashboard";
 import AllUsers from "./page/AllUsers";
 
+// layot
+import AdminDashboardLayout from "./layout/AdminDashboardLayout";
+
 function App() {
     return (
         <>
@@ -21,8 +24,11 @@ function App() {
                 <Route path="register" element={<Register/>} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/reset-password/:token" element={<ResetPassword />} />
-                <Route path="/AdminDashboard" element={<AdminDashboard />} />
-                <Route path="/AdminGetUsers" element={<AllUsers />} />
+
+                <Route path="/AdminDashboard" element={<AdminDashboardLayout />}>
+                    <Route index element={<AdminDashboard />} />
+                    <Route path="AdminGetUsers" element={<AllUsers />} />
+                </Route>
             </Routes>
         </>
     )
