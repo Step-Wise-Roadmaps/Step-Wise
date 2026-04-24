@@ -8,6 +8,7 @@ import Register from "./page/Register";
 import ForgotPassword from "./page/ForgotPassword";
 import ResetPassword from "./page/ResetPassword";
 import AdminDashboard from "./page/AdminDashboard";
+import AllUsers from "./page/AllUsers";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/reset-password/:token" element={<ResetPassword />} />
                 <Route path="/AdminDashboard" element={<AdminDashboard />} />
+                <Route path="/AdminGetUsers" element={<AllUsers />} />
             </Routes>
         </>
     )
