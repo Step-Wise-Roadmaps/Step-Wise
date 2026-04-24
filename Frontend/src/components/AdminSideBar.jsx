@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import sideBarLogo from "../assets/sideBarLogo/sideBarLogo.png";
+import { getMe } from "../features/auth/authSlice";
 import {
     BarChart3,
     BookOpen,
@@ -128,7 +130,23 @@ function SidebarSection({ title, items, isOpen, activeItem, onItemClick }) {
     );
 }
 
-function SidebarContent({ isOpen, activeItem, onItemClick, onCollapseToggle, onMobileClose, mobile = false }) {
+function SidebarContent({
+    isOpen,
+    activeItem,
+    onItemClick,
+    onCollapseToggle,
+    onMobileClose,
+    mobile = false,
+    user,
+}) {
+    const fullName = user?.full_name || "Admin";
+    const initials = fullName
+        .split(" ")
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((name) => name[0]?.toUpperCase())
+        .join("") || "AD";
+
     return (
         <aside
             className={`relative flex h-full flex-col overflow-hidden rounded-none border-r border-slate-200 bg-white text-slate-800 shadow-[0_20px_60px_rgba(0,0,0,0.05)] ${
@@ -205,7 +223,7 @@ function SidebarContent({ isOpen, activeItem, onItemClick, onCollapseToggle, onM
                 >
                     <div className={`flex items-center ${isOpen ? "gap-3" : "justify-center"}`}>
                         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 text-sm roboto-bold text-white">
-                            SA
+                            {initials}
                         </div>
 
                         <div
@@ -213,7 +231,7 @@ function SidebarContent({ isOpen, activeItem, onItemClick, onCollapseToggle, onM
                                 isOpen ? "max-w-[160px] opacity-100" : "max-w-0 opacity-0"
                             }`}
                         >
-                            <p className="roboto-medium truncate text-sm text-slate-800">Sarah Admin</p>
+                            <p className="roboto-medium truncate text-sm text-slate-800">{fullName}</p>
                             <p className="roboto-light truncate text-xs text-slate-500">Platform Owner</p>
                         </div>
                     </div>
@@ -225,13 +243,28 @@ function SidebarContent({ isOpen, activeItem, onItemClick, onCollapseToggle, onM
 
 function AdminSideBar() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const location = useLocation();
     const [isOpen, setIsOpen] = useState(true);
     const [isMobileOpen, setIsMobileOpen] = useState(false);
 
+    const { user } = useSelector((state) => state.auth);
+
+    useEffect(() => {
+        dispatch(getMe());
+    }, [dispatch]);
+
     const activeItem = Object.entries(itemRoutes).find(([, path]) => path === location.pathname)?.[0] ?? "";
 
     const handleItemClick = (itemId) => {
+        if (itemId === "logout") {
+            localStorage.removeItem("user");
+            localStorage.removeItem("token");
+            navigate("/");
+            setIsMobileOpen(false);
+            return;
+        }
+
         const route = itemRoutes[itemId];
 
         if (route) {
@@ -257,25 +290,27 @@ function AdminSideBar() {
                     activeItem={activeItem}
                     onItemClick={handleItemClick}
                     onCollapseToggle={() => setIsOpen((prev) => !prev)}
+                    user={user}
                 />
             </div>
 
             <div
                 className={`fixed inset-0 z-50 md:hidden ${
                     isMobileOpen ? "pointer-events-auto backdrop-blur-sm" : "pointer-events-none"
-                }`}
-            >
+                }`}>
+
                 <div
                     className={`h-full max-w-[86vw] transition-transform duration-300 ease-out ${
                         isMobileOpen ? "translate-x-0" : "-translate-x-full"
-                    }`}
-                >
+                    }`}>
+                        
                     <SidebarContent
                         isOpen
                         activeItem={activeItem}
                         onItemClick={handleItemClick}
                         onMobileClose={() => setIsMobileOpen(false)}
                         mobile
+                        user={user}
                     />
                 </div>
 

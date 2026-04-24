@@ -9,6 +9,12 @@ const adminController = require('../controller/adminController');
 // get users
 router.get('/users', auth, adminAuth, adminController.getAllUsers);
 
+// get Cources
+router.get('/course', auth, adminAuth, adminController.getCourses);
+
+// get lessons
+router.get('/getLesson', auth, adminAuth, adminController.getLessons);
+
 // delete
 router.delete('/users/:id', auth, adminAuth, adminController.deleteUser);
 

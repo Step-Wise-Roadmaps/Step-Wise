@@ -15,10 +15,18 @@ const login = async (userData) => {
   
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data));
+    localStorage.setItem('token', response.data.token);
   }
   
   return response.data;
 };
+
+const getMe = async (userData) => {
+  const response = await axiosInstance.get('/user/getMe', userData);
+
+  return response.data
+
+}
 
 const forgotPassword = async (emailData) => {
   const response = await axiosInstance.post('/user/forgotPassword', emailData);
@@ -38,6 +46,7 @@ const authService = {
   login,
   forgotPassword,
   resetPassword,
+  getMe
 };
 
 export default authService;
