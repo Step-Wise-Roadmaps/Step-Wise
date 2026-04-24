@@ -25,9 +25,9 @@ function App() {
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/reset-password/:token" element={<ResetPassword />} />
 
-                <Route path="/AdminDashboard" element={<AdminDashboardLayout />}>
+                <Route path="/admin-dashboard" element={<AdminDashboardLayout />}>
                     <Route index element={<AdminDashboard />} />
-                    <Route path="AdminGetUsers" element={<AllUsers />} />
+                    <Route path="users" element={<AllUsers />} />
                 </Route>
             </Routes>
         </>

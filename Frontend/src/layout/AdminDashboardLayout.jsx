@@ -5,8 +5,10 @@ function AdminDashboardLayout() {
 
     return(
         <>
-            <AdminSideBar variant="main"/>
-                <Outlet />
+            <div className="flex">
+                <AdminSideBar variant="main"/>
+                    <Outlet />
+            </div>
         </>
     )
 }
