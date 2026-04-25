@@ -19,35 +19,7 @@ import {
     Sparkles,
     Users,
 } from "lucide-react";
-// import AdminSideBar from "../components/AdminSideBar.jsx";
 import profilePhoto from "../assets/sideBarLogo/profilePhoto.png";
-
-// const stats = [
-//     {
-//         title: "Total Students",
-//         value: "1,284",
-//         change: "+12.5%",
-//         note: "New enrollments this month",
-//         icon: Users,
-//         tone: "from-cyan-500 to-blue-500",
-//     },
-//     {
-//         title: "Active Courses",
-//         value: "36",
-//         change: "+4",
-//         note: "Published and visible",
-//         icon: BookOpen,
-//         tone: "from-emerald-500 to-teal-500",
-//     },
-//     {
-//         title: "Lessons Completed",
-//         value: "8,940",
-//         change: "+18%",
-//         note: "Compared to last month",
-//         icon: GraduationCap,
-//         tone: "from-amber-500 to-orange-500",
-//     },
-// ];
 
 const quickActions = [
     "Add a new course",
