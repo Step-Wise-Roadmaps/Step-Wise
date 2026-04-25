@@ -103,13 +103,15 @@ export const authSlice = createSlice({
       .addCase(getMe.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        const userData = action.payload.user ? action.payload.user : action.payload;
+        if (userData && userData.role) {
+        state.user = userData;
+      }
       })
       .addCase(getMe.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.user = null;
       })
       // forgotPassword
       .addCase(forgotPassword.pending, (state) => { state.isLoading = true; })

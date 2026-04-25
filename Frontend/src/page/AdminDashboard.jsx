@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../features/auth/adminDashboardSlice";
 import { getCourses } from "../features/auth/adminDashboardSlice";
 import { getLessons } from "../features/auth/adminDashboardSlice";
-import { getMe } from "../features/auth/authSlice";
+// import { getMe } from "../features/auth/authSlice";
 
 import {
     Activity,
@@ -73,13 +73,12 @@ function AdminDashboard() {
         dispatch(getAllUsers());
         dispatch(getCourses());
         dispatch(getLessons());
-        dispatch(getMe());
     }, [dispatch]);
 
     const stats = [
         {
             title: "Total Users",
-            value: isLoading ? "Loading..." : users.length,
+            value: isLoading ? "Loading..." : (users?.length || 0),
             change: "+12.5%",
             note: "New enrollments this month",
             icon: Users,
@@ -87,7 +86,7 @@ function AdminDashboard() {
         },
         {
         title: "Active Courses",
-        value: isLoading ? "Loading..." : courses.length,
+        value: isLoading ? "Loading..." : (courses?.length || 0),
         change: "+4",
         note: "Published and visible",
         icon: BookOpen,
@@ -95,7 +94,7 @@ function AdminDashboard() {
     },
     {
         title: "Lessons Completed",
-        value: isLoading ? "Loading..." : lessons.length,
+        value: isLoading ? "Loading..." : (lessons?.length || 0),
         change: "+18%",
         note: "Compared to last month",
         icon: GraduationCap,
