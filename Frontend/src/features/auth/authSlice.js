@@ -77,7 +77,6 @@ export const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
@@ -104,9 +103,13 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         const userData = action.payload.user ? action.payload.user : action.payload;
-        if (userData && userData.role) {
-        state.user = userData;
-      }
+        if (userData) {
+          state.user = {
+            ...state.user,
+            ...userData,
+          };
+          localStorage.setItem('user', JSON.stringify(state.user));
+        }
       })
       .addCase(getMe.rejected, (state, action) => {
         state.isLoading = false;

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import sideBarLogo from "../assets/sideBarLogo/sideBarLogo.png";
-import { getMe } from "../features/auth/authSlice";
+// import { getMe } from "../features/auth/authSlice";
 import {
     BarChart3,
     BookOpen,
@@ -251,9 +251,9 @@ function AdminSideBar() {
 
     const { user } = useSelector((state) => state.auth);
 
-    useEffect(() => {
-        dispatch(getMe());
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getMe());
+    // }, [dispatch]);
 
     const activeItem = Object.entries(itemRoutes).find(([, path]) => path === location.pathname)?.[0] ?? "";
 
