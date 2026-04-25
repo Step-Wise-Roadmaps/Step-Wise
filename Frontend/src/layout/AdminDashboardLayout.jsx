@@ -4,10 +4,6 @@ import { Outlet } from "react-router-dom";
 import AdminSideBar from "../components/AdminSideBar";
 import { getMe } from "../features/auth/authSlice";
 
-import { getAllUsers } from "../features/auth/adminDashboardSlice";
-import { getCourses } from "../features/auth/adminDashboardSlice";
-import { getLessons } from "../features/auth/adminDashboardSlice";
-
 function AdminDashboardLayout() {
     const dispatch = useDispatch();
 
