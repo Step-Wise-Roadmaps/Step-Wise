@@ -68,8 +68,14 @@ function Login() {
             alert(message);
         }
 
-        if (isSuccess) {
-            navigate('/admin-dashboard');
+        if (isSuccess && user) {
+            const userRole = user.role || (user.user && user.user.role);
+
+            if (userRole === 'admin') {
+                navigate('/admin-dashboard');
+            } else {
+                navigate('/forgot-password');
+            }
         }
 
         dispatch(reset());
