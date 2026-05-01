@@ -8,7 +8,7 @@ import Register from "./page/Register";
 import ForgotPassword from "./page/ForgotPassword";
 import ResetPassword from "./page/ResetPassword";
 import AdminDashboard from "./page/AdminDashboard";
-import AllUsers from "./page/AllUsers";
+import UsersPage from "./page/UsersPage";
 
 // layot
 import AdminDashboardLayout from "./layout/AdminDashboardLayout";
@@ -31,7 +31,7 @@ function App() {
                 <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
                     <Route path="/admin-dashboard" element={<AdminDashboardLayout />}>
                         <Route index element={<AdminDashboard />} />
-                        <Route path="users" element={<AllUsers />} />
+                        <Route path="users" element={<UsersPage />} />
                     </Route>
                 </Route>
             </Routes>
