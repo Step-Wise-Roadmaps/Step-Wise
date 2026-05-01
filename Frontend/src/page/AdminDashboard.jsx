@@ -57,21 +57,21 @@ function AdminDashboard() {
             tone: "from-cyan-500 to-blue-500",
         },
         {
-        title: "Active Courses",
-        value: isLoading ? "Loading..." : (courses?.length || 0),
-        change: "+4",
-        note: "Published and visible",
-        icon: BookOpen,
-        tone: "from-emerald-500 to-teal-500",
-    },
-    {
-        title: "Lessons Completed",
-        value: isLoading ? "Loading..." : (lessons?.length || 0),
-        change: "+18%",
-        note: "Compared to last month",
-        icon: GraduationCap,
-        tone: "from-amber-500 to-orange-500",
-    },
+            title: "Active Courses",
+            value: isLoading ? "Loading..." : (courses?.length || 0),
+            change: "+4",
+            note: "Published and visible",
+            icon: BookOpen,
+            tone: "from-emerald-500 to-teal-500",
+        },
+        {
+            title: "Lessons Completed",
+            value: isLoading ? "Loading..." : (lessons?.length || 0),
+            change: "+18%",
+            note: "Compared to last month",
+            icon: GraduationCap,
+            tone: "from-amber-500 to-orange-500",
+        },
     ];
 
     if (isError) {
