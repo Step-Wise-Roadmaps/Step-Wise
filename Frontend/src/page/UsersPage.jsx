@@ -12,6 +12,7 @@ import {
     Sparkles,
     Users,
     UserStar,
+    UserSearch,
 } from 'lucide-react'
 
 function UsersHeader() {
@@ -92,8 +93,15 @@ function UsersTable() {
     return(
         <>
             <div className='mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8'>
-                <div className='overflow-hidden w-full max-w-7xl bg-white relative rounded-3xl p-6 md:p-10 lg:p-12'>
+                <div className='overflow-hidden w-full max-w-7xl bg-white relative rounded-3xl p-8 md:p-10 lg:p-12'>
                     <div className='absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(34,211,238,0.16),_transparent_20%),radial-gradient(circle_at_top_left,_rgba(59,130,246,0.10),_transparent_18%)]' />
+
+                    <div className='flex items-center justify-end'>
+                        <div className='relative flex items-center'>
+                            <input type="text" placeholder='Search' className='p-2 px-10 border border-slate-400 rounded-xl shadow-md outline-hidden pl-5' />
+                            <label className='absolute right-3 cursor-pointer'><UserSearch size={20} /></label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
