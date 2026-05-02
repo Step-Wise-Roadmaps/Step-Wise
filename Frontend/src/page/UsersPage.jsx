@@ -93,7 +93,7 @@ function UsersTable() {
     return(
         <>
             <div className='mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8'>
-                <div className='overflow-hidden w-full max-w-7xl bg-white relative rounded-3xl p-8 md:p-10 lg:p-12'>
+                <div className='w-full max-w-7xl bg-white relative rounded-3xl p-8 md:p-10 lg:p-12'>
                     <div className='absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(34,211,238,0.16),_transparent_20%),radial-gradient(circle_at_top_left,_rgba(59,130,246,0.10),_transparent_18%)]' />
 
                     <div className='flex items-center justify-end'>
@@ -105,21 +105,31 @@ function UsersTable() {
                     <div className='mt-5 md:mt-3'>
                         <h4 className='roboto-bold text-xl leading-tight text-slate-900 md:text-3xl'>All Stap-Wise Users</h4>
                     </div>
-                    <div className='mt-5 w-ful'>
-                        <div className='p-4 md:p-6 border border-slate-200 rounded-2xl shadow-[0_24px_80px_rgba(15,23,42,0.08)]'>
-                            <header className='w-full bg-slate-50 p-5 rounded-2xl'>
-                                {TableRows.map((TableRow) => {
-                                    return(
-                                        <div className='grid grid-cols-5'>
-                                            <p className='roboto-medium text-lg '>{TableRow.fullName}</p>
-                                            <p className='roboto-medium text-lg'>{TableRow.email}</p>
-                                            <p className='roboto-medium text-lg'>{TableRow.skill}</p>
-                                            <p className='roboto-medium text-lg'>{TableRow.enroled}</p>
-                                            <p className='roboto-medium text-lg'>{TableRow.role}</p>
-                                        </div>
-                                    )
-                                })}
-                            </header>
+                    <div className='relative mt-5 w-full'>
+                        <div className='overflow-x-auto'>
+                            <div className='p-4 md:p-6 min-w-[775px] border border-slate-200 rounded-2xl shadow-[0_24px_80px_rgba(15,23,42,0.08)]'>
+                                
+                                <header className='w-full bg-slate-50 p-5 rounded-2xl'>
+                                    {TableRows.map((TableRow, index) => {
+                                        return(
+                                            <div key={index} className='grid grid-cols-7 gap-4'>
+                                                <p className='roboto-medium col-span-2 text-lg'>{TableRow.fullName}</p>
+                                                <p className='roboto-medium col-span-2 text-lg'>{TableRow.email}</p>
+                                                <p className='roboto-medium text-lg'>{TableRow.skill}</p>
+                                                <p className='roboto-medium text-lg'>{TableRow.enroled}</p>
+                                                <p className='roboto-medium text-lg'>{TableRow.role}</p>
+                                            </div>
+                                        )
+                                    })}
+                                </header>
+
+                                <div className='p-4 md:p-6 grid grid-cols-7 gap-4'>
+                                    <p className='col-span-2 roboto-semibold text-xl'>Neftalem Dagnachew</p>
+                                    <p className='col-span-2'></p>
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
 
