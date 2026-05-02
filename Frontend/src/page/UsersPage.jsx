@@ -29,14 +29,7 @@ function UsersHeader() {
             value: "2",
             icon: UserStar,
             tone: "from-emerald-500 to-teal-500",
-        },
-
-        // {
-        //     title: "Admin Users",
-        //     value: "2",
-        //     icon: Users,
-        //     tone: "from-amber-500 to-orange-500",
-        // }
+        }
     ]
     
     return(
