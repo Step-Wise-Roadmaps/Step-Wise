@@ -77,10 +77,35 @@ function UsersHeader() {
     ) 
 }
 
+function UsersTable() {
+
+    const TableRow = [
+        {
+            fullName: "Full Name",
+            email: "Email",
+            skill: "Skill",
+            enroled: "En-roled",
+            Role: "Role"
+        },
+    ]
+
+    return(
+        <>
+            <div className='mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8'>
+                <div className='overflow-hidden w-full max-w-7xl bg-white relative rounded-3xl p-6 md:p-10 lg:p-12'>
+                    <div className='absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(34,211,238,0.16),_transparent_20%),radial-gradient(circle_at_top_left,_rgba(59,130,246,0.10),_transparent_18%)]' />
+                </div>
+            </div>
+        </>
+    )
+
+}
+
 function UsersPage() {
     return(
         <>
-            <UsersHeader />
+            <UsersHeader/>
+            <UsersTable />
         </>
     )
 }
