@@ -80,13 +80,13 @@ function UsersHeader() {
 
 function UsersTable() {
 
-    const TableRow = [
+    const TableRows = [
         {
             fullName: "Full Name",
             email: "Email",
             skill: "Skill",
             enroled: "En-roled",
-            Role: "Role"
+            role: "Role"
         },
     ]
 
@@ -98,10 +98,31 @@ function UsersTable() {
 
                     <div className='flex items-center justify-end'>
                         <div className='relative flex items-center'>
-                            <input type="text" placeholder='Search' className='p-2 px-10 border border-slate-400 rounded-xl shadow-md outline-hidden pl-5' />
+                            <input type="text" placeholder='Search' className='p-2 md:px-5 border border-slate-400 rounded-xl shadow-md outline-hidden' />
                             <label className='absolute right-3 cursor-pointer'><UserSearch size={20} /></label>
                         </div>
                     </div>
+                    <div className='mt-5 md:mt-3'>
+                        <h4 className='roboto-bold text-xl leading-tight text-slate-900 md:text-3xl'>All Stap-Wise Users</h4>
+                    </div>
+                    <div className='mt-5 w-ful'>
+                        <div className='p-4 md:p-6 border border-slate-200 rounded-2xl shadow-[0_24px_80px_rgba(15,23,42,0.08)]'>
+                            <header className='w-full bg-slate-50 p-5 rounded-2xl'>
+                                {TableRows.map((TableRow) => {
+                                    return(
+                                        <div className='grid grid-cols-5'>
+                                            <p className='roboto-medium text-lg '>{TableRow.fullName}</p>
+                                            <p className='roboto-medium text-lg'>{TableRow.email}</p>
+                                            <p className='roboto-medium text-lg'>{TableRow.skill}</p>
+                                            <p className='roboto-medium text-lg'>{TableRow.enroled}</p>
+                                            <p className='roboto-medium text-lg'>{TableRow.role}</p>
+                                        </div>
+                                    )
+                                })}
+                            </header>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </>
