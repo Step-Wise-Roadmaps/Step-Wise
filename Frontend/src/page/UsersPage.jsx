@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {
     Activity,
@@ -15,6 +17,7 @@ import {
     UserSearch,
     Trash2,
 } from 'lucide-react'
+import { getAllUsers } from '../features/auth/adminDashboardSlice';
 
 function UsersHeader() {
     
@@ -79,7 +82,7 @@ function UsersHeader() {
     ) 
 }
 
-function UsersTable() {
+function UsersTable({users, isLoading, Loading}) {
 
     // const fullName = user?.fullName || "Admin";
     // const initials = fullName
@@ -99,9 +102,17 @@ function UsersTable() {
         },
     ]
 
+   useEffect(() => {
+        if (users) {
+            users.forEach((user) => {
+                console.log(user.full_name);
+            });
+        }
+    }, [users]);
+
     const userItems = [
         {
-            name: "Neftalem Dagnachew",
+            name: isLoading ? "Loading..." : (users?.full_name),
             email: "neftalemdagnachew@gmail.com",
             skill: "Web-devlopment",
             enroled: "True",
@@ -174,10 +185,18 @@ function UsersTable() {
 }
 
 function UsersPage() {
+    const dispatch = useDispatch();
+    
+    const { users, isLoading, isError, message } = useSelector((state) => state.admin);
+
+    useEffect(() => {
+        dispatch(getAllUsers());
+    }, [dispatch]);
+
     return(
         <>
             <UsersHeader/>
-            <UsersTable />
+            <UsersTable users={users} isLoading={isLoading} />
         </>
     )
 }
