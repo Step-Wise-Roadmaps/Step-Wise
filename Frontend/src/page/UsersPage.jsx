@@ -13,6 +13,7 @@ import {
     Users,
     UserStar,
     UserSearch,
+    Trash2,
 } from 'lucide-react'
 
 function UsersHeader() {
@@ -96,6 +97,18 @@ function UsersTable() {
             enroled: "En-roled",
             role: "Role"
         },
+    ]
+
+    const userItems = [
+        {
+            name: "Neftalem Dagnachew",
+            email: "neftalemdagnachew@gmail.com",
+            skill: "Web-devlopment",
+            enroled: "True",
+            role: "User",
+            icon: Trash2,
+            delete: "Delete User",
+        }
     ]
 
     return(
