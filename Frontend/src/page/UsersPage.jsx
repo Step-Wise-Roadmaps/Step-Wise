@@ -39,7 +39,7 @@ function UsersHeader() {
                 <section className='relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] md:p-8'>
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(34,211,238,0.16),_transparent_30%),radial-gradient(circle_at_bottom_left,_rgba(59,130,246,0.10),_transparent_28%)]" />
                     
-                    <div className='relative flex flex-col gap-6 lg-flex-row lg:justify-between'>
+                    <div className='relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between'>
                         <div className='max-w-2xl space-y-4'>
                             <div className="inline-flex items-center gap-2 rounded-full border border-cyan-100 bg-cyan-50 px-4 py-2 text-sm text-cyan-700">
                                 <Sparkles size={16} />
@@ -53,7 +53,7 @@ function UsersHeader() {
                     </div>
                 </section>
 
-                <section className='overflow-hidden grid gap-4 md:grid-cols-2'>
+                <section className='grid gap-4 md:grid-cols-2'>
                     {stats.map((stat) => {
                         const Icon = stat.icon;
 
@@ -79,6 +79,14 @@ function UsersHeader() {
 }
 
 function UsersTable() {
+
+    // const fullName = user?.fullName || "Admin";
+    // const initials = fullName
+    //     .split(" ")
+    //     .filter(Boolean)
+    //     .slice(0, 2)
+    //     .map((name) => name[0]?.toUpperCase())
+    //     .join("") || "AD";
 
     const TableRows = [
         {
@@ -107,7 +115,7 @@ function UsersTable() {
                     </div>
                     <div className='relative mt-5 w-full'>
                         <div className='overflow-x-auto'>
-                            <div className='p-4 md:p-6 min-w-[775px] border border-slate-200 rounded-2xl shadow-[0_24px_80px_rgba(15,23,42,0.08)]'>
+                            <div className='p-4 md:p-6 min-w-[1120px] border border-slate-200 rounded-2xl shadow-[0_24px_80px_rgba(15,23,42,0.08)]'>
                                 
                                 <header className='w-full bg-slate-50 p-5 rounded-2xl'>
                                     {TableRows.map((TableRow, index) => {
@@ -123,9 +131,17 @@ function UsersTable() {
                                     })}
                                 </header>
 
-                                <div className='p-4 md:p-6 grid grid-cols-7 gap-4'>
-                                    <p className='col-span-2 roboto-semibold text-xl'>Neftalem Dagnachew</p>
-                                    <p className='col-span-2'></p>
+                                <div className='p-4 md:p-6 grid grid-cols-7 items-center gap-4'>
+                                    <div className='col-span-2 flex items-center gap-1'>
+                                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 text-sm roboto-bold text-white">
+                                            ND
+                                        </div>
+                                        <p className=' roboto-semibold text-xl'>Neftalem Dagnachew</p>
+                                    </div>
+                                    <p className='col-span-2 roboto-regular'>@neftalemdagnahcew</p>
+                                    <p className='roboto-regular'>Web-devlopment</p>
+                                    <p className='roboto-regular'>True</p>
+                                    <p className='roboto-regular'>User</p>
                                 </div>
 
                             </div>
