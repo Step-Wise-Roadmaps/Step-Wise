@@ -144,7 +144,7 @@ function UsersTable() {
                                     })}
                                 </header>
 
-                                <div className='p-4 md:p-6 grid grid-cols-7 items-center gap-4'>
+                                <div className='relative p-4 md:p-6 grid grid-cols-7 items-center gap-4'>
                                     <div className='col-span-2 flex items-center gap-1'>
                                         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 text-sm roboto-bold text-white">
                                             ND
@@ -155,6 +155,10 @@ function UsersTable() {
                                     <p className='roboto-regular'>Web-devlopment</p>
                                     <p className='roboto-regular'>True</p>
                                     <p className='roboto-regular'>User</p>
+                                    <div className='flex absolute right-1 items-center text-rose-600 border border-transparent hover:border-rose-200 hover:bg-rose-50 px-3 py-2 cursor-pointer rounded-lg transition-all duration-300'>
+                                        <span className='pr-1'> <Trash2 size={20} /> </span>
+                                        <button className='cursor-pointer'>Delete</button>
+                                    </div>
                                 </div>
 
                             </div>
