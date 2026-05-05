@@ -184,7 +184,7 @@ function UsersTable({users, isLoading, Loading}) {
 
 }
 
-function UsersPage() {
+function UserManagement() {
     const dispatch = useDispatch();
     
     const { users, isLoading, isError, message } = useSelector((state) => state.admin);
@@ -201,4 +201,4 @@ function UsersPage() {
     )
 }
 
-export default UsersPage;
+export default UserManagement;
