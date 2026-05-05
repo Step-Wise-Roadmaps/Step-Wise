@@ -5,21 +5,7 @@ import {
     Sparkles,
 } from 'lucide-react'
 
-const stats = [
-    {
-        title: "Total Users",
-        value: "3",
-        icon: Users,
-        tone: "from-cyan-500 to-blue-500",
-    },
-
-    {
-        title: "Admin Users",
-        value: "2",
-        icon: UserStar,
-        tone: "from-emerald-500 to-teal-500",
-    }
-]
+import { stats } from '../../data/UserManagementData';
 
 function UsersHeader() {
     
