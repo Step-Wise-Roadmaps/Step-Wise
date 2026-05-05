@@ -2,7 +2,16 @@ const pool = require('../config/db');
 
 exports.getAllUsers = async (req, res) => {
     try {
-        const [users] = await pool.query("SELECT id, full_name, email, role, created_at FROM users");
+        const [users] = await pool.query(`
+            SELECT 
+                u.id, 
+                u.full_name, 
+                u.email, 
+                s.skill_name, 
+                u.role, 
+                u.created_at
+                FROM users u
+                JOIN skills s ON u.selected_skill_id = s.id`);
 
         const [countResult] = await pool.query(
             "SELECT COUNT(*) AS total FROM users"

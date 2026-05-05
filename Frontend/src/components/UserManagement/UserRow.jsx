@@ -12,7 +12,7 @@ function UserRow({ user }) {
       </div>
 
       <p className='col-span-2 text-slate-900 roboto-regular'>{user.email}</p>
-      <p className="text-slate-900 roboto-regular">{user.skill}</p>
+      <p className="text-slate-900 roboto-regular">{user.skill_name}</p>
       <p className="text-slate-900 roboto-regular">{user.enrolled ? "True" : "False"}</p>
       <p className="text-slate-900 roboto-regular">{user.role}</p>
 
