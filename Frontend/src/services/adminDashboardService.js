@@ -8,6 +8,14 @@ const getAllUsers = async (adminData) => {
     return response.data.data;
 }
 
+const deleteUser = async (deleteUser) => {
+    const response = await axiosInstance.delete('/admin/users/:id', {
+        params: deleteUser
+    });
+
+    return response.data.data;
+}
+
 const getCourses = async (coursesData) => {
     const response = await axiosInstance.get('/admin/course', {
         params: coursesData
@@ -26,6 +34,7 @@ const getLessons = async (lessonData) => {
 
 const adminDashboardService = {
     getAllUsers,
+    deleteUser,
     getCourses,
     getLessons
 }
