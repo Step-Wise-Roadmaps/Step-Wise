@@ -1,4 +1,10 @@
 
+import {
+    Users,
+    UserStar,
+    Sparkles,
+} from 'lucide-react'
+
 const stats = [
     {
         title: "Total Users",

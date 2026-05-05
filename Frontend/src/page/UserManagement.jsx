@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../features/auth/adminDashboardSlice";
 
 // components
-import UsersHeader from "../components/users/UsersHeader";
-import UsersTable from "../components/users/UsersTable";
+import UsersHeader from "../components/UserManagement/UsersHeader";
+import UsersTable from "../components/UserManagement/UsersTable";
 
 function UserManagement() {
     const dispatch = useDispatch();
