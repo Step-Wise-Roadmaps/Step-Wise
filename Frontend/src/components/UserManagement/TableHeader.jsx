@@ -7,11 +7,11 @@ function TableHeader() {
       {TableRows.map((TableRow, index) => {
           return(
             <div key={index} className='grid grid-cols-7 gap-4'>
-              <p className='col-span-2'>{TableRow.fullName}</p>
-              <p className='col-span-2'>{TableRow.email}</p>
-              <p>{TableRow.skill}</p>
-              <p>{TableRow.enroled}</p>
-              <p>{TableRow.role}</p>
+              <p className='col-span-2 text-md text-slate-900 roboto-medium'>{TableRow.fullName}</p>
+              <p className='col-span-2 text-md text-slate-900 roboto-medium'>{TableRow.email}</p>
+              <p className="text-slate-900 text-md roboto-medium">{TableRow.skill}</p>
+              <p className="text-slate-900 text-md roboto-medium">{TableRow.enroled}</p>
+              <p className="text-slate-900 text-md roboto-medium">{TableRow.role}</p>
             </div>
           )
         })}
