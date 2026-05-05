@@ -17,8 +17,8 @@ export const menuSections = [
         title: "MAIN",
         items: [
             {id: "dashboard", label: "Dashboard", icon: LayoutDashboard, badge: "New"},
-            {id: "dashboard", label: "Dashboard", icon: LayoutDashboard, badge: "New"},
-            {id: "dashboard", label: "Dashboard", icon: LayoutDashboard, badge: "New"},
+            {id: "users", label: "Users", icon: Users, badge: "24"},
+            { id: "products", label: "Products", icon: Package },
         ],
 
         title: "MANAGEMENT",
