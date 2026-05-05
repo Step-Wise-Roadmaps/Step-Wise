@@ -16,9 +16,9 @@ function UserRow({ user }) {
       <p className="text-slate-900 roboto-regular">{user.enrolled ? "True" : "False"}</p>
       <p className="text-slate-900 roboto-regular">{user.role}</p>
 
-      <div className='flex absolute right-1 text-rose-600 cursor-pointer'>
+      <div className='flex absolute right-1 items-center text-rose-600 border border-transparent hover:border-rose-200 hover:bg-rose-50 px-3 py-2 cursor-pointer rounded-lg transition-all duration-300'>
         <Trash2 size={20} />
-        <button>Delete</button>
+        <button className="cursor-pointer">Delete</button>
       </div>
 
     </div>
