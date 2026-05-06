@@ -1,7 +1,7 @@
 
 import { Trash2 } from "lucide-react";
 
-function UserRow({ user }) {
+function UserRow({ user, deleteUser }) {
   return (
     <div className='relative p-4 md:p-6 grid grid-cols-7 items-center gap-4'>
       <div className='col-span-2 flex items-center gap-1'>
@@ -21,7 +21,12 @@ function UserRow({ user }) {
 
       <div className='flex absolute right-1 items-center text-rose-600 border border-transparent hover:border-rose-200 hover:bg-rose-50 px-3 py-2 cursor-pointer rounded-lg transition-all duration-300'>
         <Trash2 size={20} />
-        <button className="cursor-pointer">Delete</button>
+        <button onClick={() => {
+          deleteUser(user.id);
+        }}
+          className="cursor-pointer">
+            Delete
+        </button>
       </div>
 
     </div>

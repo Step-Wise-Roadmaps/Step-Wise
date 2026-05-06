@@ -3,7 +3,8 @@ import UserRow from "./UserRow";
 import TableHeader from "./TableHeader";
 import SearchBar from "./SearchBar";
 
-function UsersTable({ users, isLoading }) {
+function UsersTable({ users, isLoading, deleteUser }) {
+
   return (
     <div className='mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8'>
       <div className='w-full max-w-7xl bg-white relative rounded-3xl p-8 md:p-10 lg:p-12'>
@@ -24,7 +25,7 @@ function UsersTable({ users, isLoading }) {
                 <p>Loading...</p>
               ) : (
                 users?.map((user) => (
-                  <UserRow key={user.id} user={user} />
+                  <UserRow key={user.id} user={user} deleteUser={deleteUser} />
                 ))
               )}
 

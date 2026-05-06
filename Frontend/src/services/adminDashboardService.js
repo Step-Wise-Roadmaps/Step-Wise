@@ -1,19 +1,16 @@
 import axiosInstance from "../api/axiosInstance";
 
 const getAllUsers = async (adminData) => {
-    const response = await axiosInstance.get('/admin/users', {
-        params: adminData
-    });
+    const response = await axiosInstance.get('/admin/users');
 
     return response.data.data;
 }
 
-const deleteUser = async (deleteUser) => {
-    const response = await axiosInstance.delete('/admin/users/:id', {
-        params: deleteUser
-    });
+const deleteUser = async (id) => {
+    console.log("API CALL WITH ID:", id);
+    await axiosInstance.delete(`/admin/users/${id}`);
 
-    return response.data.data;
+    return id;
 }
 
 const getCourses = async (coursesData) => {

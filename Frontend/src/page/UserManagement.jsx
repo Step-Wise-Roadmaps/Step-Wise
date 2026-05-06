@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers } from "../features/auth/adminDashboardSlice";
+import { getAllUsers, deleteUser } from "../features/auth/adminDashboardSlice";
 
 // components
 import UsersHeader from "../components/UserManagement/UsersHeader";
@@ -15,10 +15,14 @@ function UserManagement() {
         dispatch(getAllUsers());
     }, [dispatch]);
 
+    const handleDelete = (id) => {
+        dispatch(deleteUser(id));
+    };
+
     return(
         <>
             <UsersHeader />
-            <UsersTable users={users} isLoading={isLoading} />
+            <UsersTable users={users} isLoading={isLoading} deleteUser={handleDelete} />
         </>
     )
 }
