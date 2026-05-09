@@ -22,10 +22,20 @@ export const getAllUsers = createAsyncThunk('admin/getAllUsers', async (adminDat
     }
 });
 
+export const deleteUser = createAsyncThunk('admin/deleteUser', async (id, thunkAPI) => {
+    try {
+        return await adminDashboardService.deleteUser(id);
+    } catch (error) {
+        const message = error.response?.data?.message || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+})
+
 export const getCourses = createAsyncThunk('admin/getCourses', async (coursesData, thunkAPI) => {
     try {
         return await adminDashboardService.getCourses(coursesData);
     } catch (error) {
+        console.log("DELETE ERROR:", error);
         const message = error.response?.data?.message || error.message || error.toString();
         return thunkAPI.rejectWithValue(message);
     }
@@ -61,6 +71,21 @@ export const adminSlice = createSlice({
             state.users = action.payload;
         })
         .addCase(getAllUsers.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        })
+        // deleteUser
+        .addCase(deleteUser.pending, (state) => {state.isLoading = true})
+        .addCase(deleteUser.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            const deletedId = typeof action.payload === 'string' ? Number(action.payload) : action.payload;
+            state.users = state.users.filter(
+                (user) => user.id !== deletedId
+            );
+        })
+        .addCase(deleteUser.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../features/auth/adminDashboardSlice";
 import { getCourses } from "../features/auth/adminDashboardSlice";
 import { getLessons } from "../features/auth/adminDashboardSlice";
-import { getMe } from "../features/auth/authSlice";
+// import { getMe } from "../features/auth/authSlice";
 
 import {
     Activity,
@@ -19,35 +19,7 @@ import {
     Sparkles,
     Users,
 } from "lucide-react";
-import AdminSideBar from "../components/AdminSideBar.jsx";
 import profilePhoto from "../assets/sideBarLogo/profilePhoto.png";
-
-// const stats = [
-//     {
-//         title: "Total Students",
-//         value: "1,284",
-//         change: "+12.5%",
-//         note: "New enrollments this month",
-//         icon: Users,
-//         tone: "from-cyan-500 to-blue-500",
-//     },
-//     {
-//         title: "Active Courses",
-//         value: "36",
-//         change: "+4",
-//         note: "Published and visible",
-//         icon: BookOpen,
-//         tone: "from-emerald-500 to-teal-500",
-//     },
-//     {
-//         title: "Lessons Completed",
-//         value: "8,940",
-//         change: "+18%",
-//         note: "Compared to last month",
-//         icon: GraduationCap,
-//         tone: "from-amber-500 to-orange-500",
-//     },
-// ];
 
 const quickActions = [
     "Add a new course",
@@ -73,34 +45,33 @@ function AdminDashboard() {
         dispatch(getAllUsers());
         dispatch(getCourses());
         dispatch(getLessons());
-        dispatch(getMe());
     }, [dispatch]);
 
     const stats = [
         {
             title: "Total Users",
-            value: isLoading ? "Loading..." : users.length,
+            value: isLoading ? "Loading..." : (users?.length || 0),
             change: "+12.5%",
             note: "New enrollments this month",
             icon: Users,
             tone: "from-cyan-500 to-blue-500",
         },
         {
-        title: "Active Courses",
-        value: isLoading ? "Loading..." : courses.length,
-        change: "+4",
-        note: "Published and visible",
-        icon: BookOpen,
-        tone: "from-emerald-500 to-teal-500",
-    },
-    {
-        title: "Lessons Completed",
-        value: isLoading ? "Loading..." : lessons.length,
-        change: "+18%",
-        note: "Compared to last month",
-        icon: GraduationCap,
-        tone: "from-amber-500 to-orange-500",
-    },
+            title: "Active Courses",
+            value: isLoading ? "Loading..." : (courses?.length || 0),
+            change: "+4",
+            note: "Published and visible",
+            icon: BookOpen,
+            tone: "from-emerald-500 to-teal-500",
+        },
+        {
+            title: "Lessons Completed",
+            value: isLoading ? "Loading..." : (lessons?.length || 0),
+            change: "+18%",
+            note: "Compared to last month",
+            icon: GraduationCap,
+            tone: "from-amber-500 to-orange-500",
+        },
     ];
 
     if (isError) {
@@ -109,7 +80,7 @@ function AdminDashboard() {
 
     return (
         <div className="flex min-h-screen w-full bg-slate-50 text-slate-900">
-            <AdminSideBar />
+            {/* <AdminSideBar /> */}
 
             <main className="flex-1 overflow-y-auto">
                 <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8">

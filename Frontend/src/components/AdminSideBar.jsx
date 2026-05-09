@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import sideBarLogo from "../assets/sideBarLogo/sideBarLogo.png";
-import { getMe } from "../features/auth/authSlice";
+// import { getMe } from "../features/auth/authSlice";
 import {
     BarChart3,
     BookOpen,
@@ -43,7 +43,8 @@ const footerItems = [
 ];
 
 const itemRoutes = {
-    dashboard: "/AdminDashboard",
+    dashboard: "/admin-dashboard",
+    users: "/admin-dashboard/users",
 };
 
 function SidebarItem({ item, isOpen, isActive, onClick }) {
@@ -250,9 +251,9 @@ function AdminSideBar() {
 
     const { user } = useSelector((state) => state.auth);
 
-    useEffect(() => {
-        dispatch(getMe());
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getMe());
+    // }, [dispatch]);
 
     const activeItem = Object.entries(itemRoutes).find(([, path]) => path === location.pathname)?.[0] ?? "";
 
@@ -294,13 +295,11 @@ function AdminSideBar() {
                 />
             </div>
 
-            <div
-                className={`fixed inset-0 z-50 md:hidden ${
-                    isMobileOpen ? "pointer-events-auto backdrop-blur-sm" : "pointer-events-none"
+            <div className={`fixed inset-0 z-50 md:hidden ${
+                isMobileOpen ? "pointer-events-auto backdrop-blur-sm" : "pointer-events-none"
                 }`}>
 
-                <div
-                    className={`h-full max-w-[86vw] transition-transform duration-300 ease-out ${
+                <div className={`h-full max-w-[86vw] transition-transform duration-300 ease-out ${
                         isMobileOpen ? "translate-x-0" : "-translate-x-full"
                     }`}>
                         

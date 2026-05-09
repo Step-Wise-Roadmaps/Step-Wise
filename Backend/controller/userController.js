@@ -17,25 +17,6 @@ exports.getUsers = async (req, res) => {
     }
 };
 
-exports.getMe = async (req, res) => {
-    try {
-        const userId = req.user.id;
-
-        const [results] = await pool.query(
-            "SELECT id, full_name, email FROM users WHERE id = ?",
-            [userId]
-        );
-
-        if (results.length === 0) {
-            return res.status(404).json({ message: "User not found" });
-        }
-
-        res.status(200).json(results[0])
-    } catch (err) {
-        res.status(500).json({ message: "DB Error" })
-    }
-}
-
 exports.registerUsers = async (req, res) => {
     try {
         const { email, password, full_name, selected_skill_id } = req.body;
@@ -53,10 +34,8 @@ exports.registerUsers = async (req, res) => {
             return res.status(400).json({ message: "Invalid skill selected" });
         }
 
-        // 🔥 STEP 2: hash password
         const hashed = await bcrypt.hash(password, 10);
 
-        // 🔥 STEP 3: insert user
         const [results] = await pool.query(
             "INSERT INTO users (email, password, full_name, selected_skill_id) VALUES (?, ?, ?, ?)",
             [email, hashed, full_name, selected_skill_id]
@@ -100,11 +79,38 @@ exports.loginUsers = async (req, res) => {
         }, JWT_SECRET, { expiresIn: "30m" });
 
         res.status(200).json({ 
-            message: "Login successfully", token, role: user.role});
+            message: "Login successfully",
+             token,
+             user: {
+                id: user.id,
+                full_name: user.full_name,
+                email: user.email,
+                role: user.role
+             } 
+            });
 
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Server error" });
+    }
+}
+
+exports.getMe = async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const [results] = await pool.query(
+            "SELECT id, full_name, email, role FROM users WHERE id = ?",
+            [userId]
+        );
+
+        if (results.length === 0) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.status(200).json(results[0])
+    } catch (err) {
+        res.status(500).json({ message: "DB Error" })
     }
 }
 

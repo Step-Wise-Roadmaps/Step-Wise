@@ -1,11 +1,16 @@
 import axiosInstance from "../api/axiosInstance";
 
 const getAllUsers = async (adminData) => {
-    const response = await axiosInstance.get('/admin/users', {
-        params: adminData
-    });
+    const response = await axiosInstance.get('/admin/users');
 
     return response.data.data;
+}
+
+const deleteUser = async (id) => {
+    console.log("API CALL WITH ID:", id);
+    await axiosInstance.delete(`/admin/users/${id}`);
+
+    return id;
 }
 
 const getCourses = async (coursesData) => {
@@ -26,6 +31,7 @@ const getLessons = async (lessonData) => {
 
 const adminDashboardService = {
     getAllUsers,
+    deleteUser,
     getCourses,
     getLessons
 }

@@ -8,6 +8,13 @@ import Register from "./page/Register";
 import ForgotPassword from "./page/ForgotPassword";
 import ResetPassword from "./page/ResetPassword";
 import AdminDashboard from "./page/AdminDashboard";
+import UserManagement from "./page/UserManagement";
+
+// layot
+import AdminDashboardLayout from "./layout/AdminDashboardLayout";
+
+// protected router
+import ProtectedRoute from "./router/ProtectedRoute";
 
 function App() {
     return (
@@ -20,7 +27,13 @@ function App() {
                 <Route path="register" element={<Register/>} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/reset-password/:token" element={<ResetPassword />} />
-                <Route path="/AdminDashboard" element={<AdminDashboard />} />
+
+                <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+                    <Route path="/admin-dashboard" element={<AdminDashboardLayout />}>
+                        <Route index element={<AdminDashboard />} />
+                        <Route path="users" element={<UserManagement />} />
+                    </Route>
+                </Route>
             </Routes>
         </>
     )
