@@ -7,7 +7,7 @@ import {
 
 import { stats } from '../../data/UserManagementData';
 
-function UsersHeader() {
+function UsersHeader({ users, isLoading }) {
     
     return(
         <>

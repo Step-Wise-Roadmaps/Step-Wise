@@ -21,7 +21,7 @@ function UserManagement() {
 
     return(
         <>
-            <UsersHeader />
+            <UsersHeader users={users} isLoading={isLoading}/>
             <UsersTable users={users} isLoading={isLoading} deleteUser={handleDelete} />
         </>
     )
