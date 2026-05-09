@@ -5,6 +5,7 @@ import { getAllUsers, deleteUser } from "../features/auth/adminDashboardSlice";
 // components
 import UsersHeader from "../components/UserManagement/UsersHeader";
 import UsersTable from "../components/UserManagement/UsersTable";
+import { stats } from "../data/UserManagementData";
 
 function UserManagement() {
     const dispatch = useDispatch();
@@ -18,7 +19,6 @@ function UserManagement() {
     const handleDelete = (id) => {
         dispatch(deleteUser(id));
     };
-
     return(
         <>
             <UsersHeader users={users} isLoading={isLoading}/>
