@@ -30,7 +30,7 @@ function UsersHeader({ users, isLoading }) {
                 </section>
 
                 <section className='grid gap-4 md:grid-cols-2'>
-                    {stats.map((stat) => {
+                    {stats({users, isLoading}).map((stat) => {
                         const Icon = stat.icon;
 
                         return (

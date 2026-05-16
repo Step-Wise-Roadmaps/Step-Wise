@@ -9,6 +9,9 @@ const adminController = require('../controller/adminController');
 // get users
 router.get('/users', auth, adminAuth, adminController.getAllUsers);
 
+// search user 
+router.get('/search', auth, adminAuth, adminController.searchUsers);
+
 // get Cources
 router.get('/course', auth, adminAuth, adminController.getCourses);
 

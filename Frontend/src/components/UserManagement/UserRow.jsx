@@ -16,7 +16,16 @@ function UserRow({ user, deleteUser }) {
 
       <p className='col-span-2 text-slate-900 roboto-regular'>{user.email}</p>
       <p className="text-slate-900 roboto-regular">{user.skill_name}</p>
-      <p className="text-slate-900 roboto-regular">{user.enrolled ? "True" : "False"}</p>
+      <div>
+        <span className={`rounded-full px-3 py-1 text-xs roboto-medium ${
+          user.enrolled
+          ? "bg-emerald-100 text-emerald-700"
+          : "bg-rose-100 text-rose-700"
+        }`}>
+           {user.enrolled ? "Enrolled" : "Not Enrolled"}
+        </span>
+      </div>
+
       <p className="text-slate-900 roboto-regular">{user.role}</p>
 
       <div className='flex absolute right-1 items-center text-rose-600 border border-transparent hover:border-rose-200 hover:bg-rose-50 px-3 py-2 cursor-pointer rounded-lg transition-all duration-300'>
