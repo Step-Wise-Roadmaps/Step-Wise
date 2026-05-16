@@ -30,8 +30,8 @@ function Navbar() {
                     <div className="flex-1 flex justify-end mr-6">
 
                         <div className="hidden md:flex space-x-4">
-                            <button className="roboto-regular px-4 py-2 cursor-pointer hover:text-cyan-800 duration-200">Sign in</button>
-                            <button className="roboto-regular px-8 py-[10px] cursor-pointer bg-cyan-950 text-white rounded-[50px] hover:bg-cyan-800 duration-200">Sign up</button>
+                            <Link to="/login" className="roboto-regular px-4 py-2 cursor-pointer hover:text-cyan-800 duration-200">Sign in</Link>
+                            <Link to="/register" className="roboto-regular px-8 py-[10px] cursor-pointer bg-cyan-950 text-white rounded-[50px] hover:bg-cyan-800 duration-200">Sign up</Link>
                         </div>
                         <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden focus:outline-none cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
