@@ -7,6 +7,7 @@ const initialState = {
     users: [],
     courses: [],
     lessons: [],
+    search: "",
     isError: false,
     isSuccess: false,
     isLoading: false,
@@ -16,6 +17,15 @@ const initialState = {
 export const getAllUsers = createAsyncThunk('admin/getAllUsers', async (adminData, thunkAPI) => {
     try {
         return await adminDashboardService.getAllUsers(adminData);
+    } catch (error) {
+        const message = error.response?.data?.message || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+});
+
+export const searchUsers = createAsyncThunk('admin/searchUsers', async (adminData, thunkAPI) => {
+    try {
+        return await adminDashboardService.searchUsers(adminData);
     } catch (error) {
         const message = error.response?.data?.message || error.message || error.toString();
         return thunkAPI.rejectWithValue(message);
@@ -71,6 +81,18 @@ export const adminSlice = createSlice({
             state.users = action.payload;
         })
         .addCase(getAllUsers.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        })
+        // searchUsers
+        .addCase(searchUsers.pending, (state) => {state.isLoading = true})
+        .addCase(searchUsers.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.users = action.payload;
+        })
+        .addCase(searchUsers.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;

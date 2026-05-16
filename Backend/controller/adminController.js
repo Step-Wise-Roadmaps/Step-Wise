@@ -28,6 +28,41 @@ exports.getAllUsers = async (req, res) => {
     }
 };
 
+exports.searchUsers = async (req, res) => {
+    try {
+        const { search = "" } = req.query;
+
+        const searchTerm = `%${search}%`;
+
+        const [users] = await pool.execute(
+            `
+            SELECT id, full_name, email, role
+            FROM users
+            WHERE
+                full_name LIKE ?
+                OR email LIKE ?
+                OR role LIKE ?
+            ORDER BY created_at DESC
+            `,
+            [searchTerm, searchTerm, searchTerm]
+        );
+
+        res.status(200).json({
+            success: true,
+            count: users.length,
+            data: users,
+        });
+
+    } catch (error) {
+        console.log(error);
+
+        res.status(500).json({
+            success: false,
+            message: "Server Error",
+        });
+    }
+};
+
 exports.getCourses = async (req, res) => {
     try {
         const [courses] = await pool.query(

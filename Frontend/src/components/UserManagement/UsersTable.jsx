@@ -3,13 +3,13 @@ import UserRow from "./UserRow";
 import TableHeader from "./TableHeader";
 import SearchBar from "./SearchBar";
 
-function UsersTable({ users, isLoading, deleteUser }) {
+function UsersTable({ users, isLoading, deleteUser, search, setSearch }) {
 
   return (
     <div className='mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8'>
       <div className='w-full max-w-7xl bg-white relative rounded-3xl p-8 md:p-10 lg:p-12'>
         <div className='absolute rounded-3xl inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(34,211,238,0.16),_transparent_20%),radial-gradient(circle_at_top_left,_rgba(59,130,246,0.10),_transparent_18%)]' />
-        <SearchBar />
+        <SearchBar search={search} setSearch={setSearch} />
 
         <div className='mt-5 md:mt-3'>
           <h4 className='roboto-bold text-xl leading-tight text-slate-900 md:text-3xl'>All Stap-Wise Users</h4>

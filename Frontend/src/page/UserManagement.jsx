@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers, deleteUser } from "../features/auth/adminDashboardSlice";
 
@@ -12,6 +12,12 @@ function UserManagement() {
 
     const { users, isLoading } = useSelector((state) => state.admin);
 
+    const [search, setSearch] = useState("");
+
+    const filteredUsers = users?.filter((user) =>
+        user.full_name?.toLowerCase().includes(search.toLowerCase())
+    );
+
     useEffect(() => {
         dispatch(getAllUsers());
     }, [dispatch]);
@@ -21,8 +27,15 @@ function UserManagement() {
     };
     return(
         <>
-            <UsersHeader users={users} isLoading={isLoading}/>
-            <UsersTable users={users} isLoading={isLoading} deleteUser={handleDelete} />
+            <UsersHeader users={users} isLoading={isLoading} />
+
+            <UsersTable 
+                users={filteredUsers} 
+                isLoading={isLoading} 
+                deleteUser={handleDelete}
+                search={search}
+                setSearch={setSearch}
+            />
         </>
     )
 }
