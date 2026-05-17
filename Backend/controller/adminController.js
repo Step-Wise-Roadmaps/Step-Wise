@@ -28,6 +28,47 @@ exports.getAllUsers = async (req, res) => {
     }
 };
 
+exports.userGrowth = async (req, res) => {
+    try {
+        const [results] = await pool.query(`
+            SELECT
+                DATE_FORMAT(u.created_at, '%Y-%m-%d') AS date,
+                s.skill_name AS skill,
+                COUNT(u.id) AS count
+            FROM users u
+            JOIN skills s 
+                ON u.selected_skill_id = s.id
+            GROUP BY DATE(u.created_at), s.skill_name
+            ORDER BY date ASC;
+        `);
+
+        const formattedData = results.reduce((acc, current) => {
+            const { date, skill, count } = current;
+
+            let dateRow = acc.find(item => item.date === date);
+
+            if (!dateRow) {
+                dateRow = { date };
+                acc.push(dateRow);
+            }
+
+            dateRow[skill] = Number(count);
+
+            return acc;
+        }, []);
+
+        res.status(200).json(formattedData);
+
+        console.log("USER GROWTH RESULT:", formattedData);
+
+    } catch (err) {
+        console.error("Error fetching user growth:", err);
+        res.status(500).json({
+            message: "Internal Server Error"
+        });
+    }
+};
+
 exports.searchUsers = async (req, res) => {
     try {
         const { search = "" } = req.query;
