@@ -11,26 +11,33 @@ import {
     Legend
 } from 'recharts';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+
+import { userGrowth } from '../features/auth/adminDashboardSlice';
 
 function UserGrowth() {
 
-    const { userGrowth, isLoading } = useSelector(
+    const dispatch = useDispatch();
+
+    const { userGrowth: growthData, isLoading } = useSelector(
         (state) => state.admin
     );
+
+    useEffect(() => {
+        dispatch(userGrowth());
+    }, [dispatch]);
 
     if (isLoading) {
         return <h1>Loading...</h1>;
     }
-
-    console.log(userGrowth);
 
     return (
         <div className="w-full min-h-[400px]">
 
             <ResponsiveContainer width="100%" height={400}>
 
-                <LineChart data={userGrowth}>
+                <LineChart data={growthData}>
 
                     <CartesianGrid strokeDasharray="5 5" />
 
@@ -46,18 +53,21 @@ function UserGrowth() {
                         type="monotone"
                         dataKey="Photoshop"
                         stroke="#8884d8"
+                        stackId="1"
                     />
 
                     <Line
                         type="monotone"
                         dataKey="Web Development"
                         stroke="#7c3aed"
+                        stackId="1"
                     />
 
                     <Line
                         type="monotone"
                         dataKey="UI/UX Design"
                         stroke="#2c3de3"
+                        stackId="1"
                     />
 
                 </LineChart>

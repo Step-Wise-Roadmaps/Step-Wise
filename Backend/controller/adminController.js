@@ -38,7 +38,7 @@ exports.userGrowth = async (req, res) => {
             FROM users u
             JOIN skills s 
                 ON u.selected_skill_id = s.id
-            GROUP BY DATE(u.created_at), s.skill_name
+            GROUP BY DATE_FORMAT(u.created_at, '%Y-%m-%d'), s.skill_name
             ORDER BY date ASC;
         `);
 
@@ -58,8 +58,6 @@ exports.userGrowth = async (req, res) => {
         }, []);
 
         res.status(200).json(formattedData);
-
-        console.log("USER GROWTH RESULT:", formattedData);
 
     } catch (err) {
         console.error("Error fetching user growth:", err);
