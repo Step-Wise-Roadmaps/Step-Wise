@@ -33,17 +33,22 @@ function UserGrowth() {
     }
 
     return (
-        <div className="w-full min-h-[400px]">
+        <div className="w-full bg-white min-h-[550px] flex items-center rounded-2xl p-5 md:p-10">
 
             <ResponsiveContainer width="100%" height={400}>
 
                 <LineChart data={growthData}>
 
-                    <CartesianGrid strokeDasharray="5 5" />
+                    <CartesianGrid strokeDasharray="5 5" vertical={false}
+                                    stroke="#e5e7eb" />
 
-                    <XAxis dataKey="date" />
+                    <XAxis dataKey="date" tick={{ fill: "#6b7280", fontSize: 12 }}
+                            tickLine={false}
+                            axisLine={false}/>
 
-                    <YAxis />
+                    <YAxis tick={{ fill: "#6b7280", fontSize: 12 }}
+                            tickLine={false}
+                            axisLine={false}/>
 
                     <Tooltip />
 
