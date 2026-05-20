@@ -11,7 +11,8 @@ exports.getAllUsers = async (req, res) => {
                 u.role, 
                 u.created_at
                 FROM users u
-                JOIN skills s ON u.selected_skill_id = s.id`);
+                JOIN skills s ON u.selected_skill_id = s.id
+                ORDER BY u.full_name`);
 
         const [countResult] = await pool.query(
             "SELECT COUNT(*) AS total FROM users"
