@@ -35,6 +35,14 @@ const getCourses = async (coursesData) => {
     return response.data.data
 }
 
+const getSkills = async (skillsData) => {
+    const response = await axiosInstance.get('admin/getSkills', {
+        params: skillsData
+    }) 
+
+    return response.data.data
+}
+
 const getLessons = async (lessonData) => {
     const response = await axiosInstance.get('/admin/getLesson', {
         params: lessonData
