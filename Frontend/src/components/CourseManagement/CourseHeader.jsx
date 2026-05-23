@@ -5,9 +5,9 @@ import {
     Sparkles,
 } from 'lucide-react'
 
-import { stats } from '../../data/UserManagementData';
+import { stats } from '../../data/CourseManagementData';
 
-function CourseHeader() {
+function CourseHeader({ users, isLoading }) {
     return(
         <>
             <div className='mx-auto flex w-full max-w-8xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8'>
@@ -26,6 +26,27 @@ function CourseHeader() {
                                 </div>
                             </div>
                         </div>
+                </section>
+
+                <section className='grid gap-4 md:grid-cols-2'>
+                    {stats({users, isLoading}).map((stat) => {
+                        const Icon = stat.icon;
+
+                        return (
+                            <div key={stat.title} className='relative rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1'>
+                                <div className='flex items-start justify-between gap-4'>
+                                    <div>
+                                        <p className='text-sm text-slate-500'>{stat.title}</p>
+                                        <h2 className='mt-3 roboto-bold text-3xl text-slate-900'>{stat.value}</h2>
+                                    </div>
+
+                                    <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${stat.tone} text-white shadow-lg`}>
+                                        <Icon size={22} />
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
                 </section>
             </div>
         </>
