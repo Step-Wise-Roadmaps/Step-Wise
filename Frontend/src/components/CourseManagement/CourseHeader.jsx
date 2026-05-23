@@ -7,7 +7,7 @@ import {
 
 import { stats } from '../../data/CourseManagementData';
 
-function CourseHeader({ users, isLoading }) {
+function CourseHeader({ users, courses, skills, isLoading }) {
     return(
         <>
             <div className='mx-auto flex w-full max-w-8xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8'>
@@ -29,7 +29,7 @@ function CourseHeader({ users, isLoading }) {
                 </section>
 
                 <section className='grid gap-4 md:grid-cols-2'>
-                    {stats({users, isLoading}).map((stat) => {
+                    {stats({users, courses, skills, isLoading}).map((stat) => {
                         const Icon = stat.icon;
 
                         return (

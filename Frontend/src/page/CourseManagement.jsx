@@ -5,11 +5,11 @@ import { getCourses, getAllUsers } from "../features/auth/adminDashboardSlice";
 
 function CourseManagement() {
 
-    const { users, isLoading } = useSelector((state) => state.admin);
+    const { users, courses, skills, isLoading } = useSelector((state) => state.admin);
 
     return(
         <>
-            <CourseHeader users={users} isLoading={isLoading}/>
+            <CourseHeader users={users} courses={courses} skills={skills} isLoading={isLoading}/>
         </>
     )
 }
