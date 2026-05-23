@@ -61,6 +61,16 @@ export const getCourses = createAsyncThunk('admin/getCourses', async (coursesDat
     }
 });
 
+export const getSkills = createAsyncThunk('admin/getSkills', async (skillsData, thunkAPI) => {
+    try {
+        return await adminDashboardService.getSkills(skillsData);
+    } catch (error) {
+        console.log("DELETE ERROR:", error);
+        const message = error.response?.data?.message || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+});
+
 export const getLessons = createAsyncThunk('/admin/getLessons', async (lessonData, thunkAPI) => {
     try {
         return await adminDashboardService.getLessons(lessonData);
@@ -142,6 +152,19 @@ export const adminSlice = createSlice({
             state.courses = action.payload;
         })
         .addCase(getCourses.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        })
+
+        // getSkills
+        .addCase(getSkills.pending, (state) => {state.isLoading = true})
+        .addCase(getSkills.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.skills = action.payload;
+        })
+        .addCase(getSkills.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;
