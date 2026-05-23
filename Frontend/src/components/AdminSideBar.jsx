@@ -45,6 +45,7 @@ const footerItems = [
 const itemRoutes = {
     dashboard: "/admin-dashboard",
     users: "/admin-dashboard/users",
+    courses: "/admin-dashboard/course"
 };
 
 function SidebarItem({ item, isOpen, isActive, onClick }) {
