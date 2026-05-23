@@ -11,6 +11,8 @@ import AdminDashboard from "./page/AdminDashboard";
 import UserManagement from "./page/UserManagement";
 import CourseManagement from "./page/CourseManagement"
 
+import AddCourse from "./components/CourseManagement/AddCourse"
+
 // layot
 import AdminDashboardLayout from "./layout/AdminDashboardLayout";
 
@@ -34,6 +36,7 @@ function App() {
                         <Route index element={<AdminDashboard />} />
                         <Route path="users" element={<UserManagement />} />
                         <Route path="course" element={<CourseManagement />} />
+                        <Route path="addcourse" element={<AddCourse />} />
                     </Route>
                 </Route>
             </Routes>
