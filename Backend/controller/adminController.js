@@ -124,6 +124,29 @@ exports.getCourses = async (req, res) => {
     }
 }
 
+exports.getSkills = async (req, res) => {
+    try {
+        const [skills] = await pool.query(
+            "SELECT id, skill_name FROM skills"
+        )
+
+        const [countskills] = await pool.query(
+            "SELECT COUNT(*) AS total FROM skills"
+        )
+
+        const totalSkills = countskills[0].total;
+
+        res.status(200).json({
+            success: true,
+            count: totalSkills,
+            data: skills
+        })
+
+    } catch (err) {
+        res.status(500).json({ message: "Database Error", error: err.message });
+    }
+}
+
 exports.getLessons = async (req, res) => {
     try {
         const [lessons] = await pool.query(
