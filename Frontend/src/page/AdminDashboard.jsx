@@ -6,6 +6,8 @@ import { getCourses } from "../features/auth/adminDashboardSlice";
 import { getLessons } from "../features/auth/adminDashboardSlice";
 // import { getMe } from "../features/auth/authSlice";
 
+import UserGrowth from "../components/userGrowth";
+
 import {
     Activity,
     ArrowUpRight,
@@ -165,6 +167,8 @@ function AdminDashboard() {
                             );
                         })}
                     </section>
+
+                    <UserGrowth />
 
                     <section className="grid gap-6 xl:grid-cols-[1.55fr_1fr]">
                         <div className="space-y-6">

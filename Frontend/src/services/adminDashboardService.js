@@ -6,10 +6,18 @@ const getAllUsers = async (adminData) => {
     return response.data.data;
 }
 
+const userGrowth = async () => {
+    const response = await axiosInstance.get('/admin/userGrowth');
+
+    console.log("API RESPONSE:", response.data);
+
+    return response.data;
+}
+
 const searchUsers = async (adminData) => {
     const response = await axiosInstance.get(`/admin/users/search?search=${search}`);
 
-    return response.data.data
+    return response.data
 }
 
 const deleteUser = async (id) => {
@@ -37,6 +45,7 @@ const getLessons = async (lessonData) => {
 
 const adminDashboardService = {
     getAllUsers,
+    userGrowth,
     searchUsers,
     deleteUser,
     getCourses,

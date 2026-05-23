@@ -11,7 +11,8 @@ exports.getAllUsers = async (req, res) => {
                 u.role, 
                 u.created_at
                 FROM users u
-                JOIN skills s ON u.selected_skill_id = s.id`);
+                JOIN skills s ON u.selected_skill_id = s.id
+                ORDER BY u.full_name`);
 
         const [countResult] = await pool.query(
             "SELECT COUNT(*) AS total FROM users"
@@ -25,6 +26,45 @@ exports.getAllUsers = async (req, res) => {
         });
     } catch (err) {
         res.status(500).json({ message: "Database Error", error: err.message });
+    }
+};
+
+exports.userGrowth = async (req, res) => {
+    try {
+        const [results] = await pool.query(`
+            SELECT
+                DATE_FORMAT(u.created_at, '%Y-%m-%d') AS date,
+                s.skill_name AS skill,
+                COUNT(u.id) AS count
+            FROM users u
+            JOIN skills s 
+                ON u.selected_skill_id = s.id
+            GROUP BY DATE_FORMAT(u.created_at, '%Y-%m-%d'), s.skill_name
+            ORDER BY date ASC;
+        `);
+
+        const formattedData = results.reduce((acc, current) => {
+            const { date, skill, count } = current;
+
+            let dateRow = acc.find(item => item.date === date);
+
+            if (!dateRow) {
+                dateRow = { date };
+                acc.push(dateRow);
+            }
+
+            dateRow[skill] = Number(count);
+
+            return acc;
+        }, []);
+
+        res.status(200).json(formattedData);
+
+    } catch (err) {
+        console.error("Error fetching user growth:", err);
+        res.status(500).json({
+            message: "Internal Server Error"
+        });
     }
 };
 
