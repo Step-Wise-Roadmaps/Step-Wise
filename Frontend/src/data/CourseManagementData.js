@@ -20,13 +20,3 @@ export const stats = ({users, isLoading}) => [
         tone: "from-emerald-500 to-teal-500",
     }
 ]
-
-export const TableRows = [
-  {
-    fullName: "Full Name",
-    email: "Email",
-    skill: "Skill",
-    enroled: "En-roled",
-    role: "Role"
-  },
-];
