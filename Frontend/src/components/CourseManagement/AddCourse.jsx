@@ -5,7 +5,32 @@ import {
     Sparkles,
 } from 'lucide-react'
 
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 function AddCourse() {
+    const [ formData, setFormData ] = useState({
+        courseName: '',
+        selected_skill_id: ''
+    });
+
+    const dispatch = useDispatch();
+
+    const { courseName, selected_skill_id } = formData;
+
+    const { courses, isLoading, isSuccess, isError, message } = useSelector((state) => state.admin);
+
+    useEffect(() => {
+        if (isError) {
+            alert(message);
+        }
+        
+        if (isSuccess) {
+            alert(message);
+        }
+        
+        dispatch(reset());
+    }, [courses, isLoading, isSuccess, isError, message, dispatch])
     return(
         <>
             <div className='mx-auto flex w-full max-w-8xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8'>
