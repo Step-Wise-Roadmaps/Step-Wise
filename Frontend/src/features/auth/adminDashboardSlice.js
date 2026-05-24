@@ -197,6 +197,7 @@ export const adminSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.courses = action.payload;
+            state.message = action.payload.message;
         })
         .addCase(addCourse.rejected, (state, action) => {
             state.isLoading = false;

@@ -21,17 +21,6 @@ function AddCourse() {
 
     const { courses, isLoading, isSuccess, isError, message } = useSelector((state) => state.admin);
 
-    useEffect(() => {
-        if (isError) {
-            alert(message);
-        }
-        
-        if (isSuccess) {
-            alert(message);
-        }
-        
-    }, [isError, isSuccess, message]);
-
     const onChange = (e) => {
         setFormData((prevState) => ({
             ...prevState,
@@ -67,6 +56,18 @@ function AddCourse() {
                 <form onSubmit={onSubmit} className='flex w-full max-w-8xl items-center mx-auto h-100'>
                     <div className='w-full rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] md:p-10 space-y-10 text-center'>
                         <h1 className='text-center roboto-semibold text-2xl text-slate-500'>Add Course</h1>
+
+                        {message && (
+                            <div
+                                className={`w-full rounded-xl p-4 text-sm font-medium shadow-md ${
+                                    isError
+                                        ? 'border border-red-200 bg-red-50 text-red-700'
+                                        : 'border border-green-200 bg-green-50 text-green-700'
+                                }`}
+                            >
+                                {message}
+                            </div>
+                        )}
 
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
                             <input id='course_name' name='course_name' value={course_name} onChange={onChange} required type="text" placeholder='Courses Name' className='outline-none transition hover:border-slate-300 bg-transparent focus:border-cyan-400  border border-slate-300 p-2 rounded-lg' />
