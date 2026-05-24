@@ -26,14 +26,14 @@ function AddCourse() {
                         </div>
                 </section>
 
-                <div className='flex w-full items-center mx-auto h-100'>
+                <div className='flex w-full max-w-8xl items-center mx-auto h-100'>
                 <div className='w-full rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] md:p-10 space-y-10 text-center'>
                     <h1 className='text-center roboto-semibold text-2xl text-slate-500'>Add Course</h1>
 
-                    <div className='flex gap-5 justify-center'>
-                        <input type="text" placeholder='Courses Name' className='outline-none w-xl border border-slate-900 p-2 rounded-lg' />
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+                        <input type="text" placeholder='Courses Name' className='outline-none border border-slate-900 p-2 rounded-lg' />
 
-                        <input type="text" placeholder='Courses Name' className='outline-none w-xl border border-slate-900 p-2 rounded-lg' />
+                        <input type="text" placeholder='Courses Name' className='outline-none border border-slate-900 p-2 rounded-lg' />
                     </div>
 
                     <button className='bg-cyan-950 text-white hover:bg-cyan-800 duration-200 cursor-pointer w-full p-3 rounded-lg'>Submit</button>
