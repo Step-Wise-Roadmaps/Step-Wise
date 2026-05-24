@@ -30,7 +30,7 @@ function AddCourse() {
                 <div className='w-full rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] md:p-10 space-y-10 text-center'>
                     <h1 className='text-center roboto-semibold text-2xl text-slate-500'>Add Course</h1>
 
-                    <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
                         <input type="text" placeholder='Courses Name' className='outline-none border border-slate-900 p-2 rounded-lg' />
 
                         <input type="text" placeholder='Courses Name' className='outline-none border border-slate-900 p-2 rounded-lg' />
