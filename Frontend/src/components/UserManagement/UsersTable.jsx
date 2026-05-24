@@ -16,7 +16,7 @@ function UsersTable({ users, isLoading, deleteUser, search, setSearch }) {
         </div>
 
         <div className='relative mt-5 w-full'>
-          <div className='overflow-x-auto'>
+          <div className='overflow-auto'>
             <div className='p-4 md:p-6 min-w-[1120px] border border-slate-200 rounded-2xl shadow-[0_24px_80px_rgba(15,23,42,0.08)]'>
 
               <TableHeader />

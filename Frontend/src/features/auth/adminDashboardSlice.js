@@ -61,6 +61,16 @@ export const getCourses = createAsyncThunk('admin/getCourses', async (coursesDat
     }
 });
 
+export const getSkills = createAsyncThunk('admin/getSkills', async (skillsData, thunkAPI) => {
+    try {
+        return await adminDashboardService.getSkills(skillsData);
+    } catch (error) {
+        console.log("DELETE ERROR:", error);
+        const message = error.response?.data?.message || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+});
+
 export const getLessons = createAsyncThunk('/admin/getLessons', async (lessonData, thunkAPI) => {
     try {
         return await adminDashboardService.getLessons(lessonData);
@@ -68,7 +78,16 @@ export const getLessons = createAsyncThunk('/admin/getLessons', async (lessonDat
         const message = error.response?.data?.message || error.message || error.toString();
         return thunkAPI.rejectWithValue(message);
     }
-})
+});
+
+export const addCourse = createAsyncThunk('/admin/add-course', async (addCourse, thunkAPI) => {
+    try {
+        return await adminDashboardService.addCourse(addCourse);
+    } catch (error) {
+        const message = error.response?.data?.message || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+});
 
 export const adminSlice = createSlice({
     name: 'admin',
@@ -146,6 +165,19 @@ export const adminSlice = createSlice({
             state.isError = true;
             state.message = action.payload;
         })
+
+        // getSkills
+        .addCase(getSkills.pending, (state) => {state.isLoading = true})
+        .addCase(getSkills.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.skills = action.payload;
+        })
+        .addCase(getSkills.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        })
         // getLesson
         .addCase(getLessons.pending, (state) => {state.isLoading = true})
         .addCase(getLessons.fulfilled, (state, action) => {
@@ -154,6 +186,20 @@ export const adminSlice = createSlice({
             state.lessons = action.payload;
         })
         .addCase(getLessons.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        })
+
+        //addCourse
+        .addCase(addCourse.pending, (state) => {state.isLoading = true})
+        .addCase(addCourse.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.courses = action.payload;
+            state.message = action.payload.message;
+        })
+        .addCase(addCourse.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;

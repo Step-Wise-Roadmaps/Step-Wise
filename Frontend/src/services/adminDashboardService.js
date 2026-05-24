@@ -9,8 +9,6 @@ const getAllUsers = async (adminData) => {
 const userGrowth = async () => {
     const response = await axiosInstance.get('/admin/userGrowth');
 
-    console.log("API RESPONSE:", response.data);
-
     return response.data;
 }
 
@@ -35,6 +33,14 @@ const getCourses = async (coursesData) => {
     return response.data.data
 }
 
+const getSkills = async (skillsData) => {
+    const response = await axiosInstance.get('/admin/getSkills', {
+        params: skillsData
+    }) 
+
+    return response.data.data
+}
+
 const getLessons = async (lessonData) => {
     const response = await axiosInstance.get('/admin/getLesson', {
         params: lessonData
@@ -43,13 +49,24 @@ const getLessons = async (lessonData) => {
     return response.data.data
 }
 
+const addCourse = async (addCourse) => {
+    const response = await axiosInstance.post(
+        '/admin/add-course',
+        addCourse
+    );
+
+    return response.data;
+}
+
 const adminDashboardService = {
     getAllUsers,
     userGrowth,
     searchUsers,
     deleteUser,
     getCourses,
-    getLessons
+    getSkills,
+    getLessons,
+    addCourse
 }
 
 export default adminDashboardService;

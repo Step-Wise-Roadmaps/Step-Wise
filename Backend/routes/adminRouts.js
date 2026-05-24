@@ -17,6 +17,9 @@ router.get('/search', auth, adminAuth, adminController.searchUsers);
 // get Cources
 router.get('/course', auth, adminAuth, adminController.getCourses);
 
+//  get Skills
+router.get('/getSkills', auth, adminAuth, adminController.getSkills);
+
 // get lessons
 router.get('/getLesson', auth, adminAuth, adminController.getLessons);
 

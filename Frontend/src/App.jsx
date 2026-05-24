@@ -9,6 +9,9 @@ import ForgotPassword from "./page/ForgotPassword";
 import ResetPassword from "./page/ResetPassword";
 import AdminDashboard from "./page/AdminDashboard";
 import UserManagement from "./page/UserManagement";
+import CourseManagement from "./page/CourseManagement"
+
+import AddCourse from "./components/CourseManagement/AddCourse"
 
 // layot
 import AdminDashboardLayout from "./layout/AdminDashboardLayout";
@@ -32,6 +35,8 @@ function App() {
                     <Route path="/admin-dashboard" element={<AdminDashboardLayout />}>
                         <Route index element={<AdminDashboard />} />
                         <Route path="users" element={<UserManagement />} />
+                        <Route path="course" element={<CourseManagement />} />
+                        <Route path="addcourse" element={<AddCourse />} />
                     </Route>
                 </Route>
             </Routes>
