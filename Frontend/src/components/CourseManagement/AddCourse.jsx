@@ -7,7 +7,7 @@ import {
 
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCourse } from '../../features/auth/adminDashboardSlice';
+import { addCourse, reset } from '../../features/auth/adminDashboardSlice';
 
 function AddCourse() {
     const [formData, setFormData] = useState({
@@ -33,6 +33,16 @@ function AddCourse() {
         const userData = { course_name, skill_id };
         dispatch(addCourse(userData));
     };
+
+    useEffect(() => {
+        if (message) {
+            const timer = setTimeout(() => {
+                dispatch(reset());
+            }, 5000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [message, dispatch]);
     return(
         <>
             <div className='mx-auto flex w-full max-w-8xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8'>
