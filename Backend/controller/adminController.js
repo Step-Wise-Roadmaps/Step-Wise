@@ -192,6 +192,7 @@ exports.deleteUser = async (req, res) => {
 exports.addCourse = async (req, res) => {
     try {
         const { course_name, skill_id } = req.body;
+        console.log(req.body);
 
         if (!course_name || !skill_id) {
             return res.status(400).json({ message: "Course name and Skill ID are required" });

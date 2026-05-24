@@ -7,16 +7,17 @@ import {
 
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { addCourse } from '../../features/auth/adminDashboardSlice';
 
 function AddCourse() {
-    const [ formData, setFormData ] = useState({
-        courseName: '',
-        selected_skill_id: ''
+    const [formData, setFormData] = useState({
+        course_name: '',
+        skill_id: ''
     });
 
     const dispatch = useDispatch();
 
-    const { courseName, selected_skill_id } = formData;
+    const { course_name, skill_id } = formData;
 
     const { courses, isLoading, isSuccess, isError, message } = useSelector((state) => state.admin);
 
@@ -29,8 +30,20 @@ function AddCourse() {
             alert(message);
         }
         
-        dispatch(reset());
-    }, [courses, isLoading, isSuccess, isError, message, dispatch])
+    }, [isError, isSuccess, message]);
+
+    const onChange = (e) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const userData = { course_name, skill_id };
+        dispatch(addCourse(userData));
+    };
     return(
         <>
             <div className='mx-auto flex w-full max-w-8xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8'>
@@ -51,27 +64,29 @@ function AddCourse() {
                         </div>
                 </section>
 
-                <div className='flex w-full max-w-8xl items-center mx-auto h-100'>
-                <div className='w-full rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] md:p-10 space-y-10 text-center'>
-                    <h1 className='text-center roboto-semibold text-2xl text-slate-500'>Add Course</h1>
+                <form onSubmit={onSubmit} className='flex w-full max-w-8xl items-center mx-auto h-100'>
+                    <div className='w-full rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] md:p-10 space-y-10 text-center'>
+                        <h1 className='text-center roboto-semibold text-2xl text-slate-500'>Add Course</h1>
 
-                    <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
-                        <input type="text" placeholder='Courses Name' className='outline-none transition hover:border-slate-300 bg-transparent focus:border-cyan-400  border border-slate-300 p-2 rounded-lg' />
+                        <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
+                            <input id='course_name' name='course_name' value={course_name} onChange={onChange} required type="text" placeholder='Courses Name' className='outline-none transition hover:border-slate-300 bg-transparent focus:border-cyan-400  border border-slate-300 p-2 rounded-lg' />
 
-                        <select
-                            id="selected_skill_id"
-                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 outline-none transition hover:border-slate-300 focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-500/10 sm:text-base"
-                            name="selected_skill_id">
-                            <option value="">Select a skill</option>
-                            <option value="1">Photoshop</option>
-                            <option value="2">Web Development</option>
-                            <option value="3">UI/UX Design</option>
-                        </select>
+                            <select
+                                id='skill_id'
+                                name='skill_id'
+                                value={skill_id}
+                                onChange={onChange}
+                                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 outline-none transition hover:border-slate-300 focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-500/10 sm:text-base">
+                                <option value="">Select a skill</option>
+                                <option value="1">Photoshop</option>
+                                <option value="2">Web Development</option>
+                                <option value="3">UI/UX Design</option>
+                            </select>
+                        </div>
+
+                        <button type='submit' disabled={isLoading} className='bg-cyan-950 text-white hover:bg-cyan-800 duration-200 cursor-pointer w-full p-3 rounded-lg'>{isLoading ? 'Processing...' : 'Submit'}</button>
                     </div>
-
-                    <button className='bg-cyan-950 text-white hover:bg-cyan-800 duration-200 cursor-pointer w-full p-3 rounded-lg'>Submit</button>
-                </div>
-                </div>
+                </form>
 
             </div>
         </>
