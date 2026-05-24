@@ -49,10 +49,10 @@ const getLessons = async (lessonData) => {
     return response.data.data
 }
 
-const addCourse = async (courseData) => {
+const addCourse = async (addCourse) => {
     const response = await axiosInstance.post(
         '/admin/add-course',
-        courseData
+        addCourse
     );
 
     return response.data;
