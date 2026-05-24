@@ -31,9 +31,17 @@ function AddCourse() {
                     <h1 className='text-center roboto-semibold text-2xl text-slate-500'>Add Course</h1>
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
-                        <input type="text" placeholder='Courses Name' className='outline-none border border-slate-900 p-2 rounded-lg' />
+                        <input type="text" placeholder='Courses Name' className='outline-none transition hover:border-slate-300 bg-transparent focus:border-cyan-400  border border-slate-300 p-2 rounded-lg' />
 
-                        <input type="text" placeholder='Courses Name' className='outline-none border border-slate-900 p-2 rounded-lg' />
+                        <select
+                            id="selected_skill_id"
+                            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 outline-none transition hover:border-slate-300 focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-500/10 sm:text-base"
+                            name="selected_skill_id">
+                            <option value="">Select a skill</option>
+                            <option value="1">Photoshop</option>
+                            <option value="2">Web Development</option>
+                            <option value="3">UI/UX Design</option>
+                        </select>
                     </div>
 
                     <button className='bg-cyan-950 text-white hover:bg-cyan-800 duration-200 cursor-pointer w-full p-3 rounded-lg'>Submit</button>
