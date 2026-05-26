@@ -17,7 +17,7 @@ import {
     Trash2
 } from "lucide-react";
 
-function CourseCard() {
+function CourseCard({ itemRoutes }) {
 
     const navigate = useNavigate();
 
@@ -40,12 +40,6 @@ function CourseCard() {
             tone: "bg-rose-500",
         },
     ];
-
-    const itemRoutes = {
-        AddCourse: "/admin-dashboard/addcourse",
-    };
-
-    const activeItem = Object.entries(itemRoutes).find(([, path]) => path === location.pathname)?.[0] ?? "";
 
     return(
         <>

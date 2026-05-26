@@ -17,10 +17,16 @@ function CourseManagement() {
         dispatch(getSkills());
     }, [dispatch]);
 
+    const itemRoutes = {
+        AddCourse: "/admin-dashboard/addcourse",
+    };
+
+    const activeItem = Object.entries(itemRoutes).find(([, path]) => path === location.pathname)?.[0] ?? "";
+
     return(
         <>
             <CourseHeader users={users} courses={courses} skills={skills} isLoading={isLoading}/>
-            <CourseCard />
+            <CourseCard  itemRoutes={itemRoutes}/>
         </>
     )
 }
