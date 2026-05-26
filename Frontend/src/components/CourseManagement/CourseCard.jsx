@@ -1,4 +1,7 @@
 
+import { useState } from "react";
+import { useNavigate } from 'react-router-dom'
+
 import {
     Activity,
     ArrowUpRight,
@@ -11,32 +14,41 @@ import {
     ShieldCheck,
     Sparkles,
     Users,
+    Trash2
 } from "lucide-react";
 
 function CourseCard() {
 
+    const navigate = useNavigate();
+
     const stats = [
         {
+            id: "AddCourse",
             title: "Stap-Wise Course Managment",
             value: "Add Course",
             change: "+12.5%",
             note: "New Course this month",
-            icon: Users,
+            icon: BookOpen,
             tone: "from-cyan-500 to-blue-500",
         },
         {
+            id: "DeleteCourse",
             title: "Stap-Wise Course Managment",
             value: "Delete Course",
             // note: "Published and visible",
-            icon: BookOpen,
-            tone: "from-emerald-500 to-teal-500",
+            icon: Trash2,
+            tone: "bg-rose-500",
         },
     ];
+
+    const itemRoutes = {
+        AddCourse: "/admin-dashboard/addcourse",
+    }
 
     return(
         <>
             <div className="mx-auto flex w-full max-w-8xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-10">
-                <section className="grid gap-10 md:grid-cols-1">
+                <section className="grid gap-10 md:grid-cols-1 cursor-pointer">
                         {stats.map((stat) => {
                             const Icon = stat.icon;
 
