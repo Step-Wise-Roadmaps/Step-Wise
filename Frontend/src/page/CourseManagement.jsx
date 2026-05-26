@@ -1,4 +1,5 @@
 import CourseHeader from "../components/CourseManagement/CourseHeader";
+import CourseCard from "../components/CourseManagement/CourseCard";
 
 import { useDispatch, useSelector } from 'react-redux'
 import { getCourses, getAllUsers, getSkills } from "../features/auth/adminDashboardSlice";
@@ -19,6 +20,7 @@ function CourseManagement() {
     return(
         <>
             <CourseHeader users={users} courses={courses} skills={skills} isLoading={isLoading}/>
+            <CourseCard />
         </>
     )
 }
