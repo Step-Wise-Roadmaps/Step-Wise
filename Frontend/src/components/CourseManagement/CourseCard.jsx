@@ -43,7 +43,9 @@ function CourseCard() {
 
     const itemRoutes = {
         AddCourse: "/admin-dashboard/addcourse",
-    }
+    };
+
+    const activeItem = Object.entries(itemRoutes).find(([, path]) => path === location.pathname)?.[0] ?? "";
 
     return(
         <>
@@ -54,7 +56,8 @@ function CourseCard() {
 
                             return (
                                 <article
-                                    key={stat.title}
+                                    key={stat.id}
+                                    onClick={() => navigate(itemRoutes[stat.id])}
                                     className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1">
 
                                     <div className="flex items-start justify-between gap-4">
