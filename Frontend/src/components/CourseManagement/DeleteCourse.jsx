@@ -21,9 +21,9 @@ function DeleteCourse() {
         (state) => state.admin
     );
 
-    useEffect(() => {
-        dispatch(getDesign(1));
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getDesign(1));
+    // }, [dispatch]);
 
     const handleDelete = (id) => {
         dispatch(deleteCourse(id));
