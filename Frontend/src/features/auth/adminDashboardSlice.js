@@ -51,6 +51,15 @@ export const deleteUser = createAsyncThunk('admin/deleteUser', async (id, thunkA
     }
 });
 
+export const getDesign = createAsyncThunk('admin/getDesign', async (id, thunkAPI) => {
+    try {
+        return await adminDashboardService.getDesign(id);
+    } catch (error) {
+        const message = error.response?.data?.message || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+});
+
 export const deleteCourse = createAsyncThunk('admin/deleteCourse', async (id, thunkAPI) => {
     try {
         return await adminDashboardService.deleteCourse(id);
@@ -173,6 +182,19 @@ export const adminSlice = createSlice({
             );
         })
         .addCase(deleteCourse.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        })
+
+        // getDesign
+        .addCase(getDesign.pending, (state) => {state.isLoading = true})
+        .addCase(getDesign.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.getDesign = action.payload;
+        })
+        .addCase(getDesign.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;
