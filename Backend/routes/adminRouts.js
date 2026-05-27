@@ -32,4 +32,6 @@ router.post('/add-course', auth, adminAuth, adminController.addCourse);
 // add lessons
 router.post('/add-lessons', auth, adminAuth, adminController.addLessons);
 
+router.delete('/course/:id', auth, adminAuth, adminController.deleteCourse);
+
 module.exports = router;
