@@ -49,7 +49,16 @@ export const deleteUser = createAsyncThunk('admin/deleteUser', async (id, thunkA
         const message = error.response?.data?.message || error.message || error.toString();
         return thunkAPI.rejectWithValue(message);
     }
-})
+});
+
+export const deleteCourse = createAsyncThunk('admin/deleteCourse', async (id, thunkAPI) => {
+    try {
+        return await adminDashboardService.deleteCourse(id);
+    } catch (error) {
+        const message = error.response?.data?.message || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+});
 
 export const getCourses = createAsyncThunk('admin/getCourses', async (coursesData, thunkAPI) => {
     try {
@@ -149,6 +158,21 @@ export const adminSlice = createSlice({
             );
         })
         .addCase(deleteUser.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        })
+        // deleteCourse
+        .addCase(deleteCourse.pending, (state) => {state.isLoading = true})
+        .addCase(deleteCourse.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            const deletedId = typeof action.payload === 'string' ? Number(action.payload) : action.payload;
+            state.users = state.users.filter(
+                (user) => user.id !== deletedId
+            );
+        })
+        .addCase(deleteCourse.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;

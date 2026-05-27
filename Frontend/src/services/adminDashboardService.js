@@ -19,8 +19,13 @@ const searchUsers = async (adminData) => {
 }
 
 const deleteUser = async (id) => {
-    console.log("API CALL WITH ID:", id);
     await axiosInstance.delete(`/admin/users/${id}`);
+
+    return id;
+}
+
+const deleteCourse = async (id) => {
+    await axiosInstance.delete(`/admin/course/${id}`);
 
     return id;
 }
@@ -66,7 +71,8 @@ const adminDashboardService = {
     getCourses,
     getSkills,
     getLessons,
-    addCourse
+    addCourse,
+    deleteCourse
 }
 
 export default adminDashboardService;
