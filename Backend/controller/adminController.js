@@ -232,6 +232,17 @@ exports.deleteCourse = async (req, res) => {
     try {
         const { id  } = req.params;
 
+        await pool.query("DELETE FROM courses WHERE id = ?", [id]);
+
+        res.status(200).json({ message: "Course deleted successfully" });
+
+    } catch(err) {
+        return res.status(500).json({ message: "Delete failed", error: err.message });
+    }
+}
+
+exports.getDesign = async (req, res) => {
+    try {
         const [course] = await pool.query(
             `SELECT 
                 c.id,
@@ -240,19 +251,13 @@ exports.deleteCourse = async (req, res) => {
                 s.skill_name
             FROM courses c
             JOIN skills s 
-            ON c.skill_id = s.id `,
-            [id]
-        );
+            ON c.skill_id = s.id
+            WHERE s.id = ?`
+        )
 
-        if(course.length === 0) {
-            return res.status(404).json({ message: "Course Not Found" });
-        }
-
-        await pool.query("DELETE FROM courses WHERE id = ?", [id]);
-
-        res.status(200).json({ message: "Course deleted successfully" });
+        res.status(200).json({ course })
 
     } catch(err) {
-        return res.status(500).json({ message: "Delete failed", error: err.message });
+        res.status(500).json({ message: "error" })
     }
 }
