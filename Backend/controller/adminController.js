@@ -227,3 +227,32 @@ exports.addLessons = async (req, res) => {
         res.status(500).json({ message: `Failed to add lessons. Check that course_id exists and the field names are lesson_name, video_url, course_id. ${err.message}` })
     }
 };
+
+exports.deleteCourse = async (req, res) => {
+    try {
+        const { id  } = req.params;
+
+        const [course] = await pool.query(
+            `SELECT 
+                c.id,
+                c.course_name,
+                c.skill_id,
+                s.skill_name
+            FROM courses c
+            JOIN skills s 
+            ON c.skill_id = s.id `,
+            [id]
+        );
+
+        if(course.length === 0) {
+            return res.status(404).json({ message: "Course Not Found" });
+        }
+
+        await pool.query("DELETE FROM courses WHERE id = ?", [id]);
+
+        res.status(200).json({ message: "Course deleted successfully" });
+
+    } catch(err) {
+        return res.status(500).json({ message: "Delete failed", error: err.message });
+    }
+}
