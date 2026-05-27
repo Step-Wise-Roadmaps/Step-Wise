@@ -183,10 +183,16 @@ export const adminSlice = createSlice({
         .addCase(deleteCourse.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            const deletedId = typeof action.payload === 'string' ? Number(action.payload) : action.payload;
-            state.users = state.users.filter(
-                (user) => user.id !== deletedId
-            );
+            const deletedId =
+        typeof action.payload === 'string'
+            ? Number(action.payload)
+            : action.payload;
+
+    state.designs = state.designs.filter(
+        (item) => item.id !== deletedId
+    );
+
+            state.message = action.payload.message
         })
         .addCase(deleteCourse.rejected, (state, action) => {
             state.isLoading = false;

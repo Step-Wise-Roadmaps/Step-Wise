@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getDesign, deleteCourse } from '../../features/auth/adminDashboardSlice';
+import { getDesign, deleteCourse, reset } from '../../features/auth/adminDashboardSlice';
 
 function CourseDele() {
 
@@ -16,10 +16,10 @@ function CourseDele() {
     const navigate = useNavigate();
 
     useEffect(() => {
-    dispatch(getDesign(id));
+        dispatch(getDesign(id));
     }, [dispatch, id]);
 
-    const { designs, courses, isLoading } = useSelector(
+    const { designs, isLoading, message, isError } = useSelector(
         (state) => state.admin
     );
 
@@ -82,7 +82,9 @@ function CourseDele() {
                                             <div className='flex right-1 items-center text-rose-600 border border-transparent hover:border-rose-200 hover:bg-rose-50 px-3 py-2 cursor-pointer rounded-lg transition-all duration-300'>
                                                 <Trash2 size={20} />
                                                 <button
-                                                className="cursor-pointer">
+                                                    onClick={() => handleDelete(item.id)}
+                                                    className="cursor-pointer"
+                                                >
                                                     Delete
                                                 </button>
                                             </div>
