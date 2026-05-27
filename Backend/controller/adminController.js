@@ -243,6 +243,9 @@ exports.deleteCourse = async (req, res) => {
 
 exports.getDesign = async (req, res) => {
     try {
+
+        const { id } = req.params;
+
         const [course] = await pool.query(
             `SELECT 
                 c.id,
@@ -252,7 +255,8 @@ exports.getDesign = async (req, res) => {
             FROM courses c
             JOIN skills s 
             ON c.skill_id = s.id
-            WHERE s.id = ?`
+            WHERE s.id = ?`,
+            [id]
         )
 
         res.status(200).json({ course })
