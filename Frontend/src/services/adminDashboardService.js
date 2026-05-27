@@ -19,11 +19,21 @@ const searchUsers = async (adminData) => {
 }
 
 const deleteUser = async (id) => {
-    console.log("API CALL WITH ID:", id);
     await axiosInstance.delete(`/admin/users/${id}`);
 
     return id;
 }
+
+const deleteCourse = async (id) => {
+    await axiosInstance.delete(`/admin/course/${id}`);
+
+    return id;
+}
+
+const getDesign = async (id) => {
+    const response = await axiosInstance.get(`/admin/getDesign/${id}`);
+    return response.data;
+};
 
 const getCourses = async (coursesData) => {
     const response = await axiosInstance.get('/admin/course', {
@@ -66,7 +76,9 @@ const adminDashboardService = {
     getCourses,
     getSkills,
     getLessons,
-    addCourse
+    addCourse,
+    deleteCourse,
+    getDesign,
 }
 
 export default adminDashboardService;
