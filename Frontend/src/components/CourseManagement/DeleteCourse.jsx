@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getDesign, deleteCourse } from '../../features/auth/adminDashboardSlice';
 
-import { Trash2 } from "lucide-react";
+import { Trash2, Sparkles, BookOpen, ArrowUpRight, Camera, Code, Component } from "lucide-react";
 
 function DeleteCourse() {
     const dispatch = useDispatch();
@@ -17,33 +17,94 @@ function DeleteCourse() {
         dispatch(deleteCourse(id));
     }
 
+    const stats = [
+        {
+            id: "PhotoShop",
+            title: "Stap-Wise Course Managment",
+            value: "PhotoShop Course",
+            change: "+12.5%",
+            // note: "New Course this month",
+            icon: Camera,
+            tone: "from-cyan-500 to-blue-500",
+        },
+        {
+            id: "Web Devlopment",
+            title: "Stap-Wise Course Managment",
+            value: "Web Devlopment Course",
+            // note: "Published and visible",
+            icon: Code,
+            tone: "from-emerald-500 to-teal-500",
+        },
+        {
+            id: "UI/UX Design",
+            title: "Stap-Wise Course Managment",
+            value: "UI/UX Design",
+            // note: "Published and visible",
+            icon: Component,
+            tone: "bg-rose-500",
+        },
+    ];
+
     return (
         <>
-            <h1>Course</h1>
+            <div className='mx-auto flex w-full max-w-8xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8'>
+                <section className='relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] md:p-8'>
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(34,211,238,0.16),_transparent_30%),radial-gradient(circle_at_bottom_left,_rgba(59,130,246,0.10),_transparent_28%)]" />
+                        
+                        <div className='relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between'>
+                            <div className='max-w-2xl space-y-4'>
+                                <div className="inline-flex items-center gap-2 rounded-full border border-cyan-100 bg-cyan-50 px-4 py-2 text-sm text-cyan-700">
+                                    <Sparkles size={16} />
+                                    All Course Managment Page
+                                </div>
 
-            {isLoading ? (
-                <p>Loading...</p>
-            ) : (
-                <div>
-                    {designs?.map((item) => (
-                        <div key={item.id}>
-                            {item.course_name}
-
-                            <div className='flex items-center text-rose-600 border border-transparent hover:border-rose-200 hover:bg-rose-50 px-3 py-2 cursor-pointer rounded-lg transition-all duration-300'>
-                                <Trash2 size={20} />
-                                <button onClick={() => {
-                                handleDelete(item.id);
-                                }}
-                                className="cursor-pointer">
-                                    Delete
-                                </button>
+                                <div className='space-y-5'>
+                                    <h1 className='roboto-bold text-2xl leading-tight text-slate-900 md:text-3xl'>User Managment Managme Stap-Wise Course</h1>
+                                </div>
                             </div>
                         </div>
-                    ))}
-                </div>
-            )}
+                </section>
+
+                <div className="mx-auto flex w-full max-w-8xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-10">
+                <section className="grid gap-10 md:grid-cols-1 cursor-pointer">
+                        {stats.map((stat) => {
+                            const Icon = stat.icon;
+
+                            return (
+                                <article
+                                    key={stat.id}
+                                    onClick={() => navigate(itemRoutes[stat.id])}
+                                    className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1">
+
+                                    <div className="flex items-start justify-between gap-4">
+                                        <div>
+                                            <p className="text-sm text-slate-500">{stat.title}</p>
+                                            <h2 className="mt-3 roboto-bold text-3xl text-slate-900">{stat.value}</h2>
+                                        </div>
+
+                                        <div
+                                            className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${stat.tone} text-white shadow-lg`}
+                                        >
+                                            <Icon size={22} />
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-5 flex items-center justify-between gap-3">
+                                        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-3 py-1 text-sm text-emerald-700">
+                                            <ArrowUpRight size={14} />
+                                            {stat.change}
+                                        </span>
+                                        <p className="text-xs text-slate-500">{stat.note}</p>
+                                    </div>
+                                </article>
+                            );
+                        })}
+                    </section>
+            </div>
+
+            </div>
         </>
     );
 }
 
-export default DeleteCourse;
+export default DeleteCourse
