@@ -60,6 +60,22 @@ export const deleteCourse = createAsyncThunk('admin/deleteCourse', async (id, th
     }
 });
 
+export const getDesign = createAsyncThunk(
+    'admin/getDesign',
+    async (id, thunkAPI) => {
+        try {
+            return await adminDashboardService.getDesign(id);
+        } catch (error) {
+            const message =
+                error.response?.data?.message ||
+                error.message ||
+                error.toString();
+
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
 export const getCourses = createAsyncThunk('admin/getCourses', async (coursesData, thunkAPI) => {
     try {
         return await adminDashboardService.getCourses(coursesData);
@@ -227,7 +243,19 @@ export const adminSlice = createSlice({
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;
-        });
+        })
+        // getDesign
+        .addCase(getDesign.pending, (state) => {state.isLoading = true})
+        .addCase(getDesign.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.designs = action.payload.course;
+        })
+        .addCase(getDesign.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        })
     }
 });
 

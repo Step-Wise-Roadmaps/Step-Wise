@@ -30,6 +30,11 @@ const deleteCourse = async (id) => {
     return id;
 }
 
+const getDesign = async (id) => {
+    const response = await axiosInstance.get(`/admin/getDesign/${id}`);
+    return response.data;
+};
+
 const getCourses = async (coursesData) => {
     const response = await axiosInstance.get('/admin/course', {
         params: coursesData
@@ -73,6 +78,7 @@ const adminDashboardService = {
     getLessons,
     addCourse,
     deleteCourse,
+    getDesign,
 }
 
 export default adminDashboardService;

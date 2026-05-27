@@ -243,7 +243,6 @@ exports.deleteCourse = async (req, res) => {
 
 exports.getDesign = async (req, res) => {
     try {
-
         const { id } = req.params;
 
         const [course] = await pool.query(
@@ -257,11 +256,11 @@ exports.getDesign = async (req, res) => {
             ON c.skill_id = s.id
             WHERE s.id = ?`,
             [id]
-        )
+        );
 
-        res.status(200).json({ course })
+        res.status(200).json({ course });
 
-    } catch(err) {
-        res.status(500).json({ message: "error" })
+    } catch (err) {
+        res.status(500).json({ message: "error", error: err.message });
     }
-}
+};
