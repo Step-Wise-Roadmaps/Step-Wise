@@ -18,7 +18,8 @@ function CourseManagement() {
     }, [dispatch]);
 
     const itemRoutes = {
-        AddCourse: "/admin-dashboard/addcourse",
+        AddCourse: "/admin-dashboard/add-course",
+        DeleteCourse: "/admin-dashboard/delete-course"
     };
 
     const activeItem = Object.entries(itemRoutes).find(([, path]) => path === location.pathname)?.[0] ?? "";
