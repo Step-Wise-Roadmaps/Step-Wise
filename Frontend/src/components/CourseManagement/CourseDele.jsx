@@ -62,7 +62,7 @@ function CourseDele() {
                                         </p>
 
                                         <h2 className="mt-3 roboto-bold text-3xl text-slate-900">
-                                            PhotoShop
+                                            {designs && designs.length > 0 ? designs[0].skill_name : "Loading Course..."}
                                         </h2>
                                     </div>
 
