@@ -213,7 +213,7 @@ exports.addLessons = async (req, res) => {
     try {
         const { lesson_name, video_url, course_id } = req.body || {};
 
-        if (!lesson_name || !video_url || !course_id) {
+        if (!lesson_name || !video_url || course_id == null) {
             return res.status(400).json({ message: "lesson_name, video_url, and course_id are required" })
         }
 
@@ -221,7 +221,7 @@ exports.addLessons = async (req, res) => {
             "INSERT INTO lessons (lesson_name, video_url, course_id) VALUES (?, ?, ?)",
             [lesson_name, video_url, course_id]
         )
-        res.status(201).json({ message: "Lessons added successfully", lessonId: results.insertId })
+        res.status(201).json({ message: "Lesson added successfully", lessonId: results.insertId })
 
     } catch (err) {
         res.status(500).json({ message: `Failed to add lessons. Check that course_id exists and the field names are lesson_name, video_url, course_id. ${err.message}` })
