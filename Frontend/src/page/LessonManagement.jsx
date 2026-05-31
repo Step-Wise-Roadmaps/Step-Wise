@@ -16,9 +16,17 @@ function LessonManagement() {
 
     const { courses, lessons, isLoading } = useSelector((stats) => stats.admin);
 
+    const itemRoutes = {
+        AddLessons: "/admin-dashboard/add-course",
+        DeleteLessons: "/admin-dashboard/delete-course"
+    };
+
+    const activeItem = Object.entries(itemRoutes).find(([, path]) => path === location.pathname)?.[0] ?? "";
+
     return(
         <>
             <LessonHeader courses={courses} lessons={lessons} isLoading={isLoading} />
+            <LessonCard itemRoutes={itemRoutes} />
         </>
     )
 }

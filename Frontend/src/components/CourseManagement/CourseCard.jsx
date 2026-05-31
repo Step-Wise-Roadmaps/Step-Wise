@@ -77,7 +77,7 @@ function CourseCard({ itemRoutes }) {
                                 </article>
                             );
                         })}
-                    </section>
+                </section>
             </div>
         </>
     )
