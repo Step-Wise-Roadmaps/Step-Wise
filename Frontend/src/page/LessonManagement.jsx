@@ -17,7 +17,7 @@ function LessonManagement() {
     const { courses, lessons, isLoading } = useSelector((stats) => stats.admin);
 
     const itemRoutes = {
-        AddLessons: "/admin-dashboard/add-course",
+        AddLessons: "/admin-dashboard/add-lesson",
         DeleteLessons: "/admin-dashboard/delete-course"
     };
 
