@@ -264,3 +264,28 @@ exports.getDesign = async (req, res) => {
         res.status(500).json({ message: "error", error: err.message });
     }
 };
+
+exports.getLessonsByCourseId = async (req, res) => {
+    try {
+        const {id} = req.params;
+
+        const [lessons] = await pool.query(
+            `SELECT 
+                l.id,
+                l.lesson_name,
+                l.video_url,
+                l.course_id,
+                c.course_name
+            FROM lessons l
+            JOIN courses c
+            ON l.course_id = c.id
+            WHERE c.id = ? `,
+            [id]
+        );
+
+        res.status(200).json({ lessons });
+
+    } catch (err) {
+        res.status(500).json({ message: "error", error: err.message });
+    }
+};

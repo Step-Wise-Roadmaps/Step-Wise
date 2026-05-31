@@ -36,4 +36,6 @@ router.delete('/course/:id', auth, adminAuth, adminController.deleteCourse);
 
 router.get('/getDesign/:id', auth, adminAuth, adminController.getDesign);
 
+router.get('/getLessonsByCourseId/:id', auth, adminAuth, adminController.getLessonsByCourseId);
+
 module.exports = router;
