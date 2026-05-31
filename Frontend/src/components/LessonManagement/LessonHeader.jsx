@@ -5,9 +5,9 @@ import {
     Sparkles,
 } from 'lucide-react'
 
-import { stats } from '../../data/CourseManagementData';
+import { stats } from '../../data/LessonManagementData';
 
-function LessonHeader() {
+function LessonHeader({ courses, lessons, isLoading }) {
     return(
         <>
             <div className='mx-auto flex w-full max-w-8xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8'>
@@ -29,7 +29,7 @@ function LessonHeader() {
                 </section>
 
                 <section className='grid gap-4 md:grid-cols-2'>
-                    {stats({users, courses, skills, isLoading}).map((stat) => {
+                    {stats({courses, lessons, isLoading}).map((stat) => {
                         const Icon = stat.icon;
 
                         return (

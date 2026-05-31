@@ -1,9 +1,19 @@
+
+import { useDispatch, useSelector } from 'react-redux';
+import { getCourses, getLessons } from '../features/auth/adminDashboardSlice'
+
 import LessonHeader from "../components/LessonManagement/LessonHeader";
+import { stats } from '../data/LessonManagementData';
 
 function LessonManagement() {
+
+    const dispatch = useDispatch();
+
+    const { courses, lessons, isLoading } = useSelector((stats) => stats.admin);
+
     return(
         <>
-            <LessonHeader />
+            <LessonHeader courses={courses} lessons={lessons} isLoading={isLoading} />
         </>
     )
 }
