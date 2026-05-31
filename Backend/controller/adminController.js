@@ -241,6 +241,19 @@ exports.deleteCourse = async (req, res) => {
     }
 }
 
+exports.deleteLesson = async (req, res) => {
+    try {
+        const { id  } = req.params;
+
+        await pool.query("DELETE FROM lessons WHERE id = ?", [id]);
+
+        res.status(200).json({ message: "lessons deleted successfully" });
+
+    } catch(err) {
+        return res.status(500).json({ message: "Delete failed", error: err.message });
+    }
+}
+
 exports.getDesign = async (req, res) => {
     try {
         const { id } = req.params;
