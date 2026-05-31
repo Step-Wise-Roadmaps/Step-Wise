@@ -2,7 +2,7 @@
 function LessonManagement() {
     return(
         <>
-            <h1>126</h1>
+            
         </>
     )
 }
