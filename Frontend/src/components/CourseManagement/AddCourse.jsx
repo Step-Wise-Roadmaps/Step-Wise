@@ -3,7 +3,7 @@ import {
     Users,
     UserStar,
     Sparkles,
-} from 'lucide-react'
+} from 'lucide-react';
 
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
