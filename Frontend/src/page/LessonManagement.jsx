@@ -1,8 +1,9 @@
+import LessonHeader from "../components/LessonManagement/LessonHeader";
 
 function LessonManagement() {
     return(
         <>
-            
+            <LessonHeader />
         </>
     )
 }

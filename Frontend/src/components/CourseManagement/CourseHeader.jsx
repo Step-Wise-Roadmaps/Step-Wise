@@ -5,7 +5,7 @@ import {
     Sparkles,
 } from 'lucide-react'
 
-import { stats } from '../../data/CourseManagementData';
+import { stats } from '../../data/LessonManagementData';
 
 function CourseHeader({ users, courses, skills, isLoading }) {
     return(
