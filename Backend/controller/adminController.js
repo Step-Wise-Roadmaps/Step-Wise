@@ -213,7 +213,7 @@ exports.addLessons = async (req, res) => {
     try {
         const { lesson_name, video_url, course_id } = req.body || {};
 
-        if (!lesson_name || !video_url || !course_id) {
+        if (!lesson_name || !video_url || course_id == null) {
             return res.status(400).json({ message: "lesson_name, video_url, and course_id are required" })
         }
 
@@ -221,7 +221,7 @@ exports.addLessons = async (req, res) => {
             "INSERT INTO lessons (lesson_name, video_url, course_id) VALUES (?, ?, ?)",
             [lesson_name, video_url, course_id]
         )
-        res.status(201).json({ message: "Lessons added successfully", lessonId: results.insertId })
+        res.status(201).json({ message: "Lesson added successfully", lessonId: results.insertId })
 
     } catch (err) {
         res.status(500).json({ message: `Failed to add lessons. Check that course_id exists and the field names are lesson_name, video_url, course_id. ${err.message}` })
@@ -235,6 +235,19 @@ exports.deleteCourse = async (req, res) => {
         await pool.query("DELETE FROM courses WHERE id = ?", [id]);
 
         res.status(200).json({ message: "Course deleted successfully" });
+
+    } catch(err) {
+        return res.status(500).json({ message: "Delete failed", error: err.message });
+    }
+}
+
+exports.deleteLesson = async (req, res) => {
+    try {
+        const { id  } = req.params;
+
+        await pool.query("DELETE FROM lessons WHERE id = ?", [id]);
+
+        res.status(200).json({ message: "lessons deleted successfully" });
 
     } catch(err) {
         return res.status(500).json({ message: "Delete failed", error: err.message });
@@ -259,6 +272,31 @@ exports.getDesign = async (req, res) => {
         );
 
         res.status(200).json({ course });
+
+    } catch (err) {
+        res.status(500).json({ message: "error", error: err.message });
+    }
+};
+
+exports.getLessonsByCourseId = async (req, res) => {
+    try {
+        const {id} = req.params;
+
+        const [lessons] = await pool.query(
+            `SELECT 
+                l.id,
+                l.lesson_name,
+                l.video_url,
+                l.course_id,
+                c.course_name
+            FROM lessons l
+            JOIN courses c
+            ON l.course_id = c.id
+            WHERE c.id = ? `,
+            [id]
+        );
+
+        res.status(200).json({ lessons });
 
     } catch (err) {
         res.status(500).json({ message: "error", error: err.message });

@@ -60,11 +60,36 @@ export const deleteCourse = createAsyncThunk('admin/deleteCourse', async (id, th
     }
 });
 
+export const deleteLesson = createAsyncThunk('admin/deleteLesson', async (id, thunkAPI) => {
+    try {
+        return await adminDashboardService.deleteLesson(id);
+    } catch (error) {
+        const message = error.response?.data?.message || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+});
+
 export const getDesign = createAsyncThunk(
     'admin/getDesign',
     async (id, thunkAPI) => {
         try {
             return await adminDashboardService.getDesign(id);
+        } catch (error) {
+            const message =
+                error.response?.data?.message ||
+                error.message ||
+                error.toString();
+
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
+export const getLessonsByCourseId = createAsyncThunk(
+    'admin/getLessonsByCourseId',
+    async (id, thunkAPI) => {
+        try {
+            return await adminDashboardService.getLessonsByCourseId(id);
         } catch (error) {
             const message =
                 error.response?.data?.message ||
@@ -108,6 +133,15 @@ export const getLessons = createAsyncThunk('/admin/getLessons', async (lessonDat
 export const addCourse = createAsyncThunk('/admin/add-course', async (addCourse, thunkAPI) => {
     try {
         return await adminDashboardService.addCourse(addCourse);
+    } catch (error) {
+        const message = error.response?.data?.message || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+});
+
+export const addLessons = createAsyncThunk('/admin/add-lessons', async (addLessons, thunkAPI) => {
+    try {
+        return await adminDashboardService.addLessons(addLessons);
     } catch (error) {
         const message = error.response?.data?.message || error.message || error.toString();
         return thunkAPI.rejectWithValue(message);
@@ -183,18 +217,33 @@ export const adminSlice = createSlice({
         .addCase(deleteCourse.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            const deletedId =
-        typeof action.payload === 'string'
-            ? Number(action.payload)
-            : action.payload;
-
-    state.designs = state.designs.filter(
-        (item) => item.id !== deletedId
-    );
-
-            state.message = action.payload.message
+            const deletedId = typeof action.payload === 'string'
+                ? Number(action.payload)
+                : action.payload;
+                state.designs = state.designs.filter(
+                    (item) => item.id !== deletedId
+                );
+                state.message = action.payload.message
         })
         .addCase(deleteCourse.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        })
+        // deleteLesson
+        .addCase(deleteLesson.pending, (state) => {state.isLoading = true})
+        .addCase(deleteLesson.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            const deletedId = typeof action.payload === 'string'
+                ? Number(action.payload)
+                : action.payload;
+                state.designs = state.designs.filter(
+                    (item) => item.id !== deletedId
+                );
+                state.message = action.payload.message
+        })
+        .addCase(deleteLesson.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;
@@ -211,7 +260,6 @@ export const adminSlice = createSlice({
             state.isError = true;
             state.message = action.payload;
         })
-
         // getSkills
         .addCase(getSkills.pending, (state) => {state.isLoading = true})
         .addCase(getSkills.fulfilled, (state, action) => {
@@ -250,6 +298,19 @@ export const adminSlice = createSlice({
             state.isError = true;
             state.message = action.payload;
         })
+        // addLessons
+        .addCase(addLessons.pending, (state) => {state.isLoading = true})
+        .addCase(addLessons.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.lessons = action.payload;
+            state.message = action.payload.message;
+        })
+        .addCase(addLessons.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        })
         // getDesign
         .addCase(getDesign.pending, (state) => {state.isLoading = true})
         .addCase(getDesign.fulfilled, (state, action) => {
@@ -258,6 +319,18 @@ export const adminSlice = createSlice({
             state.designs = action.payload.course;
         })
         .addCase(getDesign.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        })
+        // getLessonsByCourseId
+        .addCase(getLessonsByCourseId.pending, (state) => {state.isLoading = true})
+        .addCase(getLessonsByCourseId.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.LessonsByCourseId = action.payload.lessons;
+        })
+        .addCase(getLessonsByCourseId.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;

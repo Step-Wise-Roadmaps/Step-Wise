@@ -10,11 +10,16 @@ import ResetPassword from "./page/ResetPassword";
 import AdminDashboard from "./page/AdminDashboard";
 import UserManagement from "./page/UserManagement";
 import CourseManagement from "./page/CourseManagement"
+import LessonManagement from "./page/LessonManagement";
 
 // components
 import AddCourse from "./components/CourseManagement/AddCourse";
 import DeleteCourse from "./components/CourseManagement/DeleteCourse";
 import CourseDele from "./components/CourseManagement/CourseDele";
+
+import AddLesson from "./components/LessonManagement/AddLesson";
+import DeleteLessonsCard from "./components/LessonManagement/DeleteLessonsCard";
+import LessonDele from "./components/LessonManagement/LessonDele";
 
 // layot
 import AdminDashboardLayout from "./layout/AdminDashboardLayout";
@@ -42,6 +47,10 @@ function App() {
                         <Route path="add-course" element={<AddCourse />} />
                         <Route path="delete-course" element={<DeleteCourse />} />
                         <Route path="design/:id" element={<CourseDele />} />
+                        <Route path="lesson" element={<LessonManagement />} />
+                        <Route path="add-lesson" element={<AddLesson />} />
+                        <Route path="delete-lesson" element={<DeleteLessonsCard />} />
+                        <Route path="LessonsByCourseId/:id" element={<LessonDele />} />
                     </Route>
                 </Route>
             </Routes>

@@ -1,4 +1,5 @@
 
+
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom'
 
@@ -17,24 +18,24 @@ import {
     Trash2
 } from "lucide-react";
 
-function CourseCard({ itemRoutes }) {
+function LessonCard({ itemRoutes }) {
 
     const navigate = useNavigate();
 
     const stats = [
         {
-            id: "AddCourse",
-            title: "Stap-Wise Course Managment",
-            value: "Add Course",
+            id: "AddLessons",
+            title: "Stap-Wise Lessons Managment",
+            value: "Add Lessons",
             change: "+12.5%",
             note: "New Course this month",
             icon: BookOpen,
             tone: "from-cyan-500 to-blue-500",
         },
         {
-            id: "DeleteCourse",
-            title: "Stap-Wise Course Managment",
-            value: "Delete Course",
+            id: "DeleteLessons",
+            title: "Stap-Wise Lessons Managment",
+            value: "Delete Lessons",
             // note: "Published and visible",
             icon: Trash2,
             tone: "bg-rose-500",
@@ -83,4 +84,4 @@ function CourseCard({ itemRoutes }) {
     )
 }
 
-export default CourseCard;
+export default LessonCard;

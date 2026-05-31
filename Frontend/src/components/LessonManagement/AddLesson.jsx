@@ -5,21 +5,23 @@ import {
     Sparkles,
 } from 'lucide-react';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addCourse, reset } from '../../features/auth/adminDashboardSlice';
+import { addLessons, getCourses, reset } from "../../features/auth/adminDashboardSlice";
 
-function AddCourse() {
-    const [formData, setFormData] = useState({
-        course_name: '',
-        skill_id: ''
-    });
+function AddLesson() {
 
     const dispatch = useDispatch();
 
-    const { course_name, skill_id } = formData;
+    const { lessons, courses, message, isLoading, isSuccess, isError } = useSelector((state) => state.admin);
 
-    const { courses, isLoading, isSuccess, isError, message } = useSelector((state) => state.admin);
+    const [ formData, setFormData ] = useState({
+        lesson_name: "",
+        video_url: "",
+        course_id: "",
+    });
+
+    const { lesson_name, video_url, course_id } = formData;
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -30,8 +32,8 @@ function AddCourse() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        const userData = { course_name, skill_id };
-        dispatch(addCourse(userData));
+        const userData = { lesson_name, video_url, course_id };
+        dispatch(addLessons(userData));
     };
 
     useEffect(() => {
@@ -43,6 +45,7 @@ function AddCourse() {
             return () => clearTimeout(timer);
         }
     }, [message, dispatch]);
+
     return(
         <>
             <div className='mx-auto flex w-full max-w-8xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8'>
@@ -79,19 +82,34 @@ function AddCourse() {
                             </div>
                         )}
 
-                        <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
-                            <input id='course_name' name='course_name' value={course_name} onChange={onChange} required type="text" placeholder='Courses Name' className='outline-none transition hover:border-slate-300 bg-transparent focus:border-cyan-400  border border-slate-300 p-2 rounded-lg' />
+                        <div className='grid grid-cols-1 md:grid-cols-3 gap-3'>
+                            <input id='lesson_name' name='lesson_name' value={lesson_name} onChange={onChange} required type="text" placeholder='Lesson Name' className='outline-none transition hover:border-slate-300 bg-transparent focus:border-cyan-400  border border-slate-300 p-2 rounded-lg' />
+
+                            <input
+                                id="video_url"
+                                name="video_url"
+                                type="url"
+                                value={video_url}
+                                onChange={onChange}
+                                required
+                                placeholder="https://youtube.com/watch?v=..."
+                                className="outline-none transition hover:border-slate-300 bg-transparent focus:border-cyan-400 border border-slate-300 p-2 rounded-lg"
+                            />
 
                             <select
-                                id='skill_id'
-                                name='skill_id'
-                                value={skill_id}
+                                id="course_id"
+                                name="course_id"
+                                value={course_id}
                                 onChange={onChange}
-                                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 outline-none transition hover:border-slate-300 focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-500/10 sm:text-base">
-                                <option value="">Select a skill</option>
-                                <option value="1">Photoshop</option>
-                                <option value="2">Web Development</option>
-                                <option value="3">UI/UX Design</option>
+                                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 outline-none transition hover:border-slate-300 focus:border-cyan-400 focus:bg-white focus:ring-4 focus:ring-cyan-500/10 sm:text-base"
+                            >
+                                <option value="">Select Course</option>
+
+                                {courses?.map((course) => (
+                                    <option key={course.id} value={course.id}>
+                                        {course.course_name}
+                                    </option>
+                                ))}
                             </select>
                         </div>
 
@@ -101,7 +119,7 @@ function AddCourse() {
 
             </div>
         </>
-    );
+    )
 }
 
-export default AddCourse;
+export default AddLesson;

@@ -34,6 +34,10 @@ router.post('/add-lessons', auth, adminAuth, adminController.addLessons);
 
 router.delete('/course/:id', auth, adminAuth, adminController.deleteCourse);
 
+router.delete('/delete-lesson/:id', auth, adminAuth, adminController.deleteLesson);
+
 router.get('/getDesign/:id', auth, adminAuth, adminController.getDesign);
+
+router.get('/getLessonsByCourseId/:id', auth, adminAuth, adminController.getLessonsByCourseId);
 
 module.exports = router;
