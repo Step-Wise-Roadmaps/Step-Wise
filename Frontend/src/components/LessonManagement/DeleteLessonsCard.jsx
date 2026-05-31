@@ -8,15 +8,22 @@ import {
     Component
 } from "lucide-react";
 
-import { useState } from 'react'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCourses } from "../../features/auth/adminDashboardSlice"
+import { getCourses, getLessonsByCourseId } from "../../features/auth/adminDashboardSlice"
 
 function DeleteLessonsCard() {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const { courses, isLoading } = useSelector((state) => state.admin);
+
+    const handleCardClick = (id) => {
+        dispatch(getLessonsByCourseId(id));
+        navigate(`/admin-dashboard/LessonsByCourseId/${id}`);
+    };
 
     const stats = isLoading
     ? []

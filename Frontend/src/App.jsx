@@ -19,6 +19,7 @@ import CourseDele from "./components/CourseManagement/CourseDele";
 
 import AddLesson from "./components/LessonManagement/AddLesson";
 import DeleteLessonsCard from "./components/LessonManagement/DeleteLessonsCard";
+import LessonDele from "./components/LessonManagement/LessonDele";
 
 // layot
 import AdminDashboardLayout from "./layout/AdminDashboardLayout";
@@ -49,6 +50,7 @@ function App() {
                         <Route path="lesson" element={<LessonManagement />} />
                         <Route path="add-lesson" element={<AddLesson />} />
                         <Route path="delete-lesson" element={<DeleteLessonsCard />} />
+                        <Route path="LessonsByCourseId/:id" element={<LessonDele />} />
                     </Route>
                 </Route>
             </Routes>

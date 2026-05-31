@@ -325,12 +325,12 @@ export const adminSlice = createSlice({
             state.isError = true;
             state.message = action.payload;
         })
-        // getDesign
+        // getLessonsByCourseId
         .addCase(getLessonsByCourseId.pending, (state) => {state.isLoading = true})
         .addCase(getLessonsByCourseId.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            state.LessonsByCourseId = action.payload.course;
+            state.LessonsByCourseId = action.payload.lessons;
         })
         .addCase(getLessonsByCourseId.rejected, (state, action) => {
             state.isLoading = false;
