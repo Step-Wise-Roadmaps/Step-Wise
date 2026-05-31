@@ -114,6 +114,15 @@ export const addCourse = createAsyncThunk('/admin/add-course', async (addCourse,
     }
 });
 
+export const addLessons = createAsyncThunk('/admin/add-lessons', async (addLessons, thunkAPI) => {
+    try {
+        return await adminDashboardService.addLessons(addLessons);
+    } catch (error) {
+        const message = error.response?.data?.message || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+});
+
 export const adminSlice = createSlice({
     name: 'admin',
     initialState,
@@ -246,6 +255,19 @@ export const adminSlice = createSlice({
             state.message = action.payload.message;
         })
         .addCase(addCourse.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        })
+        // addLessons
+        .addCase(addLessons.pending, (state) => {state.isLoading = true})
+        .addCase(addLessons.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.lessons = action.payload;
+            state.message = action.payload.message;
+        })
+        .addCase(addLessons.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload;

@@ -68,6 +68,15 @@ const addCourse = async (addCourse) => {
     return response.data;
 }
 
+const addLessons = async (addLessons) => {
+    const response = await axiosInstance.post(
+        '/admin/add-lessons',
+        addLessons
+    );
+
+    return response.data;
+}
+
 const adminDashboardService = {
     getAllUsers,
     userGrowth,
@@ -77,6 +86,7 @@ const adminDashboardService = {
     getSkills,
     getLessons,
     addCourse,
+    addLessons,
     deleteCourse,
     getDesign,
 }
