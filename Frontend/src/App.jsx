@@ -10,6 +10,7 @@ import ResetPassword from "./page/ResetPassword";
 import AdminDashboard from "./page/AdminDashboard";
 import UserManagement from "./page/UserManagement";
 import CourseManagement from "./page/CourseManagement"
+import LessonManagement from "./page/LessonManagement";
 
 // components
 import AddCourse from "./components/CourseManagement/AddCourse";
@@ -42,6 +43,7 @@ function App() {
                         <Route path="add-course" element={<AddCourse />} />
                         <Route path="delete-course" element={<DeleteCourse />} />
                         <Route path="design/:id" element={<CourseDele />} />
+                        <Route path="lesson" element={<LessonManagement />} />
                     </Route>
                 </Route>
             </Routes>
