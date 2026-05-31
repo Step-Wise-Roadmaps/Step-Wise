@@ -46,6 +46,7 @@ const itemRoutes = {
     dashboard: "/admin-dashboard",
     users: "/admin-dashboard/users",
     courses: "/admin-dashboard/course",
+    lessons: "/admin-dashboard/lesson"
 };
 
 function SidebarItem({ item, isOpen, isActive, onClick }) {
