@@ -217,14 +217,13 @@ export const adminSlice = createSlice({
         .addCase(deleteCourse.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            const deletedId =
-        typeof action.payload === 'string'
-            ? Number(action.payload)
-            : action.payload;
-            state.designs = state.designs.filter(
-                (item) => item.id !== deletedId
-            );
-            state.message = action.payload.message
+            const deletedId = typeof action.payload === 'string'
+                ? Number(action.payload)
+                : action.payload;
+                state.designs = state.designs.filter(
+                    (item) => item.id !== deletedId
+                );
+                state.message = action.payload.message
         })
         .addCase(deleteCourse.rejected, (state, action) => {
             state.isLoading = false;
@@ -236,14 +235,13 @@ export const adminSlice = createSlice({
         .addCase(deleteLesson.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            const deletedId =
-        typeof action.payload === 'string'
-            ? Number(action.payload)
-            : action.payload;
-            state.designs = state.designs.filter(
-                (item) => item.id !== deletedId
-            );
-            state.message = action.payload.message
+            const deletedId = typeof action.payload === 'string'
+                ? Number(action.payload)
+                : action.payload;
+                state.designs = state.designs.filter(
+                    (item) => item.id !== deletedId
+                );
+                state.message = action.payload.message
         })
         .addCase(deleteLesson.rejected, (state, action) => {
             state.isLoading = false;
