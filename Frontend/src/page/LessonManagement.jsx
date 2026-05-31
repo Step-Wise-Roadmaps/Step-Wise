@@ -18,7 +18,7 @@ function LessonManagement() {
 
     const itemRoutes = {
         AddLessons: "/admin-dashboard/add-lesson",
-        DeleteLessons: "/admin-dashboard/delete-course"
+        DeleteLessons: "/admin-dashboard/delete-lesson"
     };
 
     const activeItem = Object.entries(itemRoutes).find(([, path]) => path === location.pathname)?.[0] ?? "";
