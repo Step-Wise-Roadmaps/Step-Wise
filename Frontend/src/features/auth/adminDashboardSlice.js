@@ -13,6 +13,8 @@ const initialState = {
     isSuccess: false,
     isLoading: false,
     message: '',
+    courseMessage: "",
+    lessonMessage: "",
 }
 
 export const getAllUsers = createAsyncThunk('admin/getAllUsers', async (adminData, thunkAPI) => {
@@ -157,6 +159,8 @@ export const adminSlice = createSlice({
             state.isError = false;
             state.isSuccess = false;
             state.message = '';
+            state.lessonMessage = "";
+            state.courseMessage = "";
         }
     },
     extraReducers: (builder) => {
@@ -291,12 +295,12 @@ export const adminSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.courses = action.payload;
-            state.message = action.payload.message;
+            state.courseMessage = action.payload.message;
         })
         .addCase(addCourse.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
-            state.message = action.payload;
+            state.courseMessage = action.payload;
         })
         // addLessons
         .addCase(addLessons.pending, (state) => {state.isLoading = true})
@@ -304,12 +308,12 @@ export const adminSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.lessons = action.payload;
-            state.message = action.payload.message;
+            state.lessonMessage = action.payload.message;
         })
         .addCase(addLessons.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
-            state.message = action.payload;
+            state.lessonMessage = action.payload;
         })
         // getDesign
         .addCase(getDesign.pending, (state) => {state.isLoading = true})
