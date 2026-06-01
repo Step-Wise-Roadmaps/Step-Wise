@@ -238,7 +238,7 @@ export const adminSlice = createSlice({
             const deletedId = typeof action.payload === 'string'
                 ? Number(action.payload)
                 : action.payload;
-                state.designs = state.designs.filter(
+                state.LessonsByCourseId = state.LessonsByCourseId.filter(
                     (item) => item.id !== deletedId
                 );
                 state.message = action.payload.message
