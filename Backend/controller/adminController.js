@@ -247,7 +247,7 @@ exports.deleteLesson = async (req, res) => {
 
         await pool.query("DELETE FROM lessons WHERE id = ?", [id]);
 
-        res.status(200).json({ message: "lessons deleted successfully" });
+        res.status(200).json({ message: "lessons deleted successfully" } [id]);
 
     } catch(err) {
         return res.status(500).json({ message: "Delete failed", error: err.message });

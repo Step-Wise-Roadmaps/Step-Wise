@@ -15,16 +15,6 @@ function LessonDele() {
         dispatch(deleteLesson(id));
     };
 
-    // useEffect(() => {
-    //     if (deleteLessonMessage) {
-    //         const timer = setTimeout(() => {
-    //             dispatch(reset());
-    //         }, 5000);
-
-    //         return () => clearInterval(timer);
-    //     }
-    // }, deleteLessonMessage, dispatch);
-
     return(
         <>
             <div className='mx-auto flex w-full max-w-8xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8'>
@@ -91,31 +81,39 @@ function LessonDele() {
                 </div>
 
                 {deleteLessonMessage && (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-        <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
-            <div className="text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-                    ✅
-                </div>
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+                        <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+                            <div className="text-center">
+                                <div
+                                    className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full ${
+                                        isError ? "bg-red-100" : "bg-green-100"
+                                    }`}
+                                >
+                                    {isError ? "❌" : "✅"}
+                                </div>
 
-                <h2 className="text-2xl font-bold text-slate-900">
-                    Success
-                </h2>
+                                <h2 className="text-2xl font-bold text-slate-900">
+                                    {isError ? "Error" : "Success"}
+                                </h2>
 
-                <p className="mt-3 text-slate-600">
-                    {deleteLessonMessage}
-                </p>
+                                <p className="mt-3 text-slate-600">
+                                    {deleteLessonMessage}
+                                </p>
 
-                <button
-                    onClick={() => dispatch(reset())}
-                    className="mt-6 rounded-xl bg-green-600 px-6 py-3 text-white hover:bg-green-700"
-                >
-                    OK
-                </button>
-            </div>
-        </div>
-    </div>
-)}
+                                <button
+                                    onClick={() => dispatch(reset())}
+                                    className={`mt-6 rounded-xl px-6 py-3 text-white ${
+                                        isError
+                                            ? "bg-red-600 hover:bg-red-700"
+                                            : "bg-green-600 hover:bg-green-700"
+                                    }`}
+                                >
+                                    OK
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
             </div>
         </>
