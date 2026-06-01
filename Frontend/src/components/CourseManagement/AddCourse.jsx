@@ -19,7 +19,7 @@ function AddCourse() {
 
     const { course_name, skill_id } = formData;
 
-    const { courses, isLoading, isSuccess, isError, message } = useSelector((state) => state.admin);
+    const { courses, isLoading, isSuccess, isError, courseMessage } = useSelector((state) => state.admin);
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -35,14 +35,14 @@ function AddCourse() {
     };
 
     useEffect(() => {
-        if (message) {
+        if (courseMessage) {
             const timer = setTimeout(() => {
                 dispatch(reset());
             }, 5000);
 
             return () => clearTimeout(timer);
         }
-    }, [message, dispatch]);
+    }, [courseMessage, dispatch]);
     return(
         <>
             <div className='mx-auto flex w-full max-w-8xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8'>
@@ -67,7 +67,7 @@ function AddCourse() {
                     <div className='w-full rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] md:p-10 space-y-10 text-center'>
                         <h1 className='text-center roboto-semibold text-2xl text-slate-500'>Add Course</h1>
 
-                        {message && (
+                        {courseMessage && (
                             <div
                                 className={`w-full rounded-xl p-4 text-sm font-medium shadow-md ${
                                     isError
@@ -75,7 +75,7 @@ function AddCourse() {
                                         : 'border border-green-200 bg-green-50 text-green-700'
                                 }`}
                             >
-                                {message}
+                                {courseMessage}
                             </div>
                         )}
 

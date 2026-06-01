@@ -31,10 +31,15 @@ const deleteCourse = async (id) => {
 }
 
 const deleteLesson = async (id) => {
-    await axiosInstance.delete(`/admin/delete-lesson/${id}`);
+    const response = await axiosInstance.delete(
+        `/admin/delete-lesson/${id}`
+    );
 
-    return id;
-}
+    return {
+        id,
+        message: response.data.message
+    };
+};
 
 const getDesign = async (id) => {
     const response = await axiosInstance.get(`/admin/getDesign/${id}`);

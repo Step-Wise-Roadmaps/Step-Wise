@@ -13,6 +13,10 @@ const initialState = {
     isSuccess: false,
     isLoading: false,
     message: '',
+    courseMessage: "",
+    lessonMessage: "",
+    deleteLessonMessage: "",
+    deleteLessonErrorMessage: "",
 }
 
 export const getAllUsers = createAsyncThunk('admin/getAllUsers', async (adminData, thunkAPI) => {
@@ -157,6 +161,10 @@ export const adminSlice = createSlice({
             state.isError = false;
             state.isSuccess = false;
             state.message = '';
+            state.lessonMessage = "";
+            state.courseMessage = "";
+            state.deleteLessonMessage = ""
+            state.deleteLessonErrorMessage = ""
         }
     },
     extraReducers: (builder) => {
@@ -235,18 +243,19 @@ export const adminSlice = createSlice({
         .addCase(deleteLesson.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            const deletedId = typeof action.payload === 'string'
-                ? Number(action.payload)
-                : action.payload;
-                state.designs = state.designs.filter(
-                    (item) => item.id !== deletedId
-                );
-                state.message = action.payload.message
+
+            const deletedId = action.payload.id;
+
+            state.LessonsByCourseId = state.LessonsByCourseId.filter(
+                (item) => item.id !== deletedId
+            );
+
+            state.deleteLessonMessage = action.payload.message;
         })
         .addCase(deleteLesson.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
-            state.message = action.payload;
+            state.deleteLessonMessage = action.payload;
         })
         // getCourses
         .addCase(getCourses.pending, (state) => {state.isLoading = true})
@@ -291,12 +300,12 @@ export const adminSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.courses = action.payload;
-            state.message = action.payload.message;
+            state.courseMessage = action.payload.message;
         })
         .addCase(addCourse.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
-            state.message = action.payload;
+            state.courseMessage = action.payload;
         })
         // addLessons
         .addCase(addLessons.pending, (state) => {state.isLoading = true})
@@ -304,12 +313,12 @@ export const adminSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.lessons = action.payload;
-            state.message = action.payload.message;
+            state.lessonMessage = action.payload.message;
         })
         .addCase(addLessons.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
-            state.message = action.payload;
+            state.lessonMessage = action.payload;
         })
         // getDesign
         .addCase(getDesign.pending, (state) => {state.isLoading = true})

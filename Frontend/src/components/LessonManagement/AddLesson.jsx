@@ -13,7 +13,7 @@ function AddLesson() {
 
     const dispatch = useDispatch();
 
-    const { lessons, courses, message, isLoading, isSuccess, isError } = useSelector((state) => state.admin);
+    const { lessons, courses, lessonMessage, isLoading, isSuccess, isError } = useSelector((state) => state.admin);
 
     const [ formData, setFormData ] = useState({
         lesson_name: "",
@@ -37,14 +37,14 @@ function AddLesson() {
     };
 
     useEffect(() => {
-        if (message) {
+        if (lessonMessage) {
             const timer = setTimeout(() => {
                 dispatch(reset());
             }, 5000);
 
             return () => clearTimeout(timer);
         }
-    }, [message, dispatch]);
+    }, [lessonMessage, dispatch]);
 
     return(
         <>
@@ -56,11 +56,11 @@ function AddLesson() {
                             <div className='max-w-2xl space-y-4'>
                                 <div className="inline-flex items-center gap-2 rounded-full border border-cyan-100 bg-cyan-50 px-4 py-2 text-sm text-cyan-700">
                                     <Sparkles size={16} />
-                                    All Course Managment Page
+                                    All Lesson Managment Page
                                 </div>
 
                                 <div className='space-y-5'>
-                                    <h1 className='roboto-bold text-2xl leading-tight text-slate-900 md:text-3xl'>Course Managment Managme Stap-Wise Course</h1>
+                                    <h1 className='roboto-bold text-2xl leading-tight text-slate-900 md:text-3xl'>Course Managment Managme Stap-Wise Lesson</h1>
                                 </div>
                             </div>
                         </div>
@@ -68,9 +68,9 @@ function AddLesson() {
 
                 <form onSubmit={onSubmit} className='flex w-full max-w-8xl items-center mx-auto h-100'>
                     <div className='w-full rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] md:p-10 space-y-10 text-center'>
-                        <h1 className='text-center roboto-semibold text-2xl text-slate-500'>Add Course</h1>
+                        <h1 className='text-center roboto-semibold text-2xl text-slate-500'>Add Lesson</h1>
 
-                        {message && (
+                        {lessonMessage && (
                             <div
                                 className={`w-full rounded-xl p-4 text-sm font-medium shadow-md ${
                                     isError
@@ -78,7 +78,7 @@ function AddLesson() {
                                         : 'border border-green-200 bg-green-50 text-green-700'
                                 }`}
                             >
-                                {message}
+                                {lessonMessage}
                             </div>
                         )}
 
