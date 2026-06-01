@@ -8,10 +8,10 @@ import {
     Component
 } from "lucide-react";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCourses, getLessonsByCourseId } from "../../features/auth/adminDashboardSlice"
+import { getCourses, getLessonsByCourseId, reset } from "../../features/auth/adminDashboardSlice"
 
 function DeleteLessonsCard() {
 
@@ -33,8 +33,7 @@ function DeleteLessonsCard() {
           value: course.course_name,
           icon: Camera,
           tone: "from-cyan-500 to-blue-500",
-      }));
-
+    }));
     return(
         <>
             <div className='mx-auto flex w-full max-w-8xl flex-col gap-6 p-4 pt-20 md:p-6 md:pt-6 lg:p-8'>

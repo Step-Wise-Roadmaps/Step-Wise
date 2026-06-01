@@ -15,6 +15,7 @@ const initialState = {
     message: '',
     courseMessage: "",
     lessonMessage: "",
+    deleteLessonMessage: "",
 }
 
 export const getAllUsers = createAsyncThunk('admin/getAllUsers', async (adminData, thunkAPI) => {
@@ -161,6 +162,7 @@ export const adminSlice = createSlice({
             state.message = '';
             state.lessonMessage = "";
             state.courseMessage = "";
+            state.deleteLessonMessage = ""
         }
     },
     extraReducers: (builder) => {
@@ -237,20 +239,21 @@ export const adminSlice = createSlice({
         // deleteLesson
         .addCase(deleteLesson.pending, (state) => {state.isLoading = true})
         .addCase(deleteLesson.fulfilled, (state, action) => {
-            state.isLoading = false;
-            state.isSuccess = true;
-            const deletedId = typeof action.payload === 'string'
-                ? Number(action.payload)
-                : action.payload;
-                state.LessonsByCourseId = state.LessonsByCourseId.filter(
-                    (item) => item.id !== deletedId
-                );
-                state.message = action.payload.message
-        })
+    state.isLoading = false;
+    state.isSuccess = true;
+
+    const deletedId = action.payload.id;
+
+    state.LessonsByCourseId = state.LessonsByCourseId.filter(
+        (item) => item.id !== deletedId
+    );
+
+    state.deleteLessonMessage = action.payload.message;
+})
         .addCase(deleteLesson.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
-            state.message = action.payload;
+            state.deleteLessonMessage = action.payload;
         })
         // getCourses
         .addCase(getCourses.pending, (state) => {state.isLoading = true})
