@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 
 function ProtectedRoute({ allowedRoles }) {
     const { user } = useSelector((state) => state.auth);
-
+    const token = localStorage.getItem('token');
     
-    if (!user) {
+    if (!user || !token) {
         return <Navigate to="/login" replace />;
     }
 

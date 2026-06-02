@@ -40,7 +40,7 @@ const recentActivities = [
 function AdminDashboard() {
 
     const dispatch = useDispatch();
-    const { users, courses, lessons, isLoading, isError, message } = useSelector((state) => state.admin);
+    const { users, courses, lessons, isLoading, error, message } = useSelector((state) => state.admin);
     const { user } = useSelector((state) => state.auth);
 
     useEffect(() => {
@@ -76,9 +76,11 @@ function AdminDashboard() {
         },
     ];
 
-    if (isError) {
-        return <p>Error: {message}</p>;
-    }
+    // if (error) {
+    //     return (
+    //         <p className="text-center roboto-extrabold text-lg">{error}</p>
+    //     );
+    // }
 
     return (
         <div className="flex min-h-screen w-full bg-slate-50 text-slate-900">
