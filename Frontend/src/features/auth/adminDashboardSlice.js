@@ -17,6 +17,7 @@ const initialState = {
     lessonMessage: "",
     deleteLessonMessage: "",
     deleteLessonErrorMessage: "",
+    searchUsersMessage: ""
 }
 
 export const getAllUsers = createAsyncThunk('admin/getAllUsers', async (adminData, thunkAPI) => {
@@ -165,6 +166,7 @@ export const adminSlice = createSlice({
             state.courseMessage = "";
             state.deleteLessonMessage = ""
             state.deleteLessonErrorMessage = ""
+            state.searchUsersMessage =""
         }
     },
     extraReducers: (builder) => {
@@ -203,7 +205,7 @@ export const adminSlice = createSlice({
         .addCase(searchUsers.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
-            state.message = action.payload;
+            state.searchUsersMessage = action.payload;
         })
         // deleteUser
         .addCase(deleteUser.pending, (state) => {state.isLoading = true})

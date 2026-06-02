@@ -69,6 +69,10 @@ exports.searchUsers = async (req, res) => {
             [searchTerm, searchTerm, searchTerm]
         );
 
+        if (users.length === 0) {
+    return sendError(res, 404, "User not found.");
+}
+
         return sendSuccess(res, 200, users, { count: users.length });
     } catch (error) {
         return sendError(res, 500, "The search failed. There was an error on the server.", error.message);
