@@ -1,31 +1,28 @@
 const pool = require('../config/db');
 
+const sendSuccess = (res, statusCode, data, extra = {}) => {
+    return res.status(statusCode).json({ success: true, ...extra, data });
+};
+
+const sendError = (res, statusCode, message, error = null) => {
+    if (error) console.error("Database Details:", error);
+    return res.status(statusCode).json({ success: false, message });
+};
+
 exports.getAllUsers = async (req, res) => {
     try {
         const [users] = await pool.query(`
-            SELECT 
-                u.id, 
-                u.full_name, 
-                u.email, 
-                s.skill_name, 
-                u.role, 
-                u.created_at
-                FROM users u
-                JOIN skills s ON u.selected_skill_id = s.id
-                ORDER BY u.full_name`);
+            SELECT u.id, u.full_name, u.email, s.skill_name, u.role, u.created_at
+            FROM users u
+            JOIN skills s ON u.selected_skill_id = s.id
+            ORDER BY u.full_name`);
 
-        const [countResult] = await pool.query(
-            "SELECT COUNT(*) AS total FROM users"
-        )
+        const [countResult] = await pool.query("SELECT COUNT(*) AS total FROM users");
         const totalUsers = countResult[0].total;
 
-        res.status(200).json({
-            success: true,
-            count: totalUsers,
-            data: users
-        });
+        return sendSuccess(res, 200, users, { count: totalUsers });
     } catch (err) {
-        res.status(500).json({ message: "Database Error", error: err.message });
+        return sendError(res, 500, "Unable to find users. A database error occurred.", err.message);
     }
 };
 
@@ -37,175 +34,111 @@ exports.userGrowth = async (req, res) => {
                 s.skill_name AS skill,
                 COUNT(u.id) AS count
             FROM users u
-            JOIN skills s 
-                ON u.selected_skill_id = s.id
+            JOIN skills s ON u.selected_skill_id = s.id
             GROUP BY DATE_FORMAT(u.created_at, '%Y-%m-%d'), s.skill_name
             ORDER BY date ASC;
         `);
 
         const formattedData = results.reduce((acc, current) => {
             const { date, skill, count } = current;
-
             let dateRow = acc.find(item => item.date === date);
-
             if (!dateRow) {
                 dateRow = { date };
                 acc.push(dateRow);
             }
-
             dateRow[skill] = Number(count);
-
             return acc;
         }, []);
 
-        res.status(200).json(formattedData);
-
+        return res.status(200).json(formattedData);
     } catch (err) {
-        console.error("Error fetching user growth:", err);
-        res.status(500).json({
-            message: "Internal Server Error"
-        });
+        return sendError(res, 500, "Unable to find user progress information.", err.message);
     }
 };
 
 exports.searchUsers = async (req, res) => {
     try {
         const { search = "" } = req.query;
-
         const searchTerm = `%${search}%`;
 
-        const [users] = await pool.execute(
-            `
+        const [users] = await pool.execute(`
             SELECT id, full_name, email, role
             FROM users
-            WHERE
-                full_name LIKE ?
-                OR email LIKE ?
-                OR role LIKE ?
-            ORDER BY created_at DESC
-            `,
+            WHERE full_name LIKE ? OR email LIKE ? OR role LIKE ?
+            ORDER BY created_at DESC`,
             [searchTerm, searchTerm, searchTerm]
         );
 
-        res.status(200).json({
-            success: true,
-            count: users.length,
-            data: users,
-        });
-
+        return sendSuccess(res, 200, users, { count: users.length });
     } catch (error) {
-        console.log(error);
-
-        res.status(500).json({
-            success: false,
-            message: "Server Error",
-        });
+        return sendError(res, 500, "The search failed. There was an error on the server.", error.message);
     }
 };
 
 exports.getCourses = async (req, res) => {
     try {
-        const [courses] = await pool.query(
-            "SELECT id, course_name FROM courses"
-        )
-        const [countCourses] = await pool.query(
-            "SELECT COUNT(*) AS total FROM courses"
-        )
+        const [courses] = await pool.query("SELECT id, course_name FROM courses");
+        const [countCourses] = await pool.query("SELECT COUNT(*) AS total FROM courses");
 
-        const totalCourses = countCourses[0].total;
-
-        res.status(200).json({ 
-            success: true,
-            count: totalCourses,
-            data: courses
-         })
+        return sendSuccess(res, 200, courses, { count: countCourses[0].total });
     } catch (err) {
-        res.status(500).json({ message: "Database Error", error: err.message });
+        return sendError(res, 500, "Unable get courses.", err.message);
     }
-}
+};
 
 exports.getSkills = async (req, res) => {
     try {
-        const [skills] = await pool.query(
-            "SELECT id, skill_name FROM skills"
-        )
+        const [skills] = await pool.query("SELECT id, skill_name FROM skills");
+        const [countskills] = await pool.query("SELECT COUNT(*) AS total FROM skills");
 
-        const [countskills] = await pool.query(
-            "SELECT COUNT(*) AS total FROM skills"
-        )
-
-        const totalSkills = countskills[0].total;
-
-        res.status(200).json({
-            success: true,
-            count: totalSkills,
-            data: skills
-        })
-
+        return sendSuccess(res, 200, skills, { count: countskills[0].total });
     } catch (err) {
-        res.status(500).json({ message: "Database Error", error: err.message });
+        return sendError(res, 500, "Unable to load skills.", err.message);
     }
-}
+};
 
 exports.getLessons = async (req, res) => {
     try {
-        const [lessons] = await pool.query(
-            "SELECT id, lesson_name, video_url FROM lessons"
-        )
-        const [countLessons] = await pool.query(
-            "SELECT COUNT(*) AS total FROM lessons"
-        )
+        const [lessons] = await pool.query("SELECT id, lesson_name, video_url FROM lessons");
+        const [countLessons] = await pool.query("SELECT COUNT(*) AS total FROM lessons");
 
-        const totalLessons = countLessons[0].total;
-
-        res.status(200).json({
-            success: true,
-            count: totalLessons,
-            data: lessons
-        })
+        return sendSuccess(res, 200, lessons, { count: countLessons[0].total });
     } catch (err) {
-        res.status(500).json({ message: "Database Error", error: err.message });
+        return sendError(res, 500, "Lessons could not be loaded.", err.message);
     }
-}
+};
 
 exports.deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const [user] = await pool.query(
-            "SELECT * FROM users WHERE id = ?",
-            [id]
-        );
-
+        const [user] = await pool.query("SELECT id FROM users WHERE id = ?", [id]);
         if (user.length === 0) {
-            return res.status(404).json({ message: "User not found" });
+            return sendError(res, 404, "This user was not found.");
         }
 
         await pool.query("DELETE FROM users WHERE id = ?", [id]);
-        res.status(200).json({ message: "User deleted successfully" });
+        return res.status(200).json({ success: true, message: "User deleted successfully", id });
     } catch (err) {
-        res.status(500).json({ message: "Delete failed", error: err.message })
+        return sendError(res, 500, "Unable to delete user.", err.message);
     }
-        
 };
 
 exports.addCourse = async (req, res) => {
     try {
         const { course_name, skill_id } = req.body;
-        console.log(req.body);
 
         if (!course_name || !skill_id) {
-            return res.status(400).json({ message: "Course name and Skill ID are required" });
+            return sendError(res, 400, "Course name and Skill ID are required.");
         }
 
         const [results] = await pool.query(
             "INSERT INTO courses (course_name, skill_id) VALUES (?,?)",
             [course_name, skill_id]
         );
-        res.status(201).json({ message: "Course added successfully", courseId: results.insertId })
-        
+        return res.status(201).json({ success: true, message: "Course added successfully", courseId: results.insertId });
     } catch (err) {
-        res.status(500).json({ message: "Failed to add course", error: err.message })
+        return sendError(res, 500, "Unable to add new course.", err.message);
     }
 };
 
@@ -214,91 +147,71 @@ exports.addLessons = async (req, res) => {
         const { lesson_name, video_url, course_id } = req.body || {};
 
         if (!lesson_name || !video_url || course_id == null) {
-            return res.status(400).json({ message: "lesson_name, video_url, and course_id are required" })
+            return sendError(res, 400, "All information must be filled in by the system.");
         }
 
         const [results] = await pool.query(
             "INSERT INTO lessons (lesson_name, video_url, course_id) VALUES (?, ?, ?)",
             [lesson_name, video_url, course_id]
-        )
-        res.status(201).json({ message: "Lesson added successfully", lessonId: results.insertId })
-
+        );
+        return res.status(201).json({ success: true, message: "Lesson added successfully", lessonId: results.insertId });
     } catch (err) {
-        res.status(500).json({ message: `Failed to add lessons. Check that course_id exists and the field names are lesson_name, video_url, course_id. ${err.message}` })
+        return sendError(res, 500, "Unable to add the course. Please verify that the Course ID is valid.", err.message);
     }
 };
 
 exports.deleteCourse = async (req, res) => {
     try {
-        const { id  } = req.params;
-
+        const { id } = req.params;
         await pool.query("DELETE FROM courses WHERE id = ?", [id]);
-
-        res.status(200).json({ message: "Course deleted successfully" });
-
+        
+        // እዚህም ID ጨምረናል
+        return res.status(200).json({ success: true, message: "Course deleted successfully", id });
     } catch(err) {
-        return res.status(500).json({ message: "Delete failed", error: err.message });
+        return sendError(res, 500, "The course could not be deleted.", err.message);
     }
-}
+};
 
 exports.deleteLesson = async (req, res) => {
     try {
-        const { id  } = req.params;
-
+        const { id } = req.params;
         await pool.query("DELETE FROM lessons WHERE id = ?", [id]);
-
-        res.status(200).json({ message: "lessons deleted successfully" } [id]);
-
+        
+        // Redux slice ላይ ለነበረው state.LessonsByCourseId.filter(item => item.id !== deletedId) መስሪያ ID ጨምረናል
+        return res.status(200).json({ success: true, message: "Lesson deleted successfully", id });
     } catch(err) {
-        return res.status(500).json({ message: "Delete failed", error: err.message });
+        return sendError(res, 500, "The lesson could not be deleted.", err.message);
     }
-}
+};
 
 exports.getDesign = async (req, res) => {
     try {
         const { id } = req.params;
-
-        const [course] = await pool.query(
-            `SELECT 
-                c.id,
-                c.course_name,
-                c.skill_id,
-                s.skill_name
+        const [course] = await pool.query(`
+            SELECT c.id, c.course_name, c.skill_id, s.skill_name
             FROM courses c
-            JOIN skills s 
-            ON c.skill_id = s.id
-            WHERE s.id = ?`,
+            JOIN skills s ON c.skill_id = s.id
+            WHERE s.id = ?`, 
             [id]
         );
-
-        res.status(200).json({ course });
-
+        return res.status(200).json({ success: true, course });
     } catch (err) {
-        res.status(500).json({ message: "error", error: err.message });
+        return sendError(res, 500, "Design information could not be found.", err.message);
     }
 };
 
 exports.getLessonsByCourseId = async (req, res) => {
     try {
-        const {id} = req.params;
-
-        const [lessons] = await pool.query(
-            `SELECT 
-                l.id,
-                l.lesson_name,
-                l.video_url,
-                l.course_id,
-                c.course_name
+        const { id } = req.params;
+        const [lessons] = await pool.query(`
+            SELECT l.id, l.lesson_name, l.video_url, l.course_id, c.course_name
             FROM lessons l
-            JOIN courses c
-            ON l.course_id = c.id
-            WHERE c.id = ? `,
+            JOIN courses c ON l.course_id = c.id
+            WHERE c.id = ? `, 
             [id]
         );
-
-        res.status(200).json({ lessons });
-
+        return res.status(200).json({ success: true, lessons });
     } catch (err) {
-        res.status(500).json({ message: "error", error: err.message });
+        return sendError(res, 500, "Unable to load course lessons.", err.message);
     }
 };
