@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import sideBarLogo from "../assets/sideBarLogo/sideBarLogo.png";
-// import { getMe } from "../features/auth/authSlice";
+import { logout } from "../features/auth/authSlice";
+
 import {
     BarChart3,
     BookOpen,
@@ -254,16 +255,13 @@ function AdminSideBar() {
 
     const { user } = useSelector((state) => state.auth);
 
-    // useEffect(() => {
-    //     dispatch(getMe());
-    // }, [dispatch]);
-
     const activeItem = Object.entries(itemRoutes).find(([, path]) => path === location.pathname)?.[0] ?? "";
 
     const handleItemClick = (itemId) => {
         if (itemId === "logout") {
             localStorage.removeItem("user");
             localStorage.removeItem("token");
+            dispatch(logout()); // አሁን የላይኛውን ኢምፖርት ተጠቅሞ በትክክል ይሰራል
             navigate("/");
             setIsMobileOpen(false);
             return;
