@@ -7,12 +7,19 @@ const register = async (userData) => {
 
 const login = async (userData) => {
   const response = await axiosInstance.post('/user/login', userData);
-  
+
   if (response.data) {
-    localStorage.setItem('user', JSON.stringify(response.data));
-    localStorage.setItem('token', response.data.token);
+    localStorage.setItem(
+      'user',
+      JSON.stringify(response.data.data.user)
+    );
+
+    localStorage.setItem(
+      'token',
+      response.data.data.token
+    );
   }
-  
+
   return response.data;
 };
 

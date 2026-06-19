@@ -66,6 +66,8 @@ function Login() {
     useEffect(() => {
         if (isError) {
             alert(message);
+            dispatch(reset());
+            return;
         }
 
         if (isSuccess && user) {
@@ -74,7 +76,7 @@ function Login() {
             if (userRole === 'admin') {
                 navigate('/admin-dashboard');
             } else {
-                navigate('/forgot-password');
+                navigate('/user-dashboard');
             }
         }
 
