@@ -11,6 +11,7 @@ import AdminDashboard from "./page/AdminDashboard";
 import UserManagement from "./page/UserManagement";
 import CourseManagement from "./page/CourseManagement"
 import LessonManagement from "./page/LessonManagement";
+import AdminAnalytics from "./page/AdminAnalytics";
 
 // components
 import AddCourse from "./components/CourseManagement/AddCourse";
@@ -51,6 +52,7 @@ function App() {
                         <Route path="add-lesson" element={<AddLesson />} />
                         <Route path="delete-lesson" element={<DeleteLessonsCard />} />
                         <Route path="LessonsByCourseId/:id" element={<LessonDele />} />
+                        <Route path="AdminAnalytics" element={<AdminAnalytics />} />
                     </Route>
                 </Route>
             </Routes>
