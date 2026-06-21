@@ -1,5 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import adminDashboardService from "../../services/adminDashboardService";
+import {
+    getAllUsers,
+    userGrowth,
+    searchUsers,
+    deleteUser,
+    deleteCourse,
+    deleteLesson,
+    getDesign,
+    getLessonsByCourseId,
+    getCourses,
+    getSkills,
+    getLessons,
+    addCourse,
+    addLessons
+} from './adminDashboardActions'
 
 const user = JSON.parse(localStorage.getItem('user'));
 
@@ -19,139 +33,6 @@ const initialState = {
     deleteLessonErrorMessage: "",
     searchUsersMessage: ""
 }
-
-export const getAllUsers = createAsyncThunk('admin/getAllUsers', async (adminData, thunkAPI) => {
-    try {
-        return await adminDashboardService.getAllUsers(adminData);
-    } catch (error) {
-        const message = error.response?.data?.message || error.message || error.toString();
-        return thunkAPI.rejectWithValue(message);
-    }
-});
-
-export const userGrowth = createAsyncThunk('admin/userGrowth', async (adminData, thunkAPI) => {
-    try {
-        return await adminDashboardService.userGrowth(adminData);
-    } catch (error) {
-        const message = error.response?.data?.message || error.message || error.toString();
-        return thunkAPI.rejectWithValue(message);
-    }
-});
-
-export const searchUsers = createAsyncThunk('admin/searchUsers', async (adminData, thunkAPI) => {
-    try {
-        return await adminDashboardService.searchUsers(adminData);
-    } catch (error) {
-        const message = error.response?.data?.message || error.message || error.toString();
-        return thunkAPI.rejectWithValue(message);
-    }
-});
-
-export const deleteUser = createAsyncThunk('admin/deleteUser', async (id, thunkAPI) => {
-    try {
-        return await adminDashboardService.deleteUser(id);
-    } catch (error) {
-        const message = error.response?.data?.message || error.message || error.toString();
-        return thunkAPI.rejectWithValue(message);
-    }
-});
-
-export const deleteCourse = createAsyncThunk('admin/deleteCourse', async (id, thunkAPI) => {
-    try {
-        return await adminDashboardService.deleteCourse(id);
-    } catch (error) {
-        const message = error.response?.data?.message || error.message || error.toString();
-        return thunkAPI.rejectWithValue(message);
-    }
-});
-
-export const deleteLesson = createAsyncThunk('admin/deleteLesson', async (id, thunkAPI) => {
-    try {
-        return await adminDashboardService.deleteLesson(id);
-    } catch (error) {
-        const message = error.response?.data?.message || error.message || error.toString();
-        return thunkAPI.rejectWithValue(message);
-    }
-});
-
-export const getDesign = createAsyncThunk(
-    'admin/getDesign',
-    async (id, thunkAPI) => {
-        try {
-            return await adminDashboardService.getDesign(id);
-        } catch (error) {
-            const message =
-                error.response?.data?.message ||
-                error.message ||
-                error.toString();
-
-            return thunkAPI.rejectWithValue(message);
-        }
-    }
-);
-
-export const getLessonsByCourseId = createAsyncThunk(
-    'admin/getLessonsByCourseId',
-    async (id, thunkAPI) => {
-        try {
-            return await adminDashboardService.getLessonsByCourseId(id);
-        } catch (error) {
-            const message =
-                error.response?.data?.message ||
-                error.message ||
-                error.toString();
-
-            return thunkAPI.rejectWithValue(message);
-        }
-    }
-);
-
-export const getCourses = createAsyncThunk('admin/getCourses', async (coursesData, thunkAPI) => {
-    try {
-        return await adminDashboardService.getCourses(coursesData);
-    } catch (error) {
-        console.log("DELETE ERROR:", error);
-        const message = error.response?.data?.message || error.message || error.toString();
-        return thunkAPI.rejectWithValue(message);
-    }
-});
-
-export const getSkills = createAsyncThunk('admin/getSkills', async (skillsData, thunkAPI) => {
-    try {
-        return await adminDashboardService.getSkills(skillsData);
-    } catch (error) {
-        console.log("DELETE ERROR:", error);
-        const message = error.response?.data?.message || error.message || error.toString();
-        return thunkAPI.rejectWithValue(message);
-    }
-});
-
-export const getLessons = createAsyncThunk('/admin/getLessons', async (lessonData, thunkAPI) => {
-    try {
-        return await adminDashboardService.getLessons(lessonData);
-    } catch (error) {
-        const message = error.response?.data?.message || error.message || error.toString();
-        return thunkAPI.rejectWithValue(message);
-    }
-});
-
-export const addCourse = createAsyncThunk('/admin/add-course', async (addCourse, thunkAPI) => {
-    try {
-        return await adminDashboardService.addCourse(addCourse);
-    } catch (error) {
-        const message = error.response?.data?.message || error.message || error.toString();
-        return thunkAPI.rejectWithValue(message);
-    }
-});
-
-export const addLessons = createAsyncThunk('/admin/add-lessons', async (addLessons, thunkAPI) => {
-    try {
-        return await adminDashboardService.addLessons(addLessons);
-    } catch (error) {
-        const message = error.response?.data?.message || error.message || error.toString();
-        return thunkAPI.rejectWithValue(message);
-    }
-});
 
 export const adminSlice = createSlice({
     name: 'admin',
@@ -351,3 +232,19 @@ export const adminSlice = createSlice({
 
 export const { reset } = adminSlice.actions;
 export default adminSlice.reducer;
+
+export {
+    getAllUsers,
+    userGrowth,
+    searchUsers,
+    deleteUser,
+    deleteCourse,
+    deleteLesson,
+    getDesign,
+    getLessonsByCourseId,
+    getCourses,
+    getSkills,
+    getLessons,
+    addCourse,
+    addLessons
+} from './adminDashboardActions'
