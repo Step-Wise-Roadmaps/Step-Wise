@@ -67,7 +67,6 @@ function Login() {
         if (isError) {
             alert(message);
             dispatch(reset());
-            return;
         }
 
         if (isSuccess && user) {

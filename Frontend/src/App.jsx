@@ -12,6 +12,7 @@ import UserManagement from "./page/UserManagement";
 import CourseManagement from "./page/CourseManagement"
 import LessonManagement from "./page/LessonManagement";
 import AdminAnalytics from "./page/AdminAnalytics";
+import UserDashboard from "./page/UserDashboard/UserDashboard";
 
 // components
 import AddCourse from "./components/CourseManagement/AddCourse";
@@ -55,6 +56,12 @@ function App() {
                         <Route path="AdminAnalytics" element={<AdminAnalytics />} />
                     </Route>
                 </Route>
+                <Route element={<ProtectedRoute allowedRoles={['user', 'admin']} />}> 
+    {/* (ማሳሰቢያ፡ admin መግባት እንዲችል ከፈለግክ 'admin' ጨምርበት፣ ካልሆነ 'user' ብቻ ማድረግ ትችላለህ) */}
+    <Route path="/user-dashboard" element={<UserDashboard />}>
+        <Route index element={<UserDashboard />} />
+    </Route>
+</Route>
             </Routes>
         </>
     )

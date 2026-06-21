@@ -13,11 +13,6 @@ const login = async (userData) => {
       'user',
       JSON.stringify(response.data.data.user)
     );
-
-    localStorage.setItem(
-      'token',
-      response.data.data.token
-    );
   }
 
   return response.data;
