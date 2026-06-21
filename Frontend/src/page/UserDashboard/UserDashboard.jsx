@@ -1,6 +1,6 @@
 import { logout } from "../../features/auth/authSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom"; // 1. useNavigate አመጣን
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function UserDashboard() {
@@ -9,9 +9,6 @@ function UserDashboard() {
 
     const handleItemClick = (actionType) => {
         if (actionType === "logout") {
-            localStorage.removeItem("user");
-            localStorage.removeItem("token");
-            
             dispatch(logout());
             navigate("/");
         }
