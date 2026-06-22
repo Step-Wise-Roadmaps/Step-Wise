@@ -204,7 +204,7 @@ function AdminDashboard() {
                                 </div>
                             </div>
 
-                            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+                            {/* <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
                                 <div className="flex items-center justify-between gap-3">
                                     <div>
                                         <h2 className="roboto-bold text-xl text-slate-900">Recent Activity</h2>
@@ -234,7 +234,7 @@ function AdminDashboard() {
                                         </div>
                                     ))}
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
 
                         <div className="space-y-6">
@@ -266,12 +266,12 @@ function AdminDashboard() {
                                         </div>
                                     </div>
 
-                                    <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-4 text-sm text-emerald-800">
+                                    {/* <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-4 text-sm text-emerald-800">
                                         <div className="flex items-center gap-2">
                                             <CircleCheckBig size={18} />
                                             All core systems are running normally.
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>

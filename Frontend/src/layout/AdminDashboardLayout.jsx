@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+// import React, { useEffect } from "react";
+// import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import AdminSideBar from "../components/AdminSideBar";
-import { getMe } from "../features/auth/authSlice";
+// import { getMe } from "../features/auth/authSlice";
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer"
 
 function AdminDashboardLayout() {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     
 
-    useEffect(() => {
-        dispatch(getMe());
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getMe());
+    // }, [dispatch]);
 
     return (
         <>
