@@ -1,4 +1,19 @@
 
+import {
+    BarChart3,
+    BookOpen,
+    ChevronLeft,
+    ChevronRight,
+    LayoutDashboard,
+    LogOut,
+    Menu,
+    Package,
+    Settings,
+    Users,
+    Video,
+    X,
+} from "lucide-react";
+
 export const menuSections = [
     {
         title: "MAIN",
