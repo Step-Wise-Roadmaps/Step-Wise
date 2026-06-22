@@ -17,9 +17,9 @@ function AdminDashboardLayout() {
 
     return (
         <>
-        <div className="mb-200">
-            <Navbar/>
-            <div className="flex pt-20">
+        <div className="">
+            {/* <Navbar/> */}
+            <div className="flex">
                 <AdminSideBar variant="main" />
                 <main className="flex-1 min-h-screen w-full bg-slate-50 text-slate-900">
                     <Outlet />

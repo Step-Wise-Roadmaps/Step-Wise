@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../features/auth/adminDashboardSlice";
 import { getCourses } from "../features/auth/adminDashboardSlice";
 import { getLessons } from "../features/auth/adminDashboardSlice";
-// import { getMe } from "../features/auth/authSlice";
 
 import UserGrowth from "../components/userGrowth";
 
@@ -82,6 +81,8 @@ function AdminDashboard() {
     //     );
     // }
 
+    const userr = JSON.parse(localStorage.getItem('user'));
+
     return (
         <div className="flex min-h-screen w-full bg-slate-50 text-slate-900">
             {/* <AdminSideBar /> */}
@@ -127,7 +128,7 @@ function AdminDashboard() {
                                             alt="Admin profile"
                                         />
                                         <div>
-                                            <p className="roboto-medium text-base">{user?.full_name}</p>
+                                            <p className="roboto-medium text-base">{userr?.full_name}</p>
                                             <p className="text-sm text-slate-300">Platform Owner</p>
                                         </div>
                                     </div>

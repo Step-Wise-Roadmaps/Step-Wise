@@ -1,11 +1,12 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import MainLogo from "../assets/NavbarImg/MainLogo.png"
+import MainLogo from "../assets/NavbarImg/MainLogo.png";
 
 function Navbar() {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const user = JSON.parse(localStorage.getItem('user'));
 
     return(
         <>
@@ -30,8 +31,16 @@ function Navbar() {
                     <div className="flex-1 flex justify-end mr-6">
 
                         <div className="hidden md:flex space-x-4">
-                            <Link to="/login" className="roboto-regular px-4 py-2 cursor-pointer hover:text-cyan-800 duration-200">Sign in</Link>
-                            <Link to="/register" className="roboto-regular px-8 py-[10px] cursor-pointer bg-cyan-950 text-white rounded-[50px] hover:bg-cyan-800 duration-200">Sign up</Link>
+                                {user ? 
+                                (
+                                    <p className="text-black">{user?.full_name}</p>
+                                ) : (
+                                    <>
+                                    <Link to="/login" className="roboto-regular px-4 py-2 cursor-pointer hover:text-cyan-800 duration-200">Sign in</Link>
+                                <Link to="/register" className="roboto-regular px-8 py-[10px] cursor-pointer bg-cyan-950 text-white rounded-[50px] hover:bg-cyan-800 duration-200">Sign up</Link>
+                                </>
+                                )}
+                            
                         </div>
                         <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden focus:outline-none cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -52,8 +61,15 @@ function Navbar() {
                             <a href="#method" className="roboto-regular hover:text-cyan-800 duration-100">Method</a>
                             <a href="#explore" className="roboto-regular hover:text-cyan-800 duration-100">Explore</a>
                             <a href="#faq" className="roboto-regular hover:text-cyan-800 duration-100">FAQ</a>
-                            <button className="roboto-regular px-4 py-2 cursor-pointer hover:text-cyan-800 duration-200">Sign in</button>
+                            {user ? 
+                            (
+                                <p>{user?.full_name}</p>
+                            ) : (
+                                <>
+                                <button className="roboto-regular px-4 py-2 cursor-pointer hover:text-cyan-800 duration-200">Sign in</button>
                             <button className="roboto-regular w-full px-30 py-3 cursor-pointer bg-cyan-950 text-white rounded-[50px] hover:bg-cyan-800 duration-200">Sign up</button>
+                            </>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -144,7 +144,9 @@ function SidebarContent({
     mobile = false,
     user,
 }) {
-    const fullName = user?.full_name || "Admin";
+
+    const userr = JSON.parse(localStorage.getItem('user'));
+    const fullName = userr?.full_name || "Admin";
     const initials = fullName
         .split(" ")
         .filter(Boolean)
