@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../features/auth/adminDashboardSlice";
 import { getCourses } from "../features/auth/adminDashboardSlice";
 import { getLessons } from "../features/auth/adminDashboardSlice";
-// import { getMe } from "../features/auth/authSlice";
 
 import UserGrowth from "../components/userGrowth";
 
@@ -82,6 +81,8 @@ function AdminDashboard() {
     //     );
     // }
 
+    const userr = JSON.parse(localStorage.getItem('user'));
+
     return (
         <div className="flex min-h-screen w-full bg-slate-50 text-slate-900">
             {/* <AdminSideBar /> */}
@@ -127,7 +128,7 @@ function AdminDashboard() {
                                             alt="Admin profile"
                                         />
                                         <div>
-                                            <p className="roboto-medium text-base">{user?.full_name}</p>
+                                            <p className="roboto-medium text-base">{userr?.full_name}</p>
                                             <p className="text-sm text-slate-300">Platform Owner</p>
                                         </div>
                                     </div>
@@ -203,7 +204,7 @@ function AdminDashboard() {
                                 </div>
                             </div>
 
-                            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+                            {/* <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
                                 <div className="flex items-center justify-between gap-3">
                                     <div>
                                         <h2 className="roboto-bold text-xl text-slate-900">Recent Activity</h2>
@@ -233,7 +234,7 @@ function AdminDashboard() {
                                         </div>
                                     ))}
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
 
                         <div className="space-y-6">
@@ -265,12 +266,12 @@ function AdminDashboard() {
                                         </div>
                                     </div>
 
-                                    <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-4 text-sm text-emerald-800">
+                                    {/* <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-4 text-sm text-emerald-800">
                                         <div className="flex items-center gap-2">
                                             <CircleCheckBig size={18} />
                                             All core systems are running normally.
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>

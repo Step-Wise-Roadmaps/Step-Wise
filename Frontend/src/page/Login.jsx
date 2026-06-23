@@ -1,5 +1,6 @@
 
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 // import background video
 import firstBackground from '../assets/video/firstBackground.mp4';
@@ -64,23 +65,34 @@ function Login() {
     );
 
     useEffect(() => {
-        if (isError) {
-            alert(message);
-            dispatch(reset());
-            return;
-        }
-
-        if (isSuccess && user) {
-            const userRole = user.role || (user.user && user.user.role);
-
-            if (userRole === 'admin') {
-                navigate('/admin-dashboard');
-            } else {
-                navigate('/user-dashboard');
+        const handleAuthStatus = async () => {
+            if (isError) {
+                const result = await Swal.fire({
+                    icon: 'error',
+                    title: '404 error',
+                    text: message,
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#469cec',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                });
+                dispatch(reset());
             }
-        }
 
-        dispatch(reset());
+            if (isSuccess && user) {
+                const userRole = user.role || (user.user && user.user.role);
+
+                if (userRole === 'admin') {
+                    navigate('/admin-dashboard');
+                } else {
+                    navigate('/user-dashboard');
+                }
+                dispatch(reset());
+            }
+        };
+
+        handleAuthStatus();
+    
     }, [user, isError, isSuccess, message, navigate, dispatch]);
 
     const onChange = (e) => {

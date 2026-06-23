@@ -1,63 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import authService from '../../services/authService';
+import { register, login, getMe, forgotPassword, resetPassword } from './authActions';
 
-const user = JSON.parse(localStorage.getItem('user'));
+const storedUser = JSON.parse(localStorage.getItem('user'));
 
 const initialState = {
-  user: user ? user : null,
+  user: storedUser ? storedUser : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
   message: '',
 };
-
-
-export const register = createAsyncThunk('auth/register', async (user, thunkAPI) => {
-  try {
-    return await authService.register(user);
-  } catch (error) {
-    const message = error.response?.data?.message || error.message || error.toString();
-    return thunkAPI.rejectWithValue(message);
-  }
-});
-
-
-export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
-  try {
-    return await authService.login(user);
-  } catch (error) {
-    const message = error.response?.data?.message || error.message || error.toString();
-    return thunkAPI.rejectWithValue(message);
-  }
-});
-
-export const getMe = createAsyncThunk('auth/getMe', async (user, thunkAPI) => {
-  try {
-    return await authService.getMe(user)
-  } catch (err) {
-    const message = err.response?.data?.message || err.message || err.toString();
-    return thunkAPI.rejectWithValue(message);
-  }
-})
-
-export const forgotPassword = createAsyncThunk('auth/forgotPassword', async (email, thunkAPI) => {
-  try {
-    return await authService.forgotPassword(email);
-  } catch (error) {
-    const message = error.response?.data?.message || error.message || error.toString();
-    return thunkAPI.rejectWithValue(message)
-  }
-});
-
-export const resetPassword = createAsyncThunk('auth/resetPassword', async (reset, thunkAPI) => {
-  try {
-    return await authService.resetPassword(reset);
-  } catch (error) {
-    const message = error.response?.data?.message || error.message || error.toString();
-    return thunkAPI.rejectWithValue(message)
-  }
-})
-
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -70,6 +22,8 @@ export const authSlice = createSlice({
       state.message = '';
     },
     logout: (state) => {
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
       state.user = null;
       state.isSuccess = false;
       state.isError = false;
@@ -95,8 +49,7 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload.data.user;
-        // state.token = action.payload.token;
+        state.user = action.payload?.data?.user || action.payload?.user;
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
@@ -147,3 +100,5 @@ export const authSlice = createSlice({
 
 export const { reset, logout } = authSlice.actions;
 export default authSlice.reducer;
+
+export { register, login, getMe, forgotPassword, resetPassword } from './authActions';

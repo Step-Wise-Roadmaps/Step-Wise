@@ -144,6 +144,7 @@ function SidebarContent({
     mobile = false,
     user,
 }) {
+
     const fullName = user?.full_name || "Admin";
     const initials = fullName
         .split(" ")
@@ -253,15 +254,14 @@ function AdminSideBar() {
     const [isOpen, setIsOpen] = useState(true);
     const [isMobileOpen, setIsMobileOpen] = useState(false);
 
-    const { user } = useSelector((state) => state.auth);
+    // const { user } = useSelector((state) => state.auth);
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const activeItem = Object.entries(itemRoutes).find(([, path]) => path === location.pathname)?.[0] ?? "";
 
     const handleItemClick = (itemId) => {
         if (itemId === "logout") {
-            localStorage.removeItem("user");
-            localStorage.removeItem("token");
-            dispatch(logout()); // አሁን የላይኛውን ኢምፖርት ተጠቅሞ በትክክል ይሰራል
+            dispatch(logout());
             navigate("/");
             setIsMobileOpen(false);
             return;
