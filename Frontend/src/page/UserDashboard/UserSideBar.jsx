@@ -1,58 +1,93 @@
 
 import { menuSections, footerItems } from "../../data/UserDashbourdData/UserSideBarData";
-import SidebarItem from "../../components/UserDashboardCommponents/UserSideBarManagment/SidebarItem";
+
+import SidebarContent from "../../components/UserDashboardCommponents/UserSideBarManagment/SidebarContent";
 
 import { logout } from "../../features/auth/authSlice";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import { Menu } from "lucide-react";
+
+const itemRoutes = {
+    dashboard: "/user-dashboard",
+    users: "/user-dashboard/users",
+    analytics: "/user-dashboard/analytics",
+    courses: "/user-dashboard/courses",
+    settings: "/user-dashboard/settings"
+};
+
 
 function UserSideBar() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
+    const [isOpen, setIsOpen] = useState(true);
+    const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    const activeItem = Object.entries(itemRoutes).find(([, path]) => path === location.pathname)?.[0] ?? "";
 
     const handleItemClick = (id) => {
         if (id === "logout") {
             dispatch(logout());
             navigate("/");
+            setIsMobileOpen(false)
+            return;
         }
+
+        const route = itemRoutes[itemId];
+        
+        setIsMobileOpen(false);
     }
 
     return(
         <>
-            <aside className="w-64 h-screen bg-white border-r flex flex-col justify-between p-4">
-                <div className="space-y-6">
-                    {menuSections.map((section, index) => (
-                        <div key={index} className="space-y-2">
-                            <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-3">
-                                {section.title}
-                            </h4>
+            <button
+                type="button"
+                onClick={() => setIsMobileOpen(true)}
+                className="fixed left-4 top-4 z-40 flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-lg md:hidden"
+            >
+                <Menu size={18} />
+            </button>
 
-                            <div className="space-y-1">
-                                {section.items.map((item) => (
-                                    <SidebarItem 
-                                        key={item.id}
-                                        label={item.label}
-                                        icon={item.icon}
-                                        onClick={() => handleItemClick(item.id)}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    ))}
+            <div className="hidden md:block">
+                <SidebarContent
+                    isOpen={isOpen}
+                    activeItem={activeItem}
+                    onItemClick={handleItemClick}
+                    onCollapseToggle={() => setIsOpen((prev) => !prev)}
+                    user={user}
+                />
+            </div>
+
+            <div className={`fixed inset-0 z-50 md:hidden ${
+                isMobileOpen ? "pointer-events-auto backdrop-blur-sm" : "pointer-events-none"
+                }`}>
+
+                <div className={`h-full max-w-[86vw] transition-transform duration-300 ease-out ${
+                        isMobileOpen ? "translate-x-0" : "-translate-x-full"
+                    }`}>
+                        
+                    <SidebarContent
+                        isOpen
+                        activeItem={activeItem}
+                        onItemClick={handleItemClick}
+                        onMobileClose={() => setIsMobileOpen(false)}
+                        mobile
+                        user={user}
+                    />
                 </div>
-                <div className="border-t pt-4 space-y-1">
-                    {footerItems.map((item) => (
-                        <SidebarItem
-                            key={item.id}
-                            label={item.label}
-                            icon={item.icon}
-                            danger={item.danger}
-                            onClick={() => handleItemClick(item.id)} 
-                        />
-                    ))}
-                </div>
-            </aside>
+
+                <button
+                    type="button"
+                    onClick={() => setIsMobileOpen(false)}
+                    className="absolute inset-0 -z-10"
+                />
+            </div>
         </>
     )
 }
