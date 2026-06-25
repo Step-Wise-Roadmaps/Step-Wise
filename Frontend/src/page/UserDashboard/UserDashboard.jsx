@@ -5,10 +5,11 @@ import { BookOpen } from "lucide-react";
 import sideBarLogo from "../../assets/sideBarLogo/sideBarLogo.png";
 
 import UserDashboardCards from "../../components/UserDashboardCommponents/UserDashboardCardCommpnents/UserDashboardCards";
+import { stats } from "../../data/UserDashbourdData/UserDashbourdCardData"
 
 function UserDashboard() {
     const dispatch = useDispatch();
-    const { user } = useSelector((state) => state.auth);
+    const { user, isLoading } = useSelector((state) => state.auth);
 
     useEffect(() => {
         dispatch(getMe());
@@ -32,8 +33,11 @@ function UserDashboard() {
                     </div>
                 </div>
             </section>
-            <div className="flex flex-col items-center lg:flex-row justify-center gap-10">
-                
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <UserDashboardCards
+                    // lessons={lessons}
+                    isLoading={isLoading}
+                />
             </div>
         </div>
     );
