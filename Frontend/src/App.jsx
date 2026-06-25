@@ -13,6 +13,7 @@ import CourseManagement from "./page/CourseManagement";
 import LessonManagement from "./page/LessonManagement";
 import AdminAnalytics from "./page/AdminAnalytics";
 import UserDashboard from "./page/UserDashboard/UserDashboard";
+import UserCources from "./page/UserDashboard/UserCources";
 
 // components
 import AddCourse from "./components/CourseManagement/AddCourse";
@@ -62,6 +63,7 @@ function App() {
             <Route element={<ProtectedRoute allowedRoles={['user', 'admin']} />}> 
                 <Route path="/user-dashboard" element={<UserDashboardLayout />}>
                     <Route index element={<UserDashboard />} />
+                    <Route path="user-courses" element={<UserCources />}/>
                 </Route>
             </Route>
         </Routes>
