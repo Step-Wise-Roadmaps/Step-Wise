@@ -2,7 +2,11 @@
 import { BookOpen } from "lucide-react";
 import sideBarLogo from "../../assets/sideBarLogo/sideBarLogo.png";
 
+import { useSelector } from "react-redux"
+
 function UserDashboard() {
+
+    const { user } = useSelector((state) => state.auth);
 
     return (
         <>

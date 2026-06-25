@@ -117,7 +117,16 @@ exports.getMe = async (req, res) => {
         const userId = req.user.id;
 
         const [results] = await pool.query(
-            "SELECT id, full_name, email, role FROM users WHERE id = ?",
+            `
+                SELECT
+                    u.id,
+                    u.full_name,
+                    u.email,
+                    s.skill_name
+                FROM users u
+                JOIN skills s ON u.selected_skill_id = s.id
+                WHERE u.id = ?;
+            `,
             [userId]
         );
 
