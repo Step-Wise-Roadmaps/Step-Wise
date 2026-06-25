@@ -28,7 +28,12 @@ export const login = createAsyncThunk('auth/login', async (userData, thunkAPI) =
 
 export const getMe = createAsyncThunk('auth/getMe', async (user, thunkAPI) => {
   try {
-    return await authService.getMe(user);
+    const data = await authService.getMe(user);
+    if(data?.data?.user) {
+      localStorage.setItem('user', JSON.stringify(data.data.user));
+    }
+
+    return data
   } catch (error) {
     return thunkAPI.rejectWithValue(getCoreError(error));
   }
