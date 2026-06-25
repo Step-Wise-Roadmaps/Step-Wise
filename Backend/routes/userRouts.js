@@ -16,9 +16,9 @@ router.post('/forgotPassword', userController.forgotPassword);
 router.post('/resetpassword/:token', userController.resetPassword);
 
 // get lessons
-router.get('/getLesson', auth, adminAuth, adminController.getLessons);
+router.get('/getLesson', auth, userController.getLessons);
 
 // get Cources
-router.get('/course', auth, adminAuth, adminController.getCourses);
+router.get('/course', auth, userController.getCourses);
 
 module.exports = router;
