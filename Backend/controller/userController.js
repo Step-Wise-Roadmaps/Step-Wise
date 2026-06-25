@@ -226,3 +226,25 @@ exports.resetPassword = async (req, res) => {
         );
     }
 };
+
+exports.getLessons = async (req, res) => {
+    try {
+        const [lessons] = await pool.query("SELECT id, lesson_name, video_url FROM lessons");
+        const [countLessons] = await pool.query("SELECT COUNT(*) AS total FROM lessons");
+
+        return sendSuccess(res, 200, lessons, { count: countLessons[0].total });
+    } catch (err) {
+        return sendError(res, 500, "Lessons could not be loaded.", err.message);
+    }
+};
+
+exports.getCourses = async (req, res) => {
+    try {
+        const [courses] = await pool.query("SELECT id, course_name FROM courses");
+        const [countCourses] = await pool.query("SELECT COUNT(*) AS total FROM courses");
+
+        return sendSuccess(res, 200, courses, { count: countCourses[0].total });
+    } catch (err) {
+        return sendError(res, 500, "Unable get courses.", err.message);
+    }
+};

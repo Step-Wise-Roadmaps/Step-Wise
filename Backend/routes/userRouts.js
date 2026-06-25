@@ -15,4 +15,10 @@ router.post('/forgotPassword', userController.forgotPassword);
 
 router.post('/resetpassword/:token', userController.resetPassword);
 
+// get lessons
+router.get('/getLesson', auth, adminAuth, adminController.getLessons);
+
+// get Cources
+router.get('/course', auth, adminAuth, adminController.getCourses);
+
 module.exports = router;
