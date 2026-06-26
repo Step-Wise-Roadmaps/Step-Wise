@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMe } from "../../features/auth/authSlice";
 
 function UserCources() {
-    const [isOpen, setIsOpen] = useState(false);
+    const [openIndex, setOpenIndex] = useState(null);
 
     const dispatch = useDispatch();
     const { user, isLoading } = useSelector((state) => state.auth);
@@ -40,16 +40,22 @@ function UserCources() {
                 <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-8 md:p-10 shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
                     <div className="space-y-8">
                         <h2 className="roboto-medium text-xl text-slate-600">Curriculum</h2>
-                        <div className="flex gap-6">
-                            <div className="hidden md:flex items-center justify-center w-20 h-20 rounded-full border-8 border-emerald-600">
-                                <span className="text-xl font-medium text-slate-800">100%</span>
+                        {GCLD.map((item, index) => (
+                            <div key={index} className="flex gap-6">
+                                <div className="hidden md:flex items-center justify-center w-20 h-20 rounded-full border-8 border-emerald-600">
+                                <span className="text-xl font-medium text-slate-800">{item.ComplitedReat}</span>
                             </div>
+                            
                             <GetUserCourses 
-                                isOpen={isOpen}
-                                setIsOpen={setIsOpen}
+                                index={index}
+                                openIndex={openIndex}
+                                setOpenIndex={setOpenIndex}
                                 GCLD={GCLD}
+                                item={item}
+                                courseNumber={index + 1}
                             />
                         </div>
+                        ))}
                     </div>
                 </div>
 
