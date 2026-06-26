@@ -1,7 +1,7 @@
 
 import { ChevronDown } from "lucide-react"
 
-function GetUserCourses() {
+function GetUserCourses({ isOpen, setIsOpen, GCLD }) {
     return(
         <div className="w-full rounded-lg border border-slate-300 p-5 space-y-8">
             <div className="flex items-center gap-2">

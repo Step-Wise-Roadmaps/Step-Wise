@@ -2,12 +2,14 @@
 import sideBarLogo from "../../assets/sideBarLogo/sideBarLogo.png";
 
 import GetUserCourses from "../../components/UserDashboardCommponents/UserCources/GetUserCourses";
+import { GCLD } from "../../data/UserDashbourdData/UserCourcesData";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMe } from "../../features/auth/authSlice";
 
 function UserCources() {
+    const [isOpen, setIsOpen] = useState(false);
 
     const dispatch = useDispatch();
     const { user, isLoading } = useSelector((state) => state.auth);
@@ -42,7 +44,11 @@ function UserCources() {
                             <div className="hidden md:flex items-center justify-center w-20 h-20 rounded-full border-8 border-emerald-600">
                                 <span className="text-xl font-medium text-slate-800">100%</span>
                             </div>
-                            <GetUserCourses />
+                            <GetUserCourses 
+                                isOpen={isOpen}
+                                setIsOpen={setIsOpen}
+                                GCLD={GCLD}
+                            />
                         </div>
                     </div>
                 </div>
