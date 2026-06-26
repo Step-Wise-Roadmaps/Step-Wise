@@ -50,7 +50,6 @@ function UserCources() {
                                 index={index}
                                 openIndex={openIndex}
                                 setOpenIndex={setOpenIndex}
-                                GCLD={GCLD}
                                 item={item}
                                 courseNumber={index + 1}
                             />

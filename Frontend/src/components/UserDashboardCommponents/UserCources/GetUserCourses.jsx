@@ -5,7 +5,6 @@ function GetUserCourses({ index, openIndex, setOpenIndex, courseNumber, item }) 
     const isOpen = openIndex === index;
 
     const handleToggle = () => {
-        // If it's already open, close it (set to null). Otherwise, open this index.
         setOpenIndex(isOpen ? null : index);
     };
     return(
