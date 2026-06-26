@@ -248,3 +248,24 @@ exports.getCourses = async (req, res) => {
         return sendError(res, 500, "Unable get courses.", err.message);
     }
 };
+
+exports.GLWCID = async (req, res) => {
+    try {
+        const [getLessonsWithCourcesId] = await pool.query(
+            `
+                SELECT
+                    c.id,
+                    course_name,
+                    lesson_name,
+                    course_id
+                FROM lessons
+                JOIN courses c ON course_id = c.id
+                WHERE skill_id = ?;
+            `,
+        )
+
+        return sendSuccess(res, 200, getLessonsWithCourcesId)
+    } catch (err) {
+        return sendError(res, 500, "can not get courses.", err.message);
+    }
+}
