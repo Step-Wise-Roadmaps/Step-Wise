@@ -249,9 +249,9 @@ exports.getCourses = async (req, res) => {
     }
 };
 
-exports.GLWCID = async (req, res) => {
+exports.getLessonsWithCourcesId = async (req, res) => {
     try {
-        const [getLessonsWithCourcesId] = await pool.query(
+        const [GLWCID] = await pool.query(
             `
                 SELECT
                     c.id,
@@ -264,7 +264,7 @@ exports.GLWCID = async (req, res) => {
             `,
         )
 
-        return sendSuccess(res, 200, getLessonsWithCourcesId)
+        return sendSuccess(res, 200, GLWCID)
     } catch (err) {
         return sendError(res, 500, "can not get courses.", err.message);
     }

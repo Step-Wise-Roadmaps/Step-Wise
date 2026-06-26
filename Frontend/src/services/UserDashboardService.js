@@ -20,7 +20,6 @@ const getLessons = async (lessonData) => {
 const UserDashboardService = {
     getLessons,
     getLessons,
-
 }
 
 export default UserDashboardService;
