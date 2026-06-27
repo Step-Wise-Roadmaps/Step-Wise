@@ -18,6 +18,12 @@ const getMe = async (userData) => {
 
 }
 
+const getLessonsWithCourcesId = async () => {
+  const response = await axiosInstance.get('/user/getLessonsWithCourcesId', );
+
+  return response.data;
+}
+
 const forgotPassword = async (emailData) => {
   const response = await axiosInstance.post('/user/forgotPassword', emailData);
 
@@ -36,7 +42,8 @@ const authService = {
   login,
   forgotPassword,
   resetPassword,
-  getMe
+  getMe,
+  getLessonsWithCourcesId
 };
 
 export default authService;

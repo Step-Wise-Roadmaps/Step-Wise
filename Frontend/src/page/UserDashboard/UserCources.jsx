@@ -2,20 +2,23 @@
 import sideBarLogo from "../../assets/sideBarLogo/sideBarLogo.png";
 
 import GetUserCourses from "../../components/UserDashboardCommponents/UserCources/GetUserCourses";
-import { GCLD } from "../../data/UserDashbourdData/UserCourcesData";
+import { GCLDS } from "../../data/UserDashbourdData/UserCourcesData";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMe } from "../../features/auth/authSlice";
 
+import { getLessonsWithCourcesId } from "../../features/auth/authSlice";
+
 function UserCources() {
     const [openIndex, setOpenIndex] = useState(null);
 
     const dispatch = useDispatch();
-    const { user, isLoading } = useSelector((state) => state.auth);
+    const { user, lessonsWithCourses, isLoading } = useSelector((state) => state.auth);
 
     useEffect(() => {
         dispatch(getMe());
+        dispatch(getLessonsWithCourcesId());
     }, [dispatch]);
 
 
@@ -39,19 +42,20 @@ function UserCources() {
 
                 <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-8 md:p-10 shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
                     <div className="space-y-8">
-                        <h2 className="roboto-medium text-xl text-slate-600">Curriculum</h2>
-                        {GCLD.map((item, index) => (
+                        <h2 className="roboto-medium text-xl text-slate-600">Cualiculem</h2>
+                        {GCLDS({ lessonsWithCourses, isLoading }).map((GCLD, index) => (
                             <div key={index} className="flex gap-6">
                                 <div className="hidden md:flex items-center justify-center w-20 h-20 rounded-full border-8 border-emerald-600">
-                                <span className="text-xl font-medium text-slate-800">{item.ComplitedReat}</span>
+                                <span className="text-xl font-medium text-slate-800">{GCLD.ComplitedReat}</span>
                             </div>
                             
                             <GetUserCourses 
                                 index={index}
+                                GCLD={GCLD}
                                 openIndex={openIndex}
                                 setOpenIndex={setOpenIndex}
-                                item={item}
                                 courseNumber={index + 1}
+                                lessonsWithCourses={lessonsWithCourses}
                             />
                         </div>
                         ))}

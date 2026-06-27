@@ -251,7 +251,7 @@ exports.getCourses = async (req, res) => {
 
 exports.getLessonsWithCourcesId = async (req, res) => {
     try {
-        const userId = req.user.id;
+        const userId = req.user.id; 
 
         const [user] = await pool.query(
             "SELECT selected_skill_id FROM users WHERE id = ?",
