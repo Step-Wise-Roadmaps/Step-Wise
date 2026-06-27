@@ -9,6 +9,7 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: '',
+  
 };
 
 export const authSlice = createSlice({

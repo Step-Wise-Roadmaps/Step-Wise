@@ -251,6 +251,7 @@ exports.getCourses = async (req, res) => {
 
 exports.getLessonsWithCourcesId = async (req, res) => {
     try {
+        const skill_id = req.query.body;
         const [GLWCID] = await pool.query(
             `
                 SELECT
@@ -262,6 +263,7 @@ exports.getLessonsWithCourcesId = async (req, res) => {
                 JOIN courses c ON course_id = c.id
                 WHERE skill_id = ?;
             `,
+            [skill_id]
         )
 
         return sendSuccess(res, 200, GLWCID)
