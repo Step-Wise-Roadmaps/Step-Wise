@@ -251,23 +251,36 @@ exports.getCourses = async (req, res) => {
 
 exports.getLessonsWithCourcesId = async (req, res) => {
     try {
-        const skill_id = req.query.body;
+        const userId = req.user.id;
+
+        const [user] = await pool.query(
+            "SELECT selected_skill_id FROM users WHERE id = ?",
+            [userId]
+        );
+
+        if (user.length === 0) {
+            return sendError(res, 404, "User not found");
+        }
+
+        const skill_id = user[0].selected_skill_id;
+
         const [GLWCID] = await pool.query(
             `
-                SELECT
-                    c.id,
-                    course_name,
-                    lesson_name,
-                    course_id
-                FROM lessons
-                JOIN courses c ON course_id = c.id
-                WHERE skill_id = ?;
+            SELECT
+                c.id,
+                c.course_name,
+                l.lesson_name,
+                l.course_id
+            FROM lessons l
+            JOIN courses c
+                ON l.course_id = c.id
+            WHERE c.skill_id = ?;
             `,
             [skill_id]
-        )
+        );
 
-        return sendSuccess(res, 200, GLWCID)
+        return sendSuccess(res, 200, GLWCID);
     } catch (err) {
-        return sendError(res, 500, "can not get courses.", err.message);
+        return sendError(res, 500, "Cannot get lessons.", err.message);
     }
 }
