@@ -24,6 +24,12 @@ const getLessonsWithCourcesId = async () => {
   return response.data;
 }
 
+const getCoursesLessonsByCourcesId = async (id) => {
+  const response = await axiosInstance.get(`/user/getCoursesLessonsByCourcesId/${id}`);
+  
+  return response.data;
+}
+
 const forgotPassword = async (emailData) => {
   const response = await axiosInstance.post('/user/forgotPassword', emailData);
 

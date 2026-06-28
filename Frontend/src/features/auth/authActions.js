@@ -53,6 +53,24 @@ export const getLessonsWithCourcesId = createAsyncThunk(
   }
 );
 
+export const getCoursesLessonsByCourcesId = createAsyncThunk(
+  "auth/getCoursesLessonsByCourcesId",
+  async (id, thunkAPI) => {
+    try {
+      console.log(id);
+      const response = await authService.getCoursesLessonsByCourcesId(id);
+      return response;
+    } catch (error) {
+      const message =
+        error.response?.data?.message ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+)
+
 export const forgotPassword = createAsyncThunk('auth/forgotPassword', async (email, thunkAPI) => {
   try {
     return await authService.forgotPassword(email);

@@ -10,8 +10,12 @@ import { getMe } from "../../features/auth/authSlice";
 
 import { getLessonsWithCourcesId } from "../../features/auth/authSlice";
 
+import { getCoursesLessonsByCourcesId } from '../../features/auth/authSlice';
+import { useNavigate } from "react-router-dom";
+
 function UserCources() {
     const [openIndex, setOpenIndex] = useState(null);
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
     const { user, lessonsWithCourses, isLoading } = useSelector((state) => state.auth);
@@ -20,6 +24,13 @@ function UserCources() {
         dispatch(getMe());
         dispatch(getLessonsWithCourcesId());
     }, [dispatch]);
+
+    const handleCardClick = async (id) => {
+        await dispatch(getCoursesLessonsByCourcesId(id));
+
+        // optional navigation
+        navigate(`/user-dashboard/LearningDashbourd/${id}`);
+    }
 
 
     return(
@@ -44,19 +55,21 @@ function UserCources() {
                     <div className="space-y-8">
                         <h2 className="roboto-medium text-xl text-slate-600">Cualiculem</h2>
                         {GCLDS({ lessonsWithCourses, isLoading }).map((GCLD, index) => (
-                            <div key={index} className="flex gap-6">
-                                <div className="hidden md:flex items-center justify-center w-20 h-20 rounded-full border-8 border-emerald-600">
-                                <span className="text-xl font-medium text-slate-800">{GCLD.ComplitedReat}</span>
+                            <div key={index} onClick={() => handleCardClick(GCLD.course_id)} className="bg-red-900">
+                                <div className="flex gap-6">
+                                    <div className="hidden md:flex items-center justify-center w-20 h-20 rounded-full border-8 border-emerald-600">
+                                    <span className="text-xl font-medium text-slate-800">{GCLD.ComplitedReat}</span>
+                                </div>
+                                
+                                <GetUserCourses 
+                                    index={index}
+                                    GCLD={GCLD}
+                                    openIndex={openIndex}
+                                    setOpenIndex={setOpenIndex}
+                                    courseNumber={index + 1}
+                                    lessonsWithCourses={lessonsWithCourses}
+                                />
                             </div>
-                            
-                            <GetUserCourses 
-                                index={index}
-                                GCLD={GCLD}
-                                openIndex={openIndex}
-                                setOpenIndex={setOpenIndex}
-                                courseNumber={index + 1}
-                                lessonsWithCourses={lessonsWithCourses}
-                            />
                         </div>
                         ))}
                     </div>
