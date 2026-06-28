@@ -284,3 +284,27 @@ exports.getLessonsWithCourcesId = async (req, res) => {
         return sendError(res, 500, "Cannot get lessons.", err.message);
     }
 }
+
+exports.getCoursesLessonsByCourcesId = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const { GCL } = await pool.query(`
+            SELECT
+                c.id,
+                c.course_name,
+                l.lesson_name,
+                l.course_id
+            FROM lessons l
+            JOIN courses c
+                ON l.course_id = c.id
+            WHERE c.skill_id = ?;
+        `,
+        [id]
+    );
+
+    return sendSuccess(res, 200, GCL)
+    } catch (error) {
+        return sendError(res, 500, "Can not Get Cources and Lessons", err.message);
+    }
+}
