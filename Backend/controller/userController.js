@@ -289,7 +289,7 @@ exports.getCoursesLessonsByCourcesId = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const { GCL } = await pool.query(`
+        const [GCL] = await pool.query(`
             SELECT
                 l.lesson_name,
                 c.course_name,

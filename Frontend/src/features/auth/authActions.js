@@ -57,7 +57,6 @@ export const getCoursesLessonsByCourcesId = createAsyncThunk(
   "auth/getCoursesLessonsByCourcesId",
   async (id, thunkAPI) => {
     try {
-      console.log(id);
       const response = await authService.getCoursesLessonsByCourcesId(id);
       return response;
     } catch (error) {
@@ -69,7 +68,7 @@ export const getCoursesLessonsByCourcesId = createAsyncThunk(
       return thunkAPI.rejectWithValue(message);
     }
   }
-)
+);
 
 export const forgotPassword = createAsyncThunk('auth/forgotPassword', async (email, thunkAPI) => {
   try {

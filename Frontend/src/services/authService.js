@@ -26,7 +26,7 @@ const getLessonsWithCourcesId = async () => {
 
 const getCoursesLessonsByCourcesId = async (id) => {
   const response = await axiosInstance.get(`/user/getCoursesLessonsByCourcesId/${id}`);
-  
+
   return response.data;
 }
 
@@ -49,7 +49,8 @@ const authService = {
   forgotPassword,
   resetPassword,
   getMe,
-  getLessonsWithCourcesId
+  getLessonsWithCourcesId,
+  getCoursesLessonsByCourcesId
 };
 
 export default authService;

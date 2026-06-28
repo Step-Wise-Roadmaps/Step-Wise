@@ -92,7 +92,6 @@ export const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getCoursesLessonsByCourcesId.fulfilled, (state, action) => {
-        console.log("get", getCoursesLessonsByCourcesId)
         state.isLoading = false;
         state.isSuccess = true;
         state.lessonsWithCoursesId = action.payload.data;
