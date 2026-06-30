@@ -29,7 +29,7 @@ function UserCources() {
         await dispatch(getCoursesLessonsByCourcesId(id));
 
         // optional navigation
-        navigate(`/user-dashboard/LearningDashbourd/${id}`);
+        navigate(`/LearningDashbourd/${id}`);
     }
 
 
@@ -55,7 +55,7 @@ function UserCources() {
                     <div className="space-y-8">
                         <h2 className="roboto-medium text-xl text-slate-600">Cualiculem</h2>
                         {GCLDS({ lessonsWithCourses, isLoading }).map((GCLD, index) => (
-                            <div key={index} onClick={() => handleCardClick(GCLD.course_id)}>
+                            <div key={index} >
                                 <div className="flex gap-6">
                                     <div className="hidden md:flex items-center justify-center w-20 h-20 rounded-full border-8 border-emerald-600">
                                     <span className="text-xl font-medium text-slate-800">{GCLD.ComplitedReat}</span>
@@ -68,6 +68,7 @@ function UserCources() {
                                     setOpenIndex={setOpenIndex}
                                     courseNumber={index + 1}
                                     lessonsWithCourses={lessonsWithCourses}
+                                    handleCardClick={handleCardClick}
                                 />
                             </div>
                         </div>

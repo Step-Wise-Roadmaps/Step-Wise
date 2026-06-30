@@ -65,8 +65,8 @@ function App() {
                 <Route path="/user-dashboard" element={<UserDashboardLayout />}>
                     <Route index element={<UserDashboard />} />
                     <Route path="user-courses" element={<UserCources />}/>
-                    <Route path="LearningDashbourd/:id" element={<LearningDashbourd />}/>
                 </Route>
+                <Route path="LearningDashbourd/:id" element={<LearningDashbourd />}/>
             </Route>
         </Routes>
     );

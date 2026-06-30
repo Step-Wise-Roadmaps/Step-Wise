@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getCoursesLessonsByCourcesId } from '../../features/auth/authSlice';
 
 function LearningDashbourd() {
-    const { id } = useParams(); 
+    const { id } = useParams();
     const dispatch = useDispatch();
 
     const { lessonsWithCoursesId, isLoading } = useSelector((state) => state.auth);
@@ -15,7 +15,7 @@ function LearningDashbourd() {
         }
     }, [dispatch, id]);
 
-    if (isLoading) return <h1>running</h1>;
+    if (isLoading) return <h1>running...</h1>;
 
     return (
         <>

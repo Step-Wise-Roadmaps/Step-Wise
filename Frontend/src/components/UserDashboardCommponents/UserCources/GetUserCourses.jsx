@@ -1,7 +1,7 @@
 
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, Play } from "lucide-react"
 
-function GetUserCourses({ index, openIndex, setOpenIndex, courseNumber, GCLD }) {
+function GetUserCourses({ index, openIndex, setOpenIndex, courseNumber, GCLD, handleCardClick }) {
     const isOpen = openIndex === index;
 
     const handleToggle = () => {
@@ -28,10 +28,13 @@ function GetUserCourses({ index, openIndex, setOpenIndex, courseNumber, GCLD }) 
             {isOpen && (
                 <div className="w-full pt-4 border-t border-slate-200 space-y-2">
                     {GCLD.lessons && GCLD.lessons.map((lesson, i) => (
-                    <p key={i} className="text-sm text-slate-600 flex items-center gap-2">
-                        <span className="text-emerald-500">•</span> {lesson}
-                    </p>
-                ))}
+                        <div className="flex gap-6">
+                            <p key={i} className="text-sm text-slate-600 flex items-center gap-2">
+                                <span className="text-emerald-500">•</span> {i + 1} {lesson}
+                            </p>
+                            <button className="rounded-full text-slate-500 border border-blue-200 px-4 py-2 cursor-pointer"  onClick={() => handleCardClick(GCLD.course_id)}> <Play /> </button>
+                        </div>
+                    ))}
                 </div>
             )}
         </div>
