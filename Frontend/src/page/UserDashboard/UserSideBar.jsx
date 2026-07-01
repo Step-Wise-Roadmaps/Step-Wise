@@ -89,7 +89,7 @@ function UserSideBar() {
                 <button
                     type="button"
                     onClick={() => setIsMobileOpen(false)}
-                    className="absolute inset-0 -z-10"
+                    className="absolute inset-0 z-10"
                 />
             </div>
         </>
