@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getCoursesLessonsByCourcesId } from '../../features/auth/authSlice';
 
-function LearningDashbourd() {
+function LessonSideBar() {
     const { id } = useParams();
     const dispatch = useDispatch();
 
@@ -44,4 +44,4 @@ function LearningDashbourd() {
     );
 }
 
-export default LearningDashbourd;
+export default LessonSideBar;

@@ -14,7 +14,7 @@ import LessonManagement from "./page/LessonManagement";
 import AdminAnalytics from "./page/AdminAnalytics";
 import UserDashboard from "./page/UserDashboard/UserDashboard";
 import UserCources from "./page/UserDashboard/UserCources";
-import LearningDashbourd from "./page/UserDashboard/LearningDashbourd";
+import LessonSideBar from "./page/UserDashboard/LessonSideBar";
 
 // components
 import AddCourse from "./components/CourseManagement/AddCourse";
@@ -66,7 +66,7 @@ function App() {
                     <Route index element={<UserDashboard />} />
                     <Route path="user-courses" element={<UserCources />}/>
                 </Route>
-                <Route path="LearningDashbourd/:id" element={<LearningDashbourd />}/>
+                <Route path="LearningDashbourd/:id" element={<LessonSideBar />}/>
             </Route>
         </Routes>
     );
