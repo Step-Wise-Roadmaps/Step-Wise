@@ -65,7 +65,7 @@ function LessonSideBar() {
           <LessonSideBarContent 
             lessonsWithCoursesId={lessonsWithCoursesId}
             isLoading={isLoading}
-            />
+          />
         </div>
 
         <div className={`md:hidden fixed inset-0 z-50 ${isMobileOpen ? "pointer-events-auto backdrop-blur-sm" : "pointer-events-none"}`}>
@@ -86,7 +86,6 @@ function LessonSideBar() {
               onClick={() => setIsMobileOpen(false)}
               className="absolute inset-0 -z-10"
             />
-          
         </div>
     </>
   );

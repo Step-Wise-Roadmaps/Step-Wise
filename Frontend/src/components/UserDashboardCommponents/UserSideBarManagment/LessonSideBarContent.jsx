@@ -1,6 +1,10 @@
 
 function LessonSideBarContent() {
-    return
+    return(
+        <>
+            
+        </>
+    )
 }
 
 export default LessonSideBarContent;
