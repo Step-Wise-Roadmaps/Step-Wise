@@ -20,6 +20,7 @@ import LessonSideBar from "./page/UserDashboard/LessonSideBar";
 import AddCourse from "./components/CourseManagement/AddCourse";
 import DeleteCourse from "./components/CourseManagement/DeleteCourse";
 import CourseDele from "./components/CourseManagement/CourseDele";
+import Lessonvideos from "./components/UserDashboardCommponents/UserSideBarManagment/Lessonvideos";
 
 import AddLesson from "./components/LessonManagement/AddLesson";
 import DeleteLessonsCard from "./components/LessonManagement/DeleteLessonsCard";
@@ -28,6 +29,7 @@ import LessonDele from "./components/LessonManagement/LessonDele";
 // layouts
 import AdminDashboardLayout from "./layout/AdminDashboardLayout";
 import UserDashboardLayout from "./layout/UserDashboardLayout";
+import UserCoursesLayout from "./layout/UserCoursesLayout";
 
 // protected router
 import ProtectedRoute from "./router/ProtectedRoute";
@@ -66,7 +68,10 @@ function App() {
                     <Route index element={<UserDashboard />} />
                     <Route path="user-courses" element={<UserCources />}/>
                 </Route>
-                <Route path="LearningDashbourd/:id" element={<LessonSideBar />}/>
+                {/* <Route path="LearningDashbourd/:id" element={<LessonSideBar />}/> */}
+                <Route path="LearningDashbourd/:id" element={<UserCoursesLayout />}>
+                    <Route index element={<Lessonvideos />}/>
+                </Route>
             </Route>
         </Routes>
     );
