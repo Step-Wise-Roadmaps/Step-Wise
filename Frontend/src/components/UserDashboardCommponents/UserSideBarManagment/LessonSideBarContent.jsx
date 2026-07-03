@@ -44,7 +44,7 @@ function LessonSideBarContent({ lessonsWithCoursesId, isLoading, onMobileClose, 
                         <button 
                             key={lesson.id}
                             onClick={() => setSelectedLesson(lesson)}
-                            className="p-4 hover:bg-slate-200 m-0 cursor-pointer w-full flex">
+                            className={`p-4 hover:bg-slate-200 m-0 cursor-pointer w-full flex`}>
                                 <p className="roboto-semibold m-0 p-0">{lesson.lesson_name}</p>
                         </button>
                     </>

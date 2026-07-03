@@ -6,12 +6,12 @@ import { getCoursesLessonsByCourcesId } from "../../features/auth/authSlice";
 
 import LessonSideBarContent from "../../components/UserDashboardCommponents/UserSideBarManagment/LessonSideBarContent";
 
-function LessonSideBar() {
+function LessonSideBar({ selectedLesson, setSelectedLesson }) {
   const { id } = useParams();
   const dispatch = useDispatch();
 
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [selectedLesson, setSelectedLesson] = useState(null);
+  // const [selectedLesson, setSelectedLesson] = useState(null);
 
   const { lessonsWithCoursesId, isLoading } = useSelector(
     (state) => state.auth
