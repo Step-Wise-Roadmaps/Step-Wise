@@ -30,8 +30,8 @@ const getCoursesLessonsByCourcesId = async (id) => {
   return response.data;
 }
 
-const progress = async () => {
-  const response = await axiosInstance.get('/user/complete-lesson');
+const progress = async (progressData) => {
+  const response = await axiosInstance.post('/user/complete-lesson', progressData);
 }
 
 const forgotPassword = async (emailData) => {

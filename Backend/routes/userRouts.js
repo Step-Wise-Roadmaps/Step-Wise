@@ -25,6 +25,6 @@ router.get('/getLessonsWithCourcesId', auth, userController.getLessonsWithCource
 
 router.get('/getCoursesLessonsByCourcesId/:id', auth, userController.getCoursesLessonsByCourcesId);
 
-router.get('/complete-lesson', auth, userController.progress);
+router.post('/complete-lesson', auth, userController.progress);
 
 module.exports = router;

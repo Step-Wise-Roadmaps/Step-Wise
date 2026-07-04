@@ -291,14 +291,17 @@ exports.getLessonsWithCourcesId = async (req, res) => {
             SELECT
                 c.id,
                 c.course_name,
+                l.id AS lesson_id,
                 l.lesson_name,
-                l.course_id
+                l.course_id,
+                IF(ulp.id IS NOT NULL, TRUE, FALSE) AS is_completed
             FROM lessons l
-            JOIN courses c
-                ON l.course_id = c.id
+            JOIN courses c ON l.course_id = c.id
+            LEFT JOIN user_lesson_progress ulp 
+                ON l.id = ulp.lesson_id AND ulp.user_id = ?
             WHERE c.skill_id = ?;
             `,
-            [skill_id]
+            [userId, skill_id]
         );
 
         return sendSuccess(res, 200, GLWCID);
@@ -309,22 +312,45 @@ exports.getLessonsWithCourcesId = async (req, res) => {
 
 exports.getCoursesLessonsByCourcesId = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id } = req.params;          // የ Course ID
+        const userId = req.user.id;         // ከ Auth Middleware የሚመጣ የተጠቃሚ ID
 
+        // 1. መጀመሪያ ተጠቃሚው ለዚህ ኮርስ ያለውን አጠቃላይ ፕሮግረስ ፐርሰንት (Udacity Style) እናሰላለን
+        const [progressResult] = await pool.query(`
+            SELECT
+                IFNULL(
+                    ROUND((COUNT(DISTINCT ulp.lesson_id) / COUNT(DISTINCT l.id)) * 100), 
+                    0
+                ) AS progress_percent
+            FROM lessons l
+            LEFT JOIN user_lesson_progress ulp 
+                ON l.id = ulp.lesson_id AND ulp.user_id = ?
+            WHERE l.course_id = ?;
+        `, [userId, id]);
+
+        const courseProgress = progressResult[0]?.progress_percent || 0;
+
+        // 2. ከዚያም ሁሉንም ትምህርቶች ከአጠቃላይ ፐርሰንቱ እና ከእያንዳንዱ ትምህርት የራይት (is_completed) ሁኔታ ጋር እናመጣለን
+        // ማሳሰቢያ፦ l.id AS id ማድረጋችን Frontend ላይ undefined የሚለውን ስህተት ሙሉ በሙሉ ያጠፋዋል!
         const [GCL] = await pool.query(`
             SELECT
+                l.id AS id, 
                 l.lesson_name,
                 c.course_name,
-                l.video_url
+                l.video_url,
+                l.course_id,
+                ? AS course_progress,
+                IF(ulp.id IS NOT NULL, TRUE, FALSE) AS is_completed
             FROM lessons l
-            JOIN courses c
-                ON l.course_id = c.id
+            JOIN courses c ON l.course_id = c.id
+            LEFT JOIN user_lesson_progress ulp 
+                ON l.id = ulp.lesson_id AND ulp.user_id = ?
             WHERE l.course_id = ?;
         `,
-        [id]
-    );
+        [courseProgress, userId, id]);
 
-    return sendSuccess(res, 200, GCL)
+        // ያንተን የ sendSuccess ፎርማት በትክክል ጠብቆ Array ይመልሳል
+        return sendSuccess(res, 200, GCL);
     } catch (err) {
         return sendError(res, 500, "Can not Get Cources and Lessons", err.message);
     }

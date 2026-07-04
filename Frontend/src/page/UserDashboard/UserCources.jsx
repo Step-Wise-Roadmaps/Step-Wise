@@ -1,4 +1,3 @@
-
 import sideBarLogo from "../../assets/sideBarLogo/sideBarLogo.png";
 
 import GetUserCourses from "../../components/UserDashboardCommponents/UserCources/GetUserCourses";
@@ -9,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMe } from "../../features/auth/authSlice";
 
 import { getLessonsWithCourcesId } from "../../features/auth/authSlice";
-
 import { getCoursesLessonsByCourcesId } from '../../features/auth/authSlice';
 import { useNavigate } from "react-router-dom";
 
@@ -27,13 +25,11 @@ function UserCources() {
 
     const handleCardClick = async (id) => {
         await dispatch(getCoursesLessonsByCourcesId(id));
-
         // optional navigation
         navigate(`/LearningDashbourd/${id}`);
-    }
+    };
 
-
-    return(
+    return (
         <>
             <div>
                 <section className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white mb-10 p-6 md:p-10 shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
@@ -54,31 +50,41 @@ function UserCources() {
                 <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-8 md:p-10 shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
                     <div className="space-y-8">
                         <h2 className="roboto-medium text-xl text-slate-600">Cualiculem</h2>
-                        {GCLDS({ lessonsWithCourses, isLoading }).map((GCLD, index) => (
-                            <div key={index} >
-                                <div className="flex gap-6">
-                                    <div className="hidden md:flex items-center justify-center w-20 h-20 rounded-full border-8 border-emerald-600">
-                                    <span className="text-xl font-medium text-slate-800">{GCLD.ComplitedReat}</span>
+                        {GCLDS({ lessonsWithCourses, isLoading }).map((GCLD, index) => {
+                            const percentageNumber = GCLD.ComplitedReat ? GCLD.ComplitedReat.replace('%', '') : 0;
+
+                            return (
+                                <div key={index}>
+                                    <div className="flex gap-6">
+                                        <div 
+                                            className="hidden md:flex items-center justify-center w-20 h-20 rounded-full p-[6px] flex-shrink-0 shadow-inner"
+                                            style={{
+                                                background: `conic-gradient(#059669 ${percentageNumber}%, #e2e8f0 ${percentageNumber}%)`
+                                            }}
+                                        >
+                                            <div className="flex items-center justify-center w-full h-full rounded-full bg-white shadow-sm">
+                                                <span className="text-xs font-bold text-slate-800">{GCLD.ComplitedReat}</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <GetUserCourses 
+                                            index={index}
+                                            GCLD={GCLD}
+                                            openIndex={openIndex}
+                                            setOpenIndex={setOpenIndex}
+                                            courseNumber={index + 1}
+                                            lessonsWithCourses={lessonsWithCourses}
+                                            handleCardClick={handleCardClick}
+                                        />
+                                    </div>
                                 </div>
-                                
-                                <GetUserCourses 
-                                    index={index}
-                                    GCLD={GCLD}
-                                    openIndex={openIndex}
-                                    setOpenIndex={setOpenIndex}
-                                    courseNumber={index + 1}
-                                    lessonsWithCourses={lessonsWithCourses}
-                                    handleCardClick={handleCardClick}
-                                />
-                            </div>
-                        </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
-
             </div>
         </>
-    )
+    );
 }
 
 export default UserCources;

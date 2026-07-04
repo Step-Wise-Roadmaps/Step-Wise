@@ -6,6 +6,8 @@ function LessonSideBarContent({ lessonsWithCoursesId, isLoading, onMobileClose, 
 
     const navigate = useNavigate();
 
+    const currentProgress = lessonsWithCoursesId.length > 0 ? lessonsWithCoursesId[0].course_progress : 0;
+
     return(
         <>
             <aside className="relative h-screen flex flex-col overflow-hidden rounded-none border-r border-slate-200 bg-slate-100 text-slate-800 shadow-[0_20px_60px_rgba(0,0,0,0.05)] w-72">
@@ -27,9 +29,17 @@ function LessonSideBarContent({ lessonsWithCoursesId, isLoading, onMobileClose, 
 
                 <div className="p-4 w-full space-y-2 border-b border-slate-300">
                     <h4 className="roboto-medium">{courseName}</h4>
-                    <div className="flex items-center">
-                        <hr className="w-full h-0.5 bg-blue-500 border-none" />
-                        <p className="roboto-medium">100%</p>
+                    
+                    <div className="w-full bg-slate-200 rounded-full h-1.5 mt-2 overflow-hidden">
+                        <div 
+                            className="bg-blue-500 h-1.5 rounded-full transition-all duration-500 ease-out" 
+                            style={{ width: `${currentProgress}%` }}
+                        ></div>
+                    </div>
+                    
+                    <div className="flex justify-between items-center text-xs text-slate-500 mt-1">
+                        <span>Progress</span>
+                        <span className="text-blue-600 font-bold">{currentProgress}%</span>
                     </div>
                 </div>
 

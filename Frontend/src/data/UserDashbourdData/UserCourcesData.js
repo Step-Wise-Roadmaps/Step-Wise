@@ -1,4 +1,3 @@
-
 export const GCLDS = ({ lessonsWithCourses, isLoading }) => {
     if (isLoading) {
         return [
@@ -15,8 +14,8 @@ export const GCLDS = ({ lessonsWithCourses, isLoading }) => {
         return [
             {
                 course_id: null,
-                courcesName: "dont get Cources",
-                lessons: ["dont get lesson"],
+                courcesName: "No Courses Found",
+                lessons: ["No lessons"],
                 ComplitedReat: "0%"
             }
         ];
@@ -30,16 +29,33 @@ export const GCLDS = ({ lessonsWithCourses, isLoading }) => {
         if (!grouped[cId]) {
             grouped[cId] = {
                 course_id: cId,
-                courcesName: item.course_name || "dont get Cources", 
+                courcesName: item.course_name || "Course", 
                 lessons: [],
-                ComplitedReat: "100%"
+                totalLessons: 0,
+                completedLessons: 0
             };
         }
         
         if (item.lesson_name && !grouped[cId].lessons.includes(item.lesson_name)) {
             grouped[cId].lessons.push(item.lesson_name);
+            grouped[cId].totalLessons += 1; // ጠቅላላ ትምህርቶች ድምር
+            
+            if (item.is_completed) {
+                grouped[cId].completedLessons += 1;
+            }
         }
     });
 
-    return Object.values(grouped);
+    return Object.values(grouped).map(course => {
+        const percent = course.totalLessons > 0 
+            ? Math.round((course.completedLessons / course.totalLessons) * 100) 
+            : 0;
+
+        return {
+            course_id: course.course_id,
+            courcesName: course.courcesName,
+            lessons: course.lessons,
+            ComplitedReat: `${percent}%`
+        };
+    });
 };
