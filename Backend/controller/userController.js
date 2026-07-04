@@ -183,6 +183,28 @@ exports.forgotPassword = async (req, res) => {
     }
 };
 
+exports.progress = async (req, res) => {
+    const { user_id, skill_id, lesson_id, course_id } = req.body;
+
+    if (!user_id || !skill_id || !lesson_id || !course_id) {
+        return sendError(res, 400, "Not get the user info");
+    }
+
+    try {
+        const [result] = await pool.query(`
+            INSERT INTO user_lesson_progress (user_id, skill_id, lesson_id, course_id, is_completed)
+            VALUES (?, ?, ?, ?, TRUE)
+            ON DUPLICATE KEY UPDATE is_completed = TRUE, completed_at = CURRENT_TIMESTAMP;
+        `, [user_id, skill_id, lesson_id, course_id]);
+
+        return sendSuccess(res, 200, "Progress updated successfully!")
+
+    } catch (err) {
+        console.error("Progress Error:", err);
+        return sendError(res, 500, "Server error while saving progress");
+    }
+};
+
 exports.resetPassword = async (req, res) => {
     const { token } = req.params;
     const { password } = req.body;
