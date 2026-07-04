@@ -21,4 +21,8 @@ router.get('/getLesson', auth, userController.getLessons);
 // get Cources
 router.get('/course', auth, userController.getCourses);
 
+router.get('/getLessonsWithCourcesId', auth, userController.getLessonsWithCourcesId);
+
+router.get('/getCoursesLessonsByCourcesId/:id', auth, userController.getCoursesLessonsByCourcesId);
+
 module.exports = router;

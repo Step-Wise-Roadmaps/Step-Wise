@@ -33,11 +33,42 @@ export const getMe = createAsyncThunk('auth/getMe', async (user, thunkAPI) => {
       localStorage.setItem('user', JSON.stringify(data.data.user));
     }
 
-    return data
+    return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(getCoreError(error));
   }
 });
+
+export const getLessonsWithCourcesId = createAsyncThunk(
+  "auth/getLessonsWithCourcesId",
+  async (_, thunkAPI) => {
+    try {
+      const response = await authService.getLessonsWithCourcesId();
+      return response;
+    } catch (error) {
+      console.log("Thunk error:", error);
+
+      return thunkAPI.rejectWithValue(getCoreError(error));
+    }
+  }
+);
+
+export const getCoursesLessonsByCourcesId = createAsyncThunk(
+  "auth/getCoursesLessonsByCourcesId",
+  async (id, thunkAPI) => {
+    try {
+      const response = await authService.getCoursesLessonsByCourcesId(id);
+      return response;
+    } catch (error) {
+      const message =
+        error.response?.data?.message ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 export const forgotPassword = createAsyncThunk('auth/forgotPassword', async (email, thunkAPI) => {
   try {

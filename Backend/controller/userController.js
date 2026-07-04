@@ -248,3 +248,62 @@ exports.getCourses = async (req, res) => {
         return sendError(res, 500, "Unable get courses.", err.message);
     }
 };
+
+exports.getLessonsWithCourcesId = async (req, res) => {
+    try {
+        const userId = req.user.id; 
+
+        const [user] = await pool.query(
+            "SELECT selected_skill_id FROM users WHERE id = ?",
+            [userId]
+        );
+
+        if (user.length === 0) {
+            return sendError(res, 404, "User not found");
+        }
+
+        const skill_id = user[0].selected_skill_id;
+
+        const [GLWCID] = await pool.query(
+            `
+            SELECT
+                c.id,
+                c.course_name,
+                l.lesson_name,
+                l.course_id
+            FROM lessons l
+            JOIN courses c
+                ON l.course_id = c.id
+            WHERE c.skill_id = ?;
+            `,
+            [skill_id]
+        );
+
+        return sendSuccess(res, 200, GLWCID);
+    } catch (err) {
+        return sendError(res, 500, "Cannot get lessons.", err.message);
+    }
+}
+
+exports.getCoursesLessonsByCourcesId = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const [GCL] = await pool.query(`
+            SELECT
+                l.lesson_name,
+                c.course_name,
+                l.video_url
+            FROM lessons l
+            JOIN courses c
+                ON l.course_id = c.id
+            WHERE l.course_id = ?;
+        `,
+        [id]
+    );
+
+    return sendSuccess(res, 200, GCL)
+    } catch (err) {
+        return sendError(res, 500, "Can not Get Cources and Lessons", err.message);
+    }
+}

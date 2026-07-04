@@ -18,6 +18,18 @@ const getMe = async (userData) => {
 
 }
 
+const getLessonsWithCourcesId = async () => {
+  const response = await axiosInstance.get('/user/getLessonsWithCourcesId', );
+
+  return response.data;
+}
+
+const getCoursesLessonsByCourcesId = async (id) => {
+  const response = await axiosInstance.get(`/user/getCoursesLessonsByCourcesId/${id}`);
+
+  return response.data;
+}
+
 const forgotPassword = async (emailData) => {
   const response = await axiosInstance.post('/user/forgotPassword', emailData);
 
@@ -36,7 +48,9 @@ const authService = {
   login,
   forgotPassword,
   resetPassword,
-  getMe
+  getMe,
+  getLessonsWithCourcesId,
+  getCoursesLessonsByCourcesId
 };
 
 export default authService;
