@@ -30,6 +30,10 @@ const getCoursesLessonsByCourcesId = async (id) => {
   return response.data;
 }
 
+const progress = async () => {
+  const response = await axiosInstance.get('/user/complete-lesson');
+}
+
 const forgotPassword = async (emailData) => {
   const response = await axiosInstance.post('/user/forgotPassword', emailData);
 
@@ -50,7 +54,8 @@ const authService = {
   resetPassword,
   getMe,
   getLessonsWithCourcesId,
-  getCoursesLessonsByCourcesId
+  getCoursesLessonsByCourcesId,
+  progress
 };
 
 export default authService;
