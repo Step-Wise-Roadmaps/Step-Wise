@@ -63,7 +63,7 @@ function UserCources() {
                                             }}
                                         >
                                             <div className="flex items-center justify-center w-full h-full rounded-full bg-white shadow-sm">
-                                                <span className="text-xs font-bold text-slate-800">{GCLD.ComplitedReat}</span>
+                                                <span className="text-xl font-bold text-slate-800">{GCLD.ComplitedReat}</span>
                                             </div>
                                         </div>
                                         

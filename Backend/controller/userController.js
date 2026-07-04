@@ -312,10 +312,9 @@ exports.getLessonsWithCourcesId = async (req, res) => {
 
 exports.getCoursesLessonsByCourcesId = async (req, res) => {
     try {
-        const { id } = req.params;          // የ Course ID
-        const userId = req.user.id;         // ከ Auth Middleware የሚመጣ የተጠቃሚ ID
+        const { id } = req.params;
+        const userId = req.user.id;
 
-        // 1. መጀመሪያ ተጠቃሚው ለዚህ ኮርስ ያለውን አጠቃላይ ፕሮግረስ ፐርሰንት (Udacity Style) እናሰላለን
         const [progressResult] = await pool.query(`
             SELECT
                 IFNULL(
@@ -330,11 +329,9 @@ exports.getCoursesLessonsByCourcesId = async (req, res) => {
 
         const courseProgress = progressResult[0]?.progress_percent || 0;
 
-        // 2. ከዚያም ሁሉንም ትምህርቶች ከአጠቃላይ ፐርሰንቱ እና ከእያንዳንዱ ትምህርት የራይት (is_completed) ሁኔታ ጋር እናመጣለን
-        // ማሳሰቢያ፦ l.id AS id ማድረጋችን Frontend ላይ undefined የሚለውን ስህተት ሙሉ በሙሉ ያጠፋዋል!
         const [GCL] = await pool.query(`
             SELECT
-                l.id AS id, 
+                l.id AS id,
                 l.lesson_name,
                 c.course_name,
                 l.video_url,
@@ -349,7 +346,6 @@ exports.getCoursesLessonsByCourcesId = async (req, res) => {
         `,
         [courseProgress, userId, id]);
 
-        // ያንተን የ sendSuccess ፎርማት በትክክል ጠብቆ Array ይመልሳል
         return sendSuccess(res, 200, GCL);
     } catch (err) {
         return sendError(res, 500, "Can not Get Cources and Lessons", err.message);
