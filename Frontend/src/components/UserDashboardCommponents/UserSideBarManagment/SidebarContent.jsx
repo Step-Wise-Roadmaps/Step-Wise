@@ -31,7 +31,7 @@ function SidebarContent({
     user,
 }) {
 
-    const fullName = user?.fullName || "Admin";
+    const fullName = user?.full_name || "Admin";
     const initials = fullName
         .split(" ")
         .filter(Boolean)

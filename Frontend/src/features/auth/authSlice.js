@@ -1,10 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { register, login, getMe, forgotPassword, resetPassword } from './authActions';
+import { register, login, getMe, getLessonsWithCourcesId, getCoursesLessonsByCourcesId, forgotPassword, resetPassword } from './authActions';
 
 const storedUser = JSON.parse(localStorage.getItem('user'));
 
 const initialState = {
   user: storedUser ? storedUser : null,
+  lessonsWithCourses: [],
+  lessonsWithCoursesId: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -62,10 +64,39 @@ export const authSlice = createSlice({
       .addCase(getMe.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        state.user = action.payload?.data || action.payload;
         state.message = action.payload.message
       })
       .addCase(getMe.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      // getLessonsWithCourcesId
+      .addCase(getLessonsWithCourcesId.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getLessonsWithCourcesId.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.lessonsWithCourses = action.payload.data;
+      })
+      .addCase(getLessonsWithCourcesId.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      // getCoursesLessonsByCourcesId
+      .addCase(getCoursesLessonsByCourcesId.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getCoursesLessonsByCourcesId.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.lessonsWithCoursesId = action.payload.data;
+      })
+      .addCase(getCoursesLessonsByCourcesId.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
@@ -101,4 +132,4 @@ export const authSlice = createSlice({
 export const { reset, logout } = authSlice.actions;
 export default authSlice.reducer;
 
-export { register, login, getMe, forgotPassword, resetPassword } from './authActions';
+export { register, login, getMe, getLessonsWithCourcesId, getCoursesLessonsByCourcesId, forgotPassword, resetPassword } from './authActions';

@@ -181,7 +181,6 @@ exports.deleteLesson = async (req, res) => {
         const { id } = req.params;
         await pool.query("DELETE FROM lessons WHERE id = ?", [id]);
         
-        // Redux slice ላይ ለነበረው state.LessonsByCourseId.filter(item => item.id !== deletedId) መስሪያ ID ጨምረናል
         return res.status(200).json({ success: true, message: "Lesson deleted successfully", id });
     } catch(err) {
         return sendError(res, 500, "The lesson could not be deleted.", err.message);

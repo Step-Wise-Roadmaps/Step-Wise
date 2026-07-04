@@ -14,7 +14,7 @@ const itemRoutes = {
     dashboard: "/user-dashboard",
     users: "/user-dashboard/users",
     analytics: "/user-dashboard/analytics",
-    courses: "/user-dashboard/courses",
+    courses: "/user-dashboard/user-courses",
     settings: "/user-dashboard/settings"
 };
 
@@ -31,8 +31,8 @@ function UserSideBar() {
 
     const activeItem = Object.entries(itemRoutes).find(([, path]) => path === location.pathname)?.[0] ?? "";
 
-    const handleItemClick = (id) => {
-        if (id === "logout") {
+    const handleItemClick = (itemId) => {
+        if (itemId === "logout") {
             dispatch(logout());
             navigate("/");
             setIsMobileOpen(false)
@@ -40,6 +40,10 @@ function UserSideBar() {
         }
 
         const route = itemRoutes[itemId];
+
+        if (route) {
+            navigate(route);
+        }
         
         setIsMobileOpen(false);
     }
