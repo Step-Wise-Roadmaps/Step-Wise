@@ -110,7 +110,6 @@ export const authSlice = createSlice({
       .addCase(progress.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        // ባክአንድህ የሚመልሰው አወቃቀር (ለምሳሌ action.payload.data ወይም action.payload ራሱ) ከሆነ፡
         state.progress = action.payload; 
       })
       .addCase(progress.rejected, (state, action) => {

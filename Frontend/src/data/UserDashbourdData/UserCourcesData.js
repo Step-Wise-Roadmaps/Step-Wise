@@ -38,7 +38,7 @@ export const GCLDS = ({ lessonsWithCourses, isLoading }) => {
         
         if (item.lesson_name && !grouped[cId].lessons.includes(item.lesson_name)) {
             grouped[cId].lessons.push(item.lesson_name);
-            grouped[cId].totalLessons += 1; // ጠቅላላ ትምህርቶች ድምር
+            grouped[cId].totalLessons += 1;
             
             if (item.is_completed) {
                 grouped[cId].completedLessons += 1;
