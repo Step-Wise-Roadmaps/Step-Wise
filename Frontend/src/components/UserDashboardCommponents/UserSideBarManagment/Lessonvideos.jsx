@@ -29,7 +29,7 @@ function Lessonvideos() {
 
     const progressData = {
       user_id: user.id,
-      skill_id: selectedLesson.skill_id || 1,
+      skill_id: selectedLesson.skill_id,
       lesson_id: selectedLesson.id,
       course_id: selectedLesson.course_id
     };

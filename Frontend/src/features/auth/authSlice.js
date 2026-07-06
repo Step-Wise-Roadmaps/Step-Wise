@@ -118,6 +118,7 @@ export const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
+      
       // forgotPassword
       .addCase(forgotPassword.pending, (state) => { state.isLoading = true; })
       .addCase(forgotPassword.fulfilled, (state, action) => {

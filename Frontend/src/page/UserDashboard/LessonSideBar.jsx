@@ -65,7 +65,7 @@ function LessonSideBar({ selectedLesson, setSelectedLesson }) {
           <LessonSideBarContent 
             lessonsWithCoursesId={lessonsWithCoursesId}
             isLoading={isLoading}
-            setSelectedLesson={setSelectedLesson}   // ✅ Correct
+            setSelectedLesson={setSelectedLesson}
             selectedLesson={selectedLesson}
             courseName={courseName}
           />
@@ -78,7 +78,7 @@ function LessonSideBar({ selectedLesson, setSelectedLesson }) {
               <LessonSideBarContent
                 lessonsWithCoursesId={lessonsWithCoursesId}
                 isLoading={isLoading}
-                setSelectedLesson={setSelectedLesson}   // ✅ Correct
+                setSelectedLesson={setSelectedLesson}
                 selectedLesson={selectedLesson}
                 courseName={courseName}
                 onMobileClose={() => setIsMobileOpen(false)}
