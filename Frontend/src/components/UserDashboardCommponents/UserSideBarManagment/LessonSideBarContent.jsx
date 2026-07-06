@@ -1,5 +1,5 @@
 
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, X } from "lucide-react"
 import { useNavigate } from "react-router-dom";
 
 function LessonSideBarContent({ lessonsWithCoursesId, isLoading, onMobileClose, mobile, selectedLesson, setSelectedLesson, courseName }) {
@@ -16,15 +16,28 @@ function LessonSideBarContent({ lessonsWithCoursesId, isLoading, onMobileClose, 
                     <div className="absolute -left-20 top-28 h-40 w-40 rounded-full bg-cyan-200/40 blur-3xl" />
                     <div className="absolute bottom-20 right-0 h-48 w-48 rounded-full bg-indigo-200/40 blur-3xl" />
                 </div> */}
+                <div className={`flex items-center justify-between`}>
+                    <div
+                        onClick={() => navigate("/user-dashboard/user-courses")}
+                        className="w-full hover:bg-slate-200 flex cursor-pointer transition duration-200 border-b border-slate-300 p-4 justify-between">
+                            <div className="flex gap-2">
+                            <ArrowLeft /> 
+                            Overview
+                            </div>
+                            {/* <div className=""></div> */} {/* */}
+                    </div>
 
-                <div
-                    onClick={() => navigate("/user-dashboard/user-courses")}
-                    className="w-full hover:bg-slate-200 flex cursor-pointer transition duration-200 border-b border-slate-300 p-4 justify-between">
-                        <div className="flex gap-2">
-                        <ArrowLeft /> 
-                        Overview
-                        </div>
-                        {/* <div className=""></div> */} {/* */}
+                    {mobile && (
+                        <>
+                            <button
+                            type="button"
+                            onClick={mobile ? onMobileClose : onCollapseToggle}
+                            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-100 text-slate-600 transition hover:bg-slate-200 hover:text-slate-900"
+                        >
+                            {mobile ? <X size={18} /> : isOpen ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+                        </button>
+                        </>
+                    )}
                 </div>
 
                 <div className="p-4 w-full space-y-2 border-b border-slate-300">
