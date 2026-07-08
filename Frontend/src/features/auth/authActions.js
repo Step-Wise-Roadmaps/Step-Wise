@@ -101,7 +101,6 @@ export const changeUserProfile = createAsyncThunk(
     try {
       return await authService.changeUserProfile(changeData);
     } catch (error) {
-      console.log(error.response); // <-- add this
       return thunkAPI.rejectWithValue(getCoreError(error));
     }
   }

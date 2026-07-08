@@ -149,7 +149,6 @@ export const authSlice = createSlice({
       .addCase(changeUserProfile.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-
         state.user = {
             ...state.user,
             id: action.payload.id,
@@ -158,11 +157,7 @@ export const authSlice = createSlice({
             role: action.payload.role,
         };
 
-         localStorage.setItem(
-        "user",
-        JSON.stringify(state.user)
-    );
-
+        localStorage.setItem( "user",JSON.stringify(state.user));
         state.message = action.payload.data;
       })
       .addCase(changeUserProfile.rejected, (state, action) => {
