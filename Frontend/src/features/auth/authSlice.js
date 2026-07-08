@@ -184,4 +184,4 @@ export const authSlice = createSlice({
 export const { reset, logout } = authSlice.actions;
 export default authSlice.reducer;
 
-export { register, login, getMe, getLessonsWithCourcesId, getCoursesLessonsByCourcesId, progress, forgotPassword, resetPassword, changeUserProfile } from './authActions';
+export { register, login, getMe, getLessonsWithCourcesId, getCoursesLessonsByCourcesId, progress, forgotPassword, resetPassword, changeUserProfile, changePassword } from './authActions';
