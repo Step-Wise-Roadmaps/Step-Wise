@@ -48,7 +48,12 @@ const resetPassword = async (resetData) => {
 };
 
 const changeUserProfile = async (changeData) => {
-  const response = await axiosInstance.post('/user/change-profile', changeData);
+  const response = await axiosInstance.put('/user/change-profile', changeData);
+  return response.data
+}
+
+const changePassword = async (changeData) => {
+  const response = await axiosInstance.put('/user/change-password', changeData);
   return response.data
 }
 
@@ -61,7 +66,8 @@ const authService = {
   getLessonsWithCourcesId,
   getCoursesLessonsByCourcesId,
   progress,
-  changeUserProfile
+  changeUserProfile,
+  changePassword
 };
 
 export default authService;

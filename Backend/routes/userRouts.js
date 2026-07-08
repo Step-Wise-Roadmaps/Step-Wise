@@ -27,6 +27,8 @@ router.get('/getCoursesLessonsByCourcesId/:id', auth, userController.getCoursesL
 
 router.post('/complete-lesson', auth, userController.progress);
 
-router.post('/change-profile', auth, userController.changeUserProfile);
+router.put('/change-profile', auth, userController.changeUserProfile);
+
+router.put('/change-password', auth, userController.changePassword);
 
 module.exports = router;

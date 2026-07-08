@@ -105,3 +105,14 @@ export const changeUserProfile = createAsyncThunk(
     }
   }
 );
+
+export const changePassword = createAsyncThunk(
+  "auth/change-password",
+  async (changeData, thunkAPI) => {
+    try {
+      return await authService.changePassword(changeData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(getCoreError(error));
+    }
+  }
+);

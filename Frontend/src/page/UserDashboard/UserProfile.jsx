@@ -131,7 +131,7 @@ function UserProfile() {
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className="bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 duration-200 disabled:bg-gray-400"
+                    className="bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 duration-200 disabled:bg-gray-400 cursor-pointer"
                 >
                     {isLoading ? "Saving..." : "Save"}
                 </button>

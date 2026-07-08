@@ -386,3 +386,52 @@ exports.changeUserProfile = async (req, res) => {
         return sendError(res, 500, "Database error", err.message);
     }
 };
+
+exports.changePassword = async (req, res) => {
+    try{
+        const { oldPassword, newPassword, confirmPassword } = req.body;
+        const userId = req.user.id;
+
+        if(!oldPassword || !newPassword || !confirmPassword) {
+            return sendError(res, 400, "All password fields are required")
+        }
+
+        if (newPassword !== confirmPassword) {
+            return sendError(res, 400, "New password and confirm password do not match");
+        }
+
+        const [user] = await pool.query(
+            "SELECT password FROM users WHERE id = ?",
+            [userId]
+        )
+
+        if (user.length === 0) {
+            return sendError(res, 400, "User not found");
+        }
+
+        const isPasswordCorrect = await bcrypt.compare(
+            oldPassword,
+            user[0].password
+        );
+
+        if (!isPasswordCorrect) {
+            return sendError(res, 400, "Old password is incorrect");
+        }
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        const [result] = await pool.query(
+            "UPDATE users SET password = ? WHERE id = ?",
+            [hashedPassword, userId]
+        )
+
+        if(result.affectedRows === 0) {
+            return sendError(res, 400, "Password update failed")
+        }
+
+        return sendSuccess(res, 200, null, { message: "Password changed successfully" })
+
+    } catch (err) {
+        return sendError(res, 500, "Data BaseError", err.message)
+    }
+}
