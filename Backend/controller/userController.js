@@ -148,18 +148,14 @@ exports.forgotPassword = async (req, res) => {
     try {
         const { email } = req.body;
 
-        const [rows] = await pool.query(
-            "SELECT * FROM users WHERE email = ?",
-            [email]
-        );
-
+        const [rows] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
         const user = rows[0];
 
         if (!user) {
-            return sendError(res, 404, "User not found");
+            return res.status(404).json({ message: "User Not Found" });
         }
 
-        const token = crypto.randomBytes(32).toString("hex");
+        const token = crypto.randomBytes(32).toString('hex');
         const expiry = new Date(Date.now() + 3600000);
 
         await pool.query(
@@ -169,17 +165,34 @@ exports.forgotPassword = async (req, res) => {
 
         const resetUrl = `http://localhost:5173/reset-password/${token}`;
 
-        // send email...
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+            }
+        });
 
-        return sendSuccess(
-            res,
-            200,
-            null,
-            { message: "Reset password link sent successfully" }
-        );
+        await transporter.sendMail({    
+            to: email,
+            subject: "Reset Password Link",
+            html: `
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <h2>Password Reset Request</h2>
+                    <p>Click the button below to choose a new password:</p>
+                    <a href="${resetUrl}" style="background-color: #0e7490; color: white; padding: 14px 30px; text-decoration: none; display: inline-block;">
+                        Reset Password
+                    </a>
+                </div>
+            `
+        });
 
-    } catch (err) {
-        return sendError(res, 500, "Failed to send reset password email", err);
+        // 3. Return success response
+        return res.status(200).json({ message: "The link has been sent successfully." });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Error processing your request." });
     }
 };
 
