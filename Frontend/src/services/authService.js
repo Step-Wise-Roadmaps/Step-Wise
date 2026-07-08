@@ -52,6 +52,11 @@ const changeUserProfile = async (changeData) => {
   return response.data
 }
 
+const changePassword = async (changeData) => {
+  const response = await axiosInstance.put('/user/change-password', changeData);
+  return response.data
+}
+
 const authService = {
   register,
   login,
@@ -61,7 +66,8 @@ const authService = {
   getLessonsWithCourcesId,
   getCoursesLessonsByCourcesId,
   progress,
-  changeUserProfile
+  changeUserProfile,
+  changePassword
 };
 
 export default authService;
