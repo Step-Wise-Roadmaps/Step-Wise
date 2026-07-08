@@ -357,16 +357,30 @@ exports.changeUserProfile = async (req, res) => {
     const { full_name, email } = req.body;
 
     try {
-        const [update] = await pool.query(
+        await pool.query(
             `
             UPDATE users
             SET full_name = ?, email = ?
-            WHERE id = ?;
+            WHERE id = ?
             `,
             [full_name, email, userId]
         );
 
-        return sendSuccess(res, 200, "Updated successfully", update);
+        const [user] = await pool.query(
+            `
+            SELECT id, full_name, email, role
+            FROM users
+            WHERE id = ?
+            `,
+            [userId]
+        );
+
+        return sendSuccess(
+            res,
+            200,
+            "Updated successfully",
+            user[0]
+        );
 
     } catch (err) {
         return sendError(res, 500, "Database error", err.message);
