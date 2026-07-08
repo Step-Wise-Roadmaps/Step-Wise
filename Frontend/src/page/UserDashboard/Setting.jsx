@@ -14,7 +14,7 @@ function Setting() {
                             </p>
                             <div className="space-y-2">
                                 <input
-                                    className="w-full border border-slate-400 p-3 outline-blue-500" placeholder="Current Password" 
+                                    className="w-full border border-slate-400 p-2 md:p-3 outline-blue-500" placeholder="Current Password" 
                                     type="password"
                                 />
                                 <p 
@@ -22,6 +22,22 @@ function Setting() {
                                     Forget Password?
                                 </p>
                             </div>
+
+                            <p className="roboto-light text-md">
+                                Add Your New Password
+                            </p>
+                            <input
+                                className="w-full border border-slate-400 p-2 md:p-3 outline-blue-500" placeholder="New Password" 
+                                type="password"
+                            />
+
+                            <p className="roboto-light text-md">
+                                Repeat Your New Password
+                            </p>
+                            <input
+                                className="w-full border border-slate-400 p-2 md:p-3 outline-blue-500" placeholder="Repeat Password" 
+                                type="password"
+                            />
                         </div>
                     </div>
                 </div>
