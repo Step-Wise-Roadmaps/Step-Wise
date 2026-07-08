@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { register, login, getMe, getLessonsWithCourcesId, getCoursesLessonsByCourcesId, progress, forgotPassword, resetPassword, changeUserProfile } from './authActions';
+import { register, login, getMe, getLessonsWithCourcesId, getCoursesLessonsByCourcesId, progress, forgotPassword, resetPassword, changeUserProfile, changePassword } from './authActions';
 
 const storedUser = JSON.parse(localStorage.getItem('user'));
 
@@ -161,6 +161,19 @@ export const authSlice = createSlice({
         state.message = action.payload.data;
       })
       .addCase(changeUserProfile.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      // changePassword
+      .addCase(changePassword.pending, (state) => {state.isLoading = true})
+      .addCase(changePassword.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = action.payload.data;
+      })
+      .addCase(changePassword.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

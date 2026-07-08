@@ -110,7 +110,7 @@ export const changePassword = createAsyncThunk(
   "auth/change-password",
   async (changeData, thunkAPI) => {
     try {
-      return await authService.changeUserProfile(changeData);
+      return await authService.changePassword(changeData);
     } catch (error) {
       return thunkAPI.rejectWithValue(getCoreError(error));
     }
