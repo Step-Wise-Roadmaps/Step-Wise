@@ -16,6 +16,7 @@ import UserDashboard from "./page/UserDashboard/UserDashboard";
 import UserCources from "./page/UserDashboard/UserCources";
 import LessonSideBar from "./page/UserDashboard/LessonSideBar";
 import UserAnalytics from "./page/UserDashboard/UserAnalytics";
+import UserProfile from "./page/UserDashboard/UserProfile";
 
 // components
 import AddCourse from "./components/CourseManagement/AddCourse";
@@ -67,8 +68,9 @@ function App() {
             <Route element={<ProtectedRoute allowedRoles={['user', 'admin']} />}> 
                 <Route path="/user-dashboard" element={<UserDashboardLayout />}>
                     <Route index element={<UserDashboard />} />
-                    <Route path="user-courses" element={<UserCources />}/>
+                    <Route path="profile" element={<UserProfile />}/>
                     <Route path="analytics" element={<UserAnalytics />}/>
+                    <Route path="user-courses" element={<UserCources />}/>
                 </Route>
                 {/* <Route path="LearningDashbourd/:id" element={<LessonSideBar />}/> */}
                 <Route path="LearningDashbourd/:id" element={<UserCoursesLayout />}>
