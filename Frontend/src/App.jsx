@@ -17,6 +17,7 @@ import UserCources from "./page/UserDashboard/UserCources";
 import LessonSideBar from "./page/UserDashboard/LessonSideBar";
 import UserAnalytics from "./page/UserDashboard/UserAnalytics";
 import UserProfile from "./page/UserDashboard/UserProfile";
+import Setting from "./page/UserDashboard/Setting";
 
 // components
 import AddCourse from "./components/CourseManagement/AddCourse";
@@ -70,6 +71,7 @@ function App() {
                     <Route index element={<UserDashboard />} />
                     <Route path="profile" element={<UserProfile />}/>
                     <Route path="analytics" element={<UserAnalytics />}/>
+                    <Route path="settings" element={<Setting />}/>
                     <Route path="user-courses" element={<UserCources />}/>
                 </Route>
                 {/* <Route path="LearningDashbourd/:id" element={<LessonSideBar />}/> */}
