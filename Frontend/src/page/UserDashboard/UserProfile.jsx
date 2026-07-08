@@ -2,8 +2,47 @@
 import sideBarLogo from "../../assets/sideBarLogo/sideBarLogo.png"
 import { useNavigate } from "react-router-dom"
 
+import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { changeUserProfile, reset } from '../../features/auth/authSlice';
+
 function UserProfile() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const [formData, setFormData] = useState({
+        full_name: '',
+        email: ''
+    });
+
+    const { full_name, email } = formData;
+
+    const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+
+    useEffect(() => {
+        if (isError) {
+            alert(message)
+        }
+
+        if (isSuccess) {
+            alert(message)
+        }
+
+        dispatch(reset());
+    }, [user, isError, isSuccess, dispatch, reset]);
+
+    const onChange = (e) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }));
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const userData = { full_name, email };
+        dispatch(changeUserProfile(userData));
+    };
     return(
         <>
             <div>
