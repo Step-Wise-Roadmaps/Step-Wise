@@ -94,3 +94,14 @@ export const resetPassword = createAsyncThunk('auth/resetPassword', async (reset
     return thunkAPI.rejectWithValue(getCoreError(error));
   }
 });
+
+export const changeUserProfile = createAsyncThunk(
+  "auth/change-profile",
+  async (changeData, thunkAPI) => {
+    try {
+      return await authService.changeUserProfile(changeData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(getCoreError(error));
+    }
+  }
+);

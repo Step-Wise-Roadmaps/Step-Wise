@@ -12,7 +12,7 @@ import { Menu } from "lucide-react";
 
 const itemRoutes = {
     dashboard: "/user-dashboard",
-    users: "/user-dashboard/users",
+    users: "/user-dashboard/profile",
     analytics: "/user-dashboard/analytics",
     courses: "/user-dashboard/user-courses",
     settings: "/user-dashboard/settings"

@@ -351,3 +351,38 @@ exports.getCoursesLessonsByCourcesId = async (req, res) => {
         return sendError(res, 500, "Can not Get Cources and Lessons", err.message);
     }
 }
+
+exports.changeUserProfile = async (req, res) => {
+    const userId = req.user.id;
+    const { full_name, email } = req.body;
+
+    try {
+        await pool.query(
+            `
+            UPDATE users
+            SET full_name = ?, email = ?
+            WHERE id = ?
+            `,
+            [full_name, email, userId]
+        );
+
+        const [user] = await pool.query(
+            `
+            SELECT id, full_name, email, role
+            FROM users
+            WHERE id = ?
+            `,
+            [userId]
+        );
+
+        return sendSuccess(
+            res,
+            200,
+            "Updated successfully",
+            user[0]
+        );
+
+    } catch (err) {
+        return sendError(res, 500, "Database error", err.message);
+    }
+};

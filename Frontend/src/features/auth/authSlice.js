@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { register, login, getMe, getLessonsWithCourcesId, getCoursesLessonsByCourcesId, progress, forgotPassword, resetPassword } from './authActions';
+import { register, login, getMe, getLessonsWithCourcesId, getCoursesLessonsByCourcesId, progress, forgotPassword, resetPassword, changeUserProfile } from './authActions';
 
 const storedUser = JSON.parse(localStorage.getItem('user'));
 
@@ -143,10 +143,32 @@ export const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
+
+      // changeUserProfile
+      .addCase(changeUserProfile.pending, (state) => { state.isLoading = true; })
+      .addCase(changeUserProfile.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = {
+            ...state.user,
+            id: action.payload.id,
+            full_name: action.payload.full_name,
+            email: action.payload.email,
+            role: action.payload.role,
+        };
+
+        localStorage.setItem( "user",JSON.stringify(state.user));
+        state.message = action.payload.data;
+      })
+      .addCase(changeUserProfile.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
   },
 });
 
 export const { reset, logout } = authSlice.actions;
 export default authSlice.reducer;
 
-export { register, login, getMe, getLessonsWithCourcesId, getCoursesLessonsByCourcesId, progress, forgotPassword, resetPassword } from './authActions';
+export { register, login, getMe, getLessonsWithCourcesId, getCoursesLessonsByCourcesId, progress, forgotPassword, resetPassword, changeUserProfile } from './authActions';
