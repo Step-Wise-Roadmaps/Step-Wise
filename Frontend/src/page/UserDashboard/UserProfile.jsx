@@ -1,7 +1,9 @@
 
 import sideBarLogo from "../../assets/sideBarLogo/sideBarLogo.png"
+import { useNavigate } from "react-router-dom"
 
 function UserProfile() {
+    const navigate = useNavigate();
     return(
         <>
             <div>
@@ -20,6 +22,9 @@ function UserProfile() {
                         <div className="space-y-3">
                             <h1 className="roboto-semibold text-md">Email</h1>
                             <input type="text" className="border border-black outline-blue-500 w-full p-2 rounded-md" />
+                            <p onClick={() => navigate("")} className="text-right text-blue-500 underline cursor-pointer hover:text-blue-600">
+                                Change Password.
+                            </p>
                         </div>
                     </div>
                     <button className="text-center bg-blue-500 p-3 px-8 rounded-lg cursor-pointer text-white hover:bg-blue-600 duration-200">Save</button>
