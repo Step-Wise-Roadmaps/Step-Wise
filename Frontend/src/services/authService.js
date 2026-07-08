@@ -49,7 +49,7 @@ const resetPassword = async (resetData) => {
 
 const changeUserProfile = async (changeData) => {
   const response = await axiosInstance.post('/user/change-profile', changeData);
-  return response.data.data
+  return response.data
 }
 
 const authService = {
