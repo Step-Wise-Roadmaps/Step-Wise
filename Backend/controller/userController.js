@@ -418,11 +418,11 @@ exports.changePassword = async (req, res) => {
             return sendError(res, 400, "Old password is incorrect");
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
 
         const [result] = await pool.query(
             "UPDATE users SET password = ? WHERE id = ?",
-            [hashedPassword], [userId]
+            [hashedPassword, userId]
         )
 
         if(result.affectedRows === 0) {
