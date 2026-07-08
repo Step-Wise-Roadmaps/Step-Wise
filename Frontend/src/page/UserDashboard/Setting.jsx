@@ -1,5 +1,10 @@
 
+import { useNavigate } from "react-router-dom"
+
 function Setting() {
+
+    const navigate = useNavigate();
+
     return(
         <>
             <div>
@@ -18,6 +23,7 @@ function Setting() {
                                     type="password"
                                 />
                                 <p 
+                                    onClick={() => navigate("/forgot-password")}
                                     className="text-right underline cursor-pointer text-blue-500 hover:text-blue-700 duration-100">
                                     Forget Password?
                                 </p>
