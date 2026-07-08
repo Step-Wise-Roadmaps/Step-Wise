@@ -48,7 +48,7 @@ const resetPassword = async (resetData) => {
 };
 
 const changeUserProfile = async (changeData) => {
-  const response = await axiosInstance.post('/user/change-profile', changeData);
+  const response = await axiosInstance.put('/user/change-profile', changeData);
   return response.data
 }
 

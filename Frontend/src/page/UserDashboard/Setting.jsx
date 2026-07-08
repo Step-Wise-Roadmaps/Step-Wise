@@ -1,6 +1,10 @@
 
 function Setting() {
-    return(<></>)
+    return(
+        <>
+            
+        </>
+    )
 }
 
 export default Setting;

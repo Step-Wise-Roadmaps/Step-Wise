@@ -386,3 +386,30 @@ exports.changeUserProfile = async (req, res) => {
         return sendError(res, 500, "Database error", err.message);
     }
 };
+
+exports.changePassword = async (req, res) => {
+    try{
+        const { password } = req.body;
+        const userId = req.user.id;
+
+        if(!password) {
+            return sendError(res, 400, "Password required")
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const [result] = await pool.query(
+            "UPDATE users SET password = ? WHERE id = ?",
+            [hashedPassword], [userId]
+        )
+
+        if(result.affectedRows === 0) {
+            return sendError(res, 404, "User not found")
+        }
+
+        return sendSuccess(res, 200, null, { message: "User registered successfully" })
+
+    } catch (err) {
+        return sendError(res, 500, "Data BaseError", err.message)
+    }
+}
