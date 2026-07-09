@@ -18,6 +18,7 @@ import LessonSideBar from "./page/UserDashboard/LessonSideBar";
 import UserAnalytics from "./page/UserDashboard/UserAnalytics";
 import UserProfile from "./page/UserDashboard/UserProfile";
 import Setting from "./page/UserDashboard/Setting";
+import GetUserDitail from "./components/UserManagement/GetUserDitail";
 
 // components
 import AddCourse from "./components/CourseManagement/AddCourse";
@@ -54,6 +55,7 @@ function App() {
                 <Route path="/admin-dashboard" element={<AdminDashboardLayout />}>
                     <Route index element={<AdminDashboard />} />
                     <Route path="users" element={<UserManagement />} />
+                    <Route path="getUserDitail/:user_id" element={<GetUserDitail />} />
                     <Route path="course" element={<CourseManagement />} />
                     <Route path="add-course" element={<AddCourse />} />
                     <Route path="delete-course" element={<DeleteCourse />} />

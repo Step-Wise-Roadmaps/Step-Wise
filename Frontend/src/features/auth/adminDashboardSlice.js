@@ -223,7 +223,7 @@ export const adminSlice = createSlice({
         .addCase(getUserDetail.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            state.getUserDetail = action.payload.data || action.payload;
+             state.getUserDetail = action.payload.data || action.payload;
         })
         .addCase(getUserDetail.rejected, (state, action) => {
             state.isLoading = false;
