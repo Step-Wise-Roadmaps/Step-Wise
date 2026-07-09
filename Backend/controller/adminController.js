@@ -26,6 +26,49 @@ exports.getAllUsers = async (req, res) => {
     }
 };
 
+exports.getUserDetails = async (req, res) => {
+    try {
+        const user_id = req.params.user_id;
+
+        if (!user_id) {
+            return sendError(res, 400, "User ID is required");
+        }
+
+        const [getDetail] = await pool.query(
+            `SELECT 
+                u.id AS user_table_id,
+                u.full_name,
+                u.role,
+                c.id AS course_id,
+                c.course_name,
+                COUNT(DISTINCT l.id) AS total_lessons,
+                COUNT(DISTINCT ulp.lesson_id) AS completed_lessons,
+                IFNULL(
+                    ROUND((COUNT(DISTINCT ulp.lesson_id) / COUNT(DISTINCT l.id)) * 100), 
+                    0
+                ) AS course_progress_percent
+             FROM users u
+             JOIN user_lesson_progress up ON u.id = up.user_id
+             JOIN courses c ON up.course_id = c.id
+             JOIN lessons l ON c.id = l.course_id
+             LEFT JOIN user_lesson_progress ulp 
+                ON l.id = ulp.lesson_id AND ulp.user_id = u.id
+             WHERE u.id = ?
+             GROUP BY c.id, u.id;`,
+            [user_id]
+        );
+
+        if (getDetail.length === 0) {
+            return sendError(res, 404, "No progress or course data found for this user");
+        }
+
+        return sendSuccess(res, 200, getDetail);
+
+    } catch (err) {
+        return sendError(res, 500, "Database Error", err.message);
+    }
+};
+
 exports.userGrowth = async (req, res) => {
     try {
         const [results] = await pool.query(`
