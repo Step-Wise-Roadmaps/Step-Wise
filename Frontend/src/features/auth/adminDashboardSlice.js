@@ -12,7 +12,8 @@ import {
     getSkills,
     getLessons,
     addCourse,
-    addLessons
+    addLessons,
+    getUserDetail
 } from './adminDashboardActions'
 
 const user = JSON.parse(localStorage.getItem('user'));
@@ -22,6 +23,7 @@ const initialState = {
     courses: [],
     lessons: [],
     userGrowth: [],
+    getUserDetail: [],
     search: "",
     isError: false,
     isSuccess: false,
@@ -215,6 +217,19 @@ export const adminSlice = createSlice({
             state.isError = true;
             state.message = action.payload;
         })
+
+        // getUserDetail
+        .addCase(getUserDetail.pending, (state) => {state.isLoading = true})
+        .addCase(getUserDetail.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.getUserDetail = action.payload.data || action.payload;
+        })
+        .addCase(getUserDetail.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        })
         // getLessonsByCourseId
         .addCase(getLessonsByCourseId.pending, (state) => {state.isLoading = true})
         .addCase(getLessonsByCourseId.fulfilled, (state, action) => {
@@ -246,5 +261,6 @@ export {
     getSkills,
     getLessons,
     addCourse,
-    addLessons
+    addLessons,
+    getUserDetail
 } from './adminDashboardActions'
