@@ -41,6 +41,11 @@ const deleteLesson = async (id) => {
     };
 };
 
+const getUserDitail = async (user_id) => {
+    const response = await axiosInstance.get(`/admin/getUserDitail/${user_id}`);
+    return response.data
+}
+
 const getDesign = async (id) => {
     const response = await axiosInstance.get(`/admin/getDesign/${id}`);
     return response.data;
