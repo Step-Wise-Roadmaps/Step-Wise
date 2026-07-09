@@ -48,7 +48,8 @@ const itemRoutes = {
     users: "/admin-dashboard/users",
     courses: "/admin-dashboard/course",
     lessons: "/admin-dashboard/lesson",
-    analytics: "/admin-dashboard/AdminAnalytics"
+    analytics: "/admin-dashboard/AdminAnalytics",
+    settings: "/admin-dashboard/setting"
 };
 
 function SidebarItem({ item, isOpen, isActive, onClick }) {

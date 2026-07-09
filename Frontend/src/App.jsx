@@ -65,6 +65,7 @@ function App() {
                     <Route path="delete-lesson" element={<DeleteLessonsCard />} />
                     <Route path="LessonsByCourseId/:id" element={<LessonDele />} />
                     <Route path="AdminAnalytics" element={<AdminAnalytics />} />
+                    <Route path="setting" element={<Setting />}/>
                 </Route>
             </Route>
 
