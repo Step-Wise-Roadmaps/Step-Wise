@@ -41,6 +41,16 @@ const deleteLesson = async (id) => {
     };
 };
 
+const getUserDitail = async (user_id) => {
+    const response = await axiosInstance.get(`/admin/getUserDitail/${user_id}`);
+    return response.data
+}
+
+const updateUserRole = async (user_id, role) => {
+    const response = await axiosInstance.put(`/admin/updateUserRole/${user_id}`, { role });
+    return response.data;
+}
+
 const getDesign = async (id) => {
     const response = await axiosInstance.get(`/admin/getDesign/${id}`);
     return response.data;
@@ -106,7 +116,9 @@ const adminDashboardService = {
     deleteCourse,
     deleteLesson,
     getDesign,
-    getLessonsByCourseId
+    getLessonsByCourseId,
+    getUserDitail,
+    updateUserRole
 }
 
 export default adminDashboardService;

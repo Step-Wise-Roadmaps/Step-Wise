@@ -1,15 +1,16 @@
 
+import { Link } from "react-router-dom"
 import { Trash2 } from "lucide-react";
 
 function UserRow({ user, deleteUser }) {
   return (
     <div className='relative p-4 md:p-6 grid grid-cols-7 items-center gap-4'>
       <div className='col-span-2 flex items-center gap-1'>
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 text-sm roboto-bold text-white">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 text-sm roboto-bold text-white coursr-pointer">
           {user.full_name?.slice(0,2).toUpperCase()}
         </div>
         <div>
-          <p className='text-lg roboto-medium text-slate-900 cursor-pointer'>{user.full_name}</p>
+          <Link to={`/admin-dashboard/getUserDitail/${user.id}`} className='text-lg roboto-medium text-slate-900 hover:text-blue-500 duration-200 cursor-pointer'>{user.full_name}</Link>
           <p className="pl-1 roboto-extralight text-slate-900 text-xs">{new Date(user.created_at).toLocaleDateString()}</p>
         </div>
       </div>
