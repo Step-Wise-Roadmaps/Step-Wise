@@ -69,6 +69,19 @@ export const getDesign = createAsyncThunk(
     }
 );
 
+export const getUserDitail = createAsyncThunk('admin/getUserDitail', async (user_id, thunkAPI) => {
+    try {
+        return await adminDashboardService.getUserDitail(user_id);
+    } catch (err) {
+        const message =
+            error.response?.data?.message ||
+            error.message ||
+            error.toString();
+
+        return thunkAPI.rejectWithValue(getCoreError(error));
+    }
+});
+
 export const getLessonsByCourseId = createAsyncThunk(
     'admin/getLessonsByCourseId',
     async (id, thunkAPI) => {

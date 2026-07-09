@@ -111,7 +111,8 @@ const adminDashboardService = {
     deleteCourse,
     deleteLesson,
     getDesign,
-    getLessonsByCourseId
+    getLessonsByCourseId,
+    getUserDitail
 }
 
 export default adminDashboardService;
