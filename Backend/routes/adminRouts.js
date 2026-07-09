@@ -42,4 +42,6 @@ router.get('/getLessonsByCourseId/:id', auth, adminAuth, adminController.getLess
 
 router.get('/getUserDitail/:user_id', auth, adminAuth, adminController.getUserDetails);
 
+router.put('/updateUserRole/:user_id', auth, adminAuth, adminController.updateUserRole);
+
 module.exports = router;

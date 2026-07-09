@@ -85,6 +85,22 @@ export const getUserDetail = createAsyncThunk(
     }
 );
 
+export const updateUserRole = createAsyncThunk(
+    'admin/updateUserRole', 
+    async ({ user_id, role }, thunkAPI) => {
+        try {
+            return await adminDashboardService.updateUserRole(user_id, role); 
+        } catch (error) {
+            const message =
+                error.response?.data?.message ||
+                error.message ||
+                error.toString();
+                
+            return thunkAPI.rejectWithValue(message); 
+        }
+    }
+);
+
 export const getLessonsByCourseId = createAsyncThunk(
     'admin/getLessonsByCourseId',
     async (id, thunkAPI) => {

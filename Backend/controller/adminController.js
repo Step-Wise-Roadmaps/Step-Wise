@@ -69,6 +69,31 @@ exports.getUserDetails = async (req, res) => {
     }
 };
 
+exports.updateUserRole = async (req, res) => {
+    try {
+        const { user_id } = req.params;
+        const { role } = req.body;
+
+        if (!user_id || !role) {
+            return sendError(res, 400, "User ID and Role are required");
+        }
+
+        const [result] = await pool.query(
+            `UPDATE users SET role = ? WHERE id = ?`,
+            [role, user_id]
+        );
+
+        if (result.affectedRows === 0) {
+            return sendError(res, 404, "User not found");
+        }
+
+        return sendSuccess(res, 200, { message: "User role updated successfully", role });
+
+    } catch (err) {
+        return sendError(res, 500, "Database Error", err.message);
+    }
+};
+
 exports.userGrowth = async (req, res) => {
     try {
         const [results] = await pool.query(`
