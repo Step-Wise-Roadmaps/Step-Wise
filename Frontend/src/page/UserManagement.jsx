@@ -30,7 +30,7 @@ function UserManagement() {
             Swal.fire({
                 icon: "success",
                 title: "Success",
-                text: result.message,
+                text: userDeletedMassage,
                 confirmButtonColor: "#469cec",
             });
 
