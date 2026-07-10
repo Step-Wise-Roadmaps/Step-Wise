@@ -121,7 +121,7 @@ function UserProfile() {
                             onClick={() =>
                                 navigate("/user-dashboard/settings")
                             }
-                            className="text-right text-blue-500 underline cursor-pointer hover:text-blue-600"
+                            className="text-right text-blue-500 cursor-pointer hover:text-blue-600 hover:underline"
                         >
                             Change Password.
                         </p>
