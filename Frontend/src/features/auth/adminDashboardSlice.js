@@ -35,7 +35,8 @@ const initialState = {
     lessonMessage: "",
     deleteLessonMessage: "",
     deleteLessonErrorMessage: "",
-    searchUsersMessage: ""
+    searchUsersMessage: "",
+    userDeletedMassage: ""
 }
 
 export const adminSlice = createSlice({
@@ -49,9 +50,10 @@ export const adminSlice = createSlice({
             state.message = '';
             state.lessonMessage = "";
             state.courseMessage = "";
-            state.deleteLessonMessage = ""
-            state.deleteLessonErrorMessage = ""
-            state.searchUsersMessage =""
+            state.deleteLessonMessage = "";
+            state.deleteLessonErrorMessage = "";
+            state.searchUsersMessage = "";
+            state.userDeletedMassage = ""
         }
     },
     extraReducers: (builder) => {
@@ -97,15 +99,19 @@ export const adminSlice = createSlice({
         .addCase(deleteUser.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
-            const deletedId = typeof action.payload === 'string' ? Number(action.payload) : action.payload;
+
+            const deletedId = Number(action.payload.id);
+
             state.users = state.users.filter(
-                (user) => user.id !== deletedId
+                (user) => Number(user.id) !== deletedId
             );
+
+            state.userDeletedMassage = action.payload.message;
         })
         .addCase(deleteUser.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
-            state.message = action.payload;
+            state.userDeletedMassage = action.payload;
         })
         // deleteCourse
         .addCase(deleteCourse.pending, (state) => {state.isLoading = true})

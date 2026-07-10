@@ -15,13 +15,14 @@ const userGrowth = async () => {
 const searchUsers = async (adminData) => {
     const response = await axiosInstance.get(`/admin/users/search?search=${search}`);
 
+    console.log(response.data);
     return response.data
 }
 
 const deleteUser = async (id) => {
-    await axiosInstance.delete(`/admin/users/${id}`);
+    const response = await axiosInstance.delete(`/admin/users/${id}`);
 
-    return id;
+    return response.data;
 }
 
 const deleteCourse = async (id) => {
