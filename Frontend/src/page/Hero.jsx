@@ -3,7 +3,7 @@ import { useState } from 'react';
 import rokateImg from '../assets/HeroImg/rokateImg.png';
 import bookImg from '../assets/HeroImg/bookImg.png';
 import pointer from '../assets/HeroImg/pointer.png';
-import Photography from '../assets/HeroImg/Photography.png';
+import Photography from '../assets/HeroImg/photography.png';
 import secondBackground from '../assets/video/secondBackground.mp4';
 
 const FAQItem = ({ question, answer }) => {

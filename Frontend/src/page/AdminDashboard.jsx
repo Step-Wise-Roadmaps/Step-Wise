@@ -5,7 +5,7 @@ import { getAllUsers } from "../features/auth/adminDashboardSlice";
 import { getCourses } from "../features/auth/adminDashboardSlice";
 import { getLessons } from "../features/auth/adminDashboardSlice";
 
-import UserGrowth from "../components/userGrowth";
+import UserGrowth from "../components/UserGrowth";
 
 import {
     Activity,
