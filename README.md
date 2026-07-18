@@ -40,5 +40,5 @@ When trying to learn a new skill online, standard search engines give you thousa
 
 1. **Clone the repository**
    ```bash
-   git clone [https://github.com/your-username/step-wise.git](https://github.com/your-username/step-wise.git)
+   git clone [https://github.com/Step-Wise-Roadmaps/Step-Wise.git
    cd step-wise
